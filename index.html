@@ -6,207 +6,220 @@
 
 <title>Smart Receipt Pro</title>
 
+<script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body {
-    font-family: Arial;
-    background:#f1f5f9;
-    padding:20px;
-}
-
-.card {
-    background:#fff;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:15px;
-}
-
-input, textarea {
-    width:100%;
-    padding:10px;
-    margin:5px 0;
-    border-radius:8px;
-    border:1px solid #ccc;
-}
-
-button {
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.primary { background:#6366f1; color:white; }
-.green { background:#22c55e; color:white; }
-.red { background:#ef4444; color:white; }
+body { font-family: 'Inter', sans-serif; }
 </style>
 </head>
 
-<body>
+<body class="bg-slate-100">
 
-<div class="card">
+<div class="max-w-md mx-auto p-4 space-y-4">
 
-<h2>📄 Nuevo Ticket</h2>
+<!-- HEADER -->
+<div class="flex justify-between items-center">
+    <div>
+        <h1 class="text-xl font-bold text-slate-800">Smart Receipt</h1>
+        <p class="text-xs text-slate-500">Control de ventas simple</p>
+    </div>
+</div>
 
-<input id="business" placeholder="Nombre del negocio">
-<input id="client" placeholder="Cliente">
+<!-- FORM -->
+<div class="bg-white p-4 rounded-2xl shadow-sm space-y-3">
 
-<input id="name" placeholder="Producto">
-<input id="price" type="number" placeholder="Precio">
+<input id="business" placeholder="Nombre del negocio"
+class="w-full p-3 rounded-xl bg-slate-50 outline-none focus:ring-2 focus:ring-indigo-500">
 
-<button class="primary" onclick="addItem()">Agregar</button>
+<input id="client" placeholder="Cliente"
+class="w-full p-3 rounded-xl bg-slate-50 outline-none focus:ring-2 focus:ring-indigo-500">
 
-<div id="list"></div>
+<div class="grid grid-cols-3 gap-2">
+<input id="name" placeholder="Producto"
+class="col-span-2 p-3 rounded-xl bg-slate-50">
 
-<h3 id="total">$0.00</h3>
+<input id="price" type="number" placeholder="$"
+class="p-3 rounded-xl bg-slate-50">
+</div>
 
-<textarea id="notes" placeholder="Notas..."></textarea>
-
-<button class="primary" onclick="save()">Guardar</button>
-<button class="green" onclick="share()">Compartir</button>
-<button class="red" onclick="clearAll()">Limpiar</button>
+<button onclick="addItem()"
+class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold active:scale-95">
+Agregar producto
+</button>
 
 </div>
 
-<div class="card">
-<h3>📅 Historial</h3>
-<div id="history"></div>
+<!-- TICKET -->
+<div id="ticket" class="bg-white rounded-2xl shadow p-4">
+
+<div class="text-center border-b pb-2 mb-2">
+<p id="tBusiness" class="font-bold text-slate-800"></p>
+<p id="tClient" class="text-xs text-slate-500"></p>
+<p id="tDate" class="text-xs text-slate-400"></p>
+</div>
+
+<div id="list" class="space-y-2"></div>
+
+<div class="border-t mt-3 pt-2 flex justify-between font-bold text-lg">
+<span>Total</span>
+<span id="total">$0.00</span>
+</div>
+
+</div>
+
+<!-- ACTIONS -->
+<div class="grid grid-cols-3 gap-2">
+
+<button onclick="save()"
+class="bg-slate-800 text-white py-3 rounded-xl text-sm">Guardar</button>
+
+<button onclick="share()"
+class="bg-green-500 text-white py-3 rounded-xl text-sm">WhatsApp</button>
+
+<button onclick="clearAll()"
+class="bg-red-100 text-red-600 py-3 rounded-xl text-sm">Limpiar</button>
+
+</div>
+
+<!-- HISTORY -->
+<div>
+<h3 class="text-sm font-bold text-slate-600 mb-2">Historial</h3>
+<div id="history" class="space-y-2"></div>
+</div>
+
 </div>
 
 <script>
 
 // STATE
 let items = [];
-let history = JSON.parse(localStorage.getItem("saas_receipts")) || [];
+let history = JSON.parse(localStorage.getItem("pro_receipts")) || [];
+
+document.getElementById("tDate").innerText =
+new Date().toLocaleDateString();
 
 // SECURITY
 function escapeHTML(str){
-    return str.replace(/[&<>"']/g, t => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",
-        '"':"&quot;","'":"&#39;"
-    }[t]));
+return str.replace(/[&<>"']/g, t => ({
+"&":"&amp;","<":"&lt;",">":"&gt;",
+'"':"&quot;","'":"&#39;"
+}[t]));
 }
 
 // ADD ITEM
 function addItem(){
-    const name = document.getElementById("name").value.trim();
-    const price = parseFloat(document.getElementById("price").value);
+const name = document.getElementById("name").value.trim();
+const price = parseFloat(document.getElementById("price").value);
 
-    if(!name || isNaN(price) || price<=0){
-        alert("Datos inválidos");
-        return;
-    }
+if(!name || isNaN(price) || price<=0){
+alert("Datos inválidos");
+return;
+}
 
-    items.push({
-        id: crypto.randomUUID(),
-        name,
-        price
-    });
+items.push({
+id: crypto.randomUUID(),
+name,
+price
+});
 
-    document.getElementById("name").value="";
-    document.getElementById("price").value="";
+document.getElementById("name").value="";
+document.getElementById("price").value="";
 
-    render();
+render();
 }
 
 // RENDER
 function render(){
-    const list = document.getElementById("list");
 
-    list.innerHTML = items.map(i => `
-        <div>
-            ${escapeHTML(i.name)} - $${i.price.toFixed(2)}
-            <button onclick="removeItem('${i.id}')">x</button>
-        </div>
-    `).join("");
+// header dinámico
+document.getElementById("tBusiness").innerText =
+document.getElementById("business").value;
 
-    updateTotal();
-}
+document.getElementById("tClient").innerText =
+document.getElementById("client").value;
 
-function removeItem(id){
-    items = items.filter(i=>i.id!==id);
-    render();
-}
+const list = document.getElementById("list");
 
-function updateTotal(){
-    const total = items.reduce((s,i)=>s+i.price,0);
-    document.getElementById("total").innerText="$"+total.toFixed(2);
-}
+list.innerHTML = items.map(i=>`
+<div class="flex justify-between text-sm">
+<span>${escapeHTML(i.name)}</span>
+<span>$${i.price.toFixed(2)}</span>
+</div>
+`).join("");
 
-// SAVE
-function save(){
-    const business = document.getElementById("business").value;
-    const client = document.getElementById("client").value;
-    const notes = document.getElementById("notes").value;
-
-    if(items.length===0){
-        alert("No hay productos");
-        return;
-    }
-
-    const record = {
-        id: Date.now(),
-        business,
-        client,
-        notes,
-        items:[...items],
-        total: items.reduce((s,i)=>s+i.price,0),
-        date: new Date().toLocaleString()
-    };
-
-    history.unshift(record);
-    localStorage.setItem("saas_receipts", JSON.stringify(history));
-
-    items=[];
-    render();
-    renderHistory();
+const total = items.reduce((s,i)=>s+i.price,0);
+document.getElementById("total").innerText="$"+total.toFixed(2);
 }
 
 // CLEAR
 function clearAll(){
-    if(!confirm("Limpiar?")) return;
-    items=[];
-    render();
+if(!confirm("Limpiar lista?")) return;
+items=[];
+render();
+}
+
+// SAVE
+function save(){
+
+if(items.length===0){
+alert("Agrega productos");
+return;
+}
+
+const record = {
+id: Date.now(),
+business: document.getElementById("business").value,
+client: document.getElementById("client").value,
+items:[...items],
+total: items.reduce((s,i)=>s+i.price,0)
+};
+
+history.unshift(record);
+localStorage.setItem("pro_receipts", JSON.stringify(history));
+
+items=[];
+render();
+renderHistory();
 }
 
 // HISTORY
 function renderHistory(){
-    const h = document.getElementById("history");
+const h = document.getElementById("history");
 
-    h.innerHTML = history.map(r=>`
-        <div style="margin-bottom:10px;">
-            <strong>${escapeHTML(r.business)}</strong><br>
-            Cliente: ${escapeHTML(r.client)}<br>
-            $${r.total.toFixed(2)}
-        </div>
-    `).join("");
+h.innerHTML = history.map(r=>`
+<div class="bg-white p-3 rounded-xl shadow-sm flex justify-between text-sm">
+<div>
+<p class="font-semibold">${escapeHTML(r.business)}</p>
+<p class="text-xs text-slate-400">${escapeHTML(r.client)}</p>
+</div>
+<p class="font-bold">$${r.total.toFixed(2)}</p>
+</div>
+`).join("");
 }
 
 // SHARE
 async function share(){
-    const el = document.body;
+const el = document.getElementById("ticket");
 
-    const canvas = await html2canvas(el);
-    canvas.toBlob(async blob=>{
-        const file = new File([blob],"ticket.png",{type:"image/png"});
+const canvas = await html2canvas(el,{scale:2});
+canvas.toBlob(async blob=>{
+const file = new File([blob],"ticket.png",{type:"image/png"});
 
-        if(navigator.canShare && navigator.canShare({files:[file]})){
-            await navigator.share({
-                files:[file],
-                title:"Ticket"
-            });
-        } else {
-            const a=document.createElement("a");
-            a.href=canvas.toDataURL();
-            a.download="ticket.png";
-            a.click();
-        }
-    });
+if(navigator.canShare && navigator.canShare({files:[file]})){
+await navigator.share({files:[file]});
+}else{
+const a=document.createElement("a");
+a.href=canvas.toDataURL();
+a.download="ticket.png";
+a.click();
+}
+});
 }
 
 // INIT
-render();
 renderHistory();
 
 </script>
