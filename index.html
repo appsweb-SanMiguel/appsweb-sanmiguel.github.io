@@ -1,1 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DivideGastos - App Moderna</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background: #f0f4f8;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    header {
+      background: #3498db;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 16px 16px 0 0;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .form {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    input {
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 14px;
+      background: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #27ae60;
+    }
+    .historial {
+      padding: 20px;
+      max-height: 600px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .ticket {
+      background: #f8f9fa;
+      border-left: 4px solid #3498db;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .ticket h3 {
+      color: #2c3e50;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .ticket p {
+      color: #555;
+      font-size: 14px;
+      margin: 4px 0;
+    }
+    .ticket .monto {
+      font-weight: bold;
+      color: #27ae60;
+      font-size: 16px;
+    }
+    .ticket .fecha {
+      font-size: 12px;
+      color: #999;
+      margin-top: 8px;
+    }
+    .acciones {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+    }
+    .acciones button {
+      padding: 6px 12px;
+      font-size: 14px;
+      border-radius: 6px;
+    }
+    .btn-descargar {
+      background: #3498db;
+    }
+    .btn-compartir {
+      background: #e67e22;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🛒 DivideGastos</h1>
+      <p>Registra y divide compras fácilmente</p>
+    </header>
 
+    <div class="form">
+      <input type="text" id="items" placeholder="Ej: Leche, Pan, Huevos" required />
+      <input type="number" id="total" placeholder="Total en $" min="0" step="0.01" required />
+      <input type="number" id="people" placeholder="Número de personas" min="1" value="2" required />
+      <button onclick="calcular()">Dividir Gasto</button>
+    </div>
+
+    <div class="historial" id="historial"></div>
+  </div>
+
+  <script>
+    function calcular() {
+      const items = document.getElementById("items").value.trim();
+      const total = parseFloat(document.getElementById("total").value);
+      const people = parseInt(document.getElementById("people").value);
+      const fecha = new Date().toLocaleDateString("es-ES");
+      const hora = new Date().toLocaleTimeString("es-ES");
+
+      if (!items || isNaN(total) || total <= 0 || isNaN(people) || people < 1) {
+        alert("Por favor, completa todos los campos correctamente.");
+        return;
+      }
+
+      const porPersona = (total / people).toFixed(2);
+      const historial = document.getElementById("historial");
+
+      const ticket = document.createElement("div");
+      ticket.className = "ticket";
+      ticket.innerHTML = `
+        <h3>Compra del ${fecha}</h3>
+        <p><strong>Artículos:</strong> ${items}</p>
+        <p><strong>Total:</strong> $${total.toFixed(2)}</p>
+        <p><strong>Entre:</strong> ${people} persona(s)</p>
+        <p class="monto"><strong>Deuda por persona:</strong> $${porPersona}</p>
+        <span class="fecha">Registrado el ${fecha} a las ${hora}</span>
+        <div class="acciones">
+          <button class="btn-descargar" onclick="descargar(this)">📥 Descargar</button>
+          <button class="btn-compartir" onclick="compartir(this)">📤 Compartir</button>
+        </div>
+      `;
+
+      historial.appendChild(ticket);
+      document.getElementById("items").value = "";
+      document.getElementById("total").value = "";
+    }
+
+    function descargar(btn) {
+      const ticket = btn.closest(".ticket");
+      const printWindow = window.open("", "", "height=600,width=400");
+      printWindow.document.write(`
+        <html>
+          <head><title>Comprobante de Gasto</title></head>
+          <body style="font-family: sans-serif; padding: 20px;">
+            <h2>📄 Comprobante de Pago</h2>
+            ${ticket.innerHTML.replace(/<button[^>]*>.*?<\/button>/g, "")}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.print();
+    }
+
+    function compartir(btn) {
+      const ticket = btn.closest(".ticket");
+      const texto = Array.from(ticket.querySelectorAll("p, h3, .fecha"))
+        .map(el => el.innerText).join("\n");
+      navigator.clipboard.writeText(texto).then(() => {
+        alert("✅ Comprobante copiado al portapapeles");
+      });
+    }
+  </script>
+</body>
+</html>   
