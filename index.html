@@ -3,224 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Receipt Pro</title>
-    <!-- Librería para convertir HTML a Imagen -->
+    <title>Smart Receipt Pro | Agenda</title>
+    <!-- Tailwind CSS -->
+    <script src="https://tailwindcss.com"></script>
+    <!-- html2canvas para convertir a imagen -->
     <script src="https://cloudflare.com"></script>
+    <!-- Google Fonts -->
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        :root {
-            --primary: #6366f1;
-            --bg: #f1f5f9;
-            --card: #ffffff;
-            --text: #1e293b;
-            --secondary: #64748b;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
-
-        .app-container { max-width: 450px; margin: 0 auto; }
-        
-        .card {
-            background: var(--card);
-            padding: 24px;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        h1 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-
-        /* Formulario */
-        .input-group { display: flex; gap: 8px; margin-bottom: 20px; }
-        input { 
-            padding: 12px; border: 1px solid #e2e8f0; border-radius: 10px; 
-            outline: none; width: 100%; transition: 0.2s;
-        }
-        input:focus { border-color: var(--primary); ring: 2px var(--primary); }
-        
-        .btn-add { 
-            background: var(--primary); color: white; border: none; 
-            padding: 0 15px; border-radius: 10px; cursor: pointer; font-weight: bold;
-        }
-
-        /* Ticket Estilizado */
-        #ticket-export {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #f0f0f0;
-        }
-        .ticket-header { text-align: center; border-bottom: 2px dashed #eee; padding-bottom: 15px; margin-bottom: 15px; }
-        .item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f8fafc; }
-        
-        .totals { margin-top: 15px; background: #f8fafc; padding: 15px; border-radius: 12px; }
-        .grand-total { font-weight: 600; font-size: 1.2rem; color: var(--primary); margin-top: 10px; border-top: 1px solid #ddd; pt: 10px; }
-
-        /* Agenda / Historial */
-        .history-title { font-size: 0.9rem; color: var(--secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .history-item { 
-            background: white; padding: 12px; border-radius: 12px; margin-bottom: 8px;
-            display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--primary);
-        }
-
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .btn { 
-            padding: 12px; border: none; border-radius: 10px; cursor: pointer; 
-            font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-share { background: #25D366; color: white; }
-        .btn-save { background: var(--primary); color: white; }
-        .btn-clear { background: #fee2e2; color: #ef4444; width: 100%; margin-top: 10px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .ticket-dashed { background-image: radial-gradient(#e2e8f0 2px, transparent 2px); background-size: 12px 12px; }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-<div class="app-container">
-    <div class="card">
-        <h1>🛒 Nueva Compra</h1>
-        <div class="input-group">
-            <input type="text" id="itemName" placeholder="Producto...">
-            <input type="number" id="itemPrice" placeholder="$0.00" style="width: 100px">
-            <button class="btn-add" onclick="addItem()">+</button>
-        </div>
+    <div class="max-w-md mx-auto space-y-6">
+        
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-2">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">Mi Agenda</h1>
+                <p class="text-sm text-slate-500">Gestión de compras inteligente</p>
+            </div>
+            <div class="bg-indigo-100 p-3 rounded-full">
+                <svg xmlns="http://w3.org" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+            </div>
+        </header>
 
-        <!-- Área que se convertirá en imagen -->
-        <div id="ticket-export">
-            <div class="ticket-header">
-                <h2 style="font-size: 1.1rem;">SMART RECEIPT</h2>
-                <small id="currentDate"></small>
-            </div>
-            <div id="itemList">
-                <p style="text-align: center; color: #94a3b8; padding: 20px;">No hay productos</p>
-            </div>
-            <div class="totals">
-                <div style="display: flex; justify-content: space-between;">
-                    <span>Total</span>
-                    <span id="totalDisplay">$0.00</span>
+        <!-- Formulario de Entrada -->
+        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 space-y-4">
+            <div class="grid grid-cols-12 gap-3">
+                <div class="col-span-7">
+                    <label class="text-xs font-semibold text-slate-400 uppercase ml-1">Producto</label>
+                    <input type="text" id="itemName" placeholder="Ej. Café Starbucks" 
+                           class="w-full mt-1 p-3 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
                 </div>
-                <div class="grand-total" style="display: flex; justify-content: space-between;">
-                    <span>A pagar</span>
-                    <span id="grandTotalDisplay">$0.00</span>
+                <div class="col-span-5">
+                    <label class="text-xs font-semibold text-slate-400 uppercase ml-1">Precio</label>
+                    <input type="number" id="itemPrice" placeholder="0.00" 
+                           class="w-full mt-1 p-3 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
                 </div>
+            </div>
+            <button onclick="addItem()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-2xl shadow-lg shadow-indigo-200 transition-all active:scale-95">
+                Agregar a la lista
+            </button>
+        </div>
+
+        <!-- Previsualización del Ticket (Lo que se compartirá) -->
+        <div id="ticket-capture" class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+            <div class="bg-indigo-600 p-6 text-white text-center">
+                <h2 class="text-xl font-bold tracking-tight">TICKET DE COMPRA</h2>
+                <p id="ticketDate" class="text-indigo-100 text-xs mt-1 uppercase tracking-widest"></p>
+            </div>
+            
+            <div class="p-6 space-y-4">
+                <div id="itemList" class="min-h-[60px] space-y-3">
+                    <!-- Items dinámicos -->
+                    <p class="text-center text-slate-400 text-sm py-4 italic">No hay productos aún...</p>
+                </div>
+
+                <div class="border-t border-dashed border-slate-200 pt-4 space-y-2">
+                    <div class="flex justify-between text-slate-500">
+                        <span>Subtotal</span>
+                        <span id="subtotalDisplay">$0.00</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-2">
+                        <span class="text-lg font-bold text-slate-800">Total a Pagar</span>
+                        <span id="totalDisplay" class="text-2xl font-extrabold text-indigo-600">$0.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Decoración de ticket -->
+            <div class="h-4 ticket-dashed w-full"></div>
+        </div>
+
+        <!-- Acciones Rápidas -->
+        <div class="grid grid-cols-2 gap-4">
+            <button onclick="saveToHistory()" class="flex items-center justify-center gap-2 bg-slate-800 text-white py-3 rounded-2xl font-semibold hover:bg-slate-900 transition-all">
+                <span>💾 Guardar</span>
+            </button>
+            <button onclick="shareTicket()" class="flex items-center justify-center gap-2 bg-green-500 text-white py-3 rounded-2xl font-semibold hover:bg-green-600 transition-all">
+                <span>WhatsApp</span>
+            </button>
+        </div>
+
+        <!-- Historial (Agenda) -->
+        <div>
+            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                📅 Historial Reciente
+            </h3>
+            <div id="historyContainer" class="space-y-3">
+                <!-- Records de historial -->
             </div>
         </div>
 
-        <div class="actions">
-            <button class="btn btn-save" onclick="saveToHistory()">💾 Guardar</button>
-            <button class="btn btn-share" onclick="shareAsImage()">WhatsApp</button>
-        </div>
-        <button class="btn-clear" onclick="clearCurrent()">Limpiar actual</button>
     </div>
 
-    <p class="history-title">📅 Historial de Compras</p>
-    <div id="historyList"></div>
-</div>
+    <script>
+        let currentItems = [];
+        let history = JSON.parse(localStorage.getItem('my_shopping_agenda')) || [];
 
-<script>
-    let currentItems = [];
-    let history = JSON.parse(localStorage.getItem('receiptHistory')) || [];
+        // Inicializar fecha
+        document.getElementById('ticketDate').innerText = new Date().toLocaleDateString('es-ES', { 
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+        });
 
-    document.getElementById('currentDate').innerText = new Date().toLocaleString();
+        function addItem() {
+            const name = document.getElementById('itemName').value;
+            const price = parseFloat(document.getElementById('itemPrice').value);
 
-    function addItem() {
-        const name = document.getElementById('itemName').value;
-        const price = parseFloat(document.getElementById('itemPrice').value);
-        if (name && price) {
-            currentItems.push({ name, price });
-            updateUI();
-            document.getElementById('itemName').value = '';
-            document.getElementById('itemPrice').value = '';
+            if (name && price) {
+                currentItems.push({ name, price, id: Date.now() });
+                renderItems();
+                document.getElementById('itemName').value = '';
+                document.getElementById('itemPrice').value = '';
+                document.getElementById('itemName').focus();
+            }
         }
-    }
 
-    function updateUI() {
-        const list = document.getElementById('itemList');
-        if (currentItems.length === 0) {
-            list.innerHTML = `<p style="text-align: center; color: #94a3b8; padding: 20px;">No hay productos</p>`;
-            return;
+        function renderItems() {
+            const list = document.getElementById('itemList');
+            if (currentItems.length === 0) {
+                list.innerHTML = `<p class="text-center text-slate-400 text-sm py-4 italic">No hay productos aún...</p>`;
+            } else {
+                list.innerHTML = currentItems.map(item => `
+                    <div class="flex justify-between items-center group">
+                        <span class="text-slate-700 font-medium">${item.name}</span>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-slate-900">$${item.price.toFixed(2)}</span>
+                            <button onclick="removeItem(${item.id})" class="text-red-400 hover:text-red-600 text-xs">✕</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            calculateTotals();
         }
-        
-        list.innerHTML = currentItems.map(item => `
-            <div class="item-row">
-                <span>${item.name}</span>
-                <span style="font-weight: 600;">$${item.price.toFixed(2)}</span>
-            </div>
-        `).join('');
 
-        const total = currentItems.reduce((s, i) => s + i.price, 0);
-        document.getElementById('totalDisplay').innerText = `$${total.toFixed(2)}`;
-        document.getElementById('grandTotalDisplay').innerText = `$${total.toFixed(2)}`;
-    }
+        function removeItem(id) {
+            currentItems = currentItems.filter(i => i.id !== id);
+            renderItems();
+        }
 
-    function clearCurrent() {
-        currentItems = [];
-        updateUI();
-    }
+        function calculateTotals() {
+            const total = currentItems.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('subtotalDisplay').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('totalDisplay').innerText = `$${total.toFixed(2)}`;
+        }
 
-    // Guardar en la "Agenda" (LocalStorage)
-    function saveToHistory() {
-        if (currentItems.length === 0) return;
-        const total = currentItems.reduce((s, i) => s + i.price, 0);
-        const record = {
-            id: Date.now(),
-            date: new Date().toLocaleDateString(),
-            total: total
-        };
-        history.unshift(record);
-        localStorage.setItem('receiptHistory', JSON.stringify(history));
-        renderHistory();
-        clearCurrent();
-    }
-
-    function renderHistory() {
-        const hList = document.getElementById('historyList');
-        hList.innerHTML = history.map(item => `
-            <div class="history-item">
-                <div>
-                    <div style="font-weight: 600;">Compra #${item.id.toString().slice(-4)}</div>
-                    <small style="color: #64748b;">${item.date}</small>
-                </div>
-                <div style="font-weight: 600; color: var(--primary);">$${item.total.toFixed(2)}</div>
-            </div>
-        `).join('');
-    }
-
-    // FUNCIÓN MÁGICA: Compartir como imagen
-    async function shareAsImage() {
-        const ticket = document.getElementById('ticket-export');
-        
-        // 1. Convertir div a canvas
-        const canvas = await html2canvas(ticket, { backgroundColor: '#ffffff' });
-        
-        // 2. Convertir canvas a Blob
-        canvas.toBlob(async (blob) => {
-            const file = new File([blob], 'ticket.png', { type: 'image/png' });
+        function saveToHistory() {
+            if (currentItems.length === 0) return;
             
-            // 3. Usar API de compartir nativa (funciona en móviles)
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                try {
+            const total = currentItems.reduce((sum, item) => sum + item.price, 0);
+            const entry = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString(),
+                total: total,
+                count: currentItems.length
+            };
+
+            history.unshift(entry);
+            localStorage.setItem('my_shopping_agenda', JSON.stringify(history));
+            renderHistory();
+            currentItems = [];
+            renderItems();
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('historyContainer');
+            container.innerHTML = history.map(h => `
+                <div class="bg-white p-4 rounded-2xl border border-slate-100 flex justify-between items-center shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-indigo-50 text-indigo-600 p-3 rounded-xl font-bold text-xs uppercase">
+                            ${h.date.split('/')[0]}<br>${h.date.split('/')[1]}
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800">${h.count} Productos</p>
+                            <p class="text-xs text-slate-400 font-medium">Ref: #${h.id.toString().slice(-4)}</p>
+                        </div>
+                    </div>
+                    <p class="text-lg font-extrabold text-slate-900">$${h.total.toFixed(2)}</p>
+                </div>
+            `).join('');
+        }
+
+        async function shareTicket() {
+            const captureArea = document.getElementById('ticket-capture');
+            const canvas = await html2canvas(captureArea, {
+                backgroundColor: '#f8fafc',
+                scale: 2,
+                borderRadius: 24
+            });
+
+            canvas.toBlob(async (blob) => {
+                const file = new File([blob], 'mi-ticket.png', { type: 'image/png' });
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     await navigator.share({
                         files: [file],
-                        title: 'Mi Ticket de Compra',
-                        text: 'Aquí está el resumen de la compra.'
+                        title: 'Mi Ticket de Gasto',
+                        text: 'Te comparto el ticket de la compra de hoy.'
                     });
-                } catch (err) {
-                    alert("Error al compartir. Intenta descargar la imagen.");
+                } else {
+                    const link = document.createElement('a');
+                    link.download = 'ticket.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                    alert("Imagen descargada. ¡Ya puedes enviarla por WhatsApp!");
                 }
-            } else {
-                // Fallback: Descargar imagen si no se puede compartir directamente
-                const link = document.createElement('a');
-                link.download = 'ticket.png';
-                link.href = canvas.toDataURL();
-                link.click();
-                alert("Tu navegador no soporta compartir directamente. Se ha descargado la imagen para que la envíes manualmente.");
-            }
-        });
-    }
+            });
+        }
 
-    renderHistory();
-</script>
-
+        renderHistory();
+    </script>
 </body>
 </html>
