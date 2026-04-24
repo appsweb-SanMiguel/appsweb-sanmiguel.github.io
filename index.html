@@ -1,225 +1,197 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Receipt Pro</title>
-    <!-- Librería para convertir HTML a Imagen -->
-    <script src="https://cloudflare.com"></script>
-    <link href="https://googleapis.com" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6366f1;
-            --bg: #f1f5f9;
-            --card: #ffffff;
-            --text: #1e293b;
-            --secondary: #64748b;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Receipt Pro</title>
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+<!-- FIX CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-        .app-container { max-width: 450px; margin: 0 auto; }
-        
-        .card {
-            background: var(--card);
-            padding: 24px;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
+<style>
+:root {
+    --primary:#6366f1;
+    --bg:#f1f5f9;
+    --card:#fff;
+    --text:#1e293b;
+}
 
-        h1 { font-size: 1.2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    padding:20px;
+}
 
-        /* Formulario */
-        .input-group { display: flex; gap: 8px; margin-bottom: 20px; }
-        input { 
-            padding: 12px; border: 1px solid #e2e8f0; border-radius: 10px; 
-            outline: none; width: 100%; transition: 0.2s;
-        }
-        input:focus { border-color: var(--primary); ring: 2px var(--primary); }
-        
-        .btn-add { 
-            background: var(--primary); color: white; border: none; 
-            padding: 0 15px; border-radius: 10px; cursor: pointer; font-weight: bold;
-        }
+.card {
+    background: var(--card);
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
 
-        /* Ticket Estilizado */
-        #ticket-export {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #f0f0f0;
-        }
-        .ticket-header { text-align: center; border-bottom: 2px dashed #eee; padding-bottom: 15px; margin-bottom: 15px; }
-        .item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f8fafc; }
-        
-        .totals { margin-top: 15px; background: #f8fafc; padding: 15px; border-radius: 12px; }
-        .grand-total { font-weight: 600; font-size: 1.2rem; color: var(--primary); margin-top: 10px; border-top: 1px solid #ddd; pt: 10px; }
+input {
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
 
-        /* Agenda / Historial */
-        .history-title { font-size: 0.9rem; color: var(--secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .history-item { 
-            background: white; padding: 12px; border-radius: 12px; margin-bottom: 8px;
-            display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--primary);
-        }
-
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .btn { 
-            padding: 12px; border: none; border-radius: 10px; cursor: pointer; 
-            font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-share { background: #25D366; color: white; }
-        .btn-save { background: var(--primary); color: white; }
-        .btn-clear { background: #fee2e2; color: #ef4444; width: 100%; margin-top: 10px; }
-    </style>
+button {
+    cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-<div class="app-container">
-    <div class="card">
-        <h1>🛒 Nueva Compra</h1>
-        <div class="input-group">
-            <input type="text" id="itemName" placeholder="Producto...">
-            <input type="number" id="itemPrice" placeholder="$0.00" style="width: 100px">
-            <button class="btn-add" onclick="addItem()">+</button>
-        </div>
+<div class="card">
+    <h2>Nueva compra</h2>
 
-        <!-- Área que se convertirá en imagen -->
-        <div id="ticket-export">
-            <div class="ticket-header">
-                <h2 style="font-size: 1.1rem;">SMART RECEIPT</h2>
-                <small id="currentDate"></small>
-            </div>
-            <div id="itemList">
-                <p style="text-align: center; color: #94a3b8; padding: 20px;">No hay productos</p>
-            </div>
-            <div class="totals">
-                <div style="display: flex; justify-content: space-between;">
-                    <span>Total</span>
-                    <span id="totalDisplay">$0.00</span>
-                </div>
-                <div class="grand-total" style="display: flex; justify-content: space-between;">
-                    <span>A pagar</span>
-                    <span id="grandTotalDisplay">$0.00</span>
-                </div>
-            </div>
-        </div>
+    <input id="name" placeholder="Producto">
+    <input id="price" type="number" placeholder="Precio">
 
-        <div class="actions">
-            <button class="btn btn-save" onclick="saveToHistory()">💾 Guardar</button>
-            <button class="btn btn-share" onclick="shareAsImage()">WhatsApp</button>
-        </div>
-        <button class="btn-clear" onclick="clearCurrent()">Limpiar actual</button>
-    </div>
+    <button onclick="addItem()">Agregar</button>
 
-    <p class="history-title">📅 Historial de Compras</p>
-    <div id="historyList"></div>
+    <div id="list"></div>
+
+    <h3 id="total">$0.00</h3>
+
+    <button onclick="save()">Guardar</button>
+    <button onclick="clearAll()">Limpiar</button>
+    <button onclick="share()">Compartir</button>
+</div>
+
+<div class="card">
+    <h3>Historial</h3>
+    <div id="history"></div>
 </div>
 
 <script>
-    let currentItems = [];
-    let history = JSON.parse(localStorage.getItem('receiptHistory')) || [];
+// ================== STATE ==================
+let items = [];
+let history = JSON.parse(localStorage.getItem("history_v2")) || [];
 
-    document.getElementById('currentDate').innerText = new Date().toLocaleString();
+// ================== SECURITY ==================
+function escapeHTML(str){
+    return str.replace(/[&<>"']/g, t => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",
+        '"':"&quot;","'":"&#39;"
+    }[t]));
+}
 
-    function addItem() {
-        const name = document.getElementById('itemName').value;
-        const price = parseFloat(document.getElementById('itemPrice').value);
-        if (name && price) {
-            currentItems.push({ name, price });
-            updateUI();
-            document.getElementById('itemName').value = '';
-            document.getElementById('itemPrice').value = '';
-        }
+// ================== LOGIC ==================
+function addItem(){
+    const name = document.getElementById("name").value.trim();
+    const price = parseFloat(document.getElementById("price").value);
+
+    if(!name || isNaN(price) || price <= 0){
+        alert("Datos inválidos");
+        return;
     }
 
-    function updateUI() {
-        const list = document.getElementById('itemList');
-        if (currentItems.length === 0) {
-            list.innerHTML = `<p style="text-align: center; color: #94a3b8; padding: 20px;">No hay productos</p>`;
-            return;
-        }
-        
-        list.innerHTML = currentItems.map(item => `
-            <div class="item-row">
-                <span>${item.name}</span>
-                <span style="font-weight: 600;">$${item.price.toFixed(2)}</span>
-            </div>
-        `).join('');
+    items.push({
+        id: crypto.randomUUID(),
+        name,
+        price
+    });
 
-        const total = currentItems.reduce((s, i) => s + i.price, 0);
-        document.getElementById('totalDisplay').innerText = `$${total.toFixed(2)}`;
-        document.getElementById('grandTotalDisplay').innerText = `$${total.toFixed(2)}`;
+    document.getElementById("name").value="";
+    document.getElementById("price").value="";
+
+    render();
+}
+
+function render(){
+    const list = document.getElementById("list");
+
+    if(items.length === 0){
+        list.innerHTML = "<p>Sin productos</p>";
+        updateTotal();
+        return;
     }
 
-    function clearCurrent() {
-        currentItems = [];
-        updateUI();
-    }
+    list.innerHTML = items.map(i => `
+        <div>
+            ${escapeHTML(i.name)} - $${i.price.toFixed(2)}
+            <button onclick="removeItem('${i.id}')">x</button>
+        </div>
+    `).join("");
 
-    // Guardar en la "Agenda" (LocalStorage)
-    function saveToHistory() {
-        if (currentItems.length === 0) return;
-        const total = currentItems.reduce((s, i) => s + i.price, 0);
-        const record = {
-            id: Date.now(),
-            date: new Date().toLocaleDateString(),
-            total: total
-        };
-        history.unshift(record);
-        localStorage.setItem('receiptHistory', JSON.stringify(history));
-        renderHistory();
-        clearCurrent();
-    }
+    updateTotal();
+}
 
-    function renderHistory() {
-        const hList = document.getElementById('historyList');
-        hList.innerHTML = history.map(item => `
-            <div class="history-item">
-                <div>
-                    <div style="font-weight: 600;">Compra #${item.id.toString().slice(-4)}</div>
-                    <small style="color: #64748b;">${item.date}</small>
-                </div>
-                <div style="font-weight: 600; color: var(--primary);">$${item.total.toFixed(2)}</div>
-            </div>
-        `).join('');
-    }
+function removeItem(id){
+    if(!confirm("Eliminar producto?")) return;
+    items = items.filter(i => i.id !== id);
+    render();
+}
 
-    // FUNCIÓN MÁGICA: Compartir como imagen
-    async function shareAsImage() {
-        const ticket = document.getElementById('ticket-export');
-        
-        // 1. Convertir div a canvas
-        const canvas = await html2canvas(ticket, { backgroundColor: '#ffffff' });
-        
-        // 2. Convertir canvas a Blob
-        canvas.toBlob(async (blob) => {
-            const file = new File([blob], 'ticket.png', { type: 'image/png' });
-            
-            // 3. Usar API de compartir nativa (funciona en móviles)
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                try {
-                    await navigator.share({
-                        files: [file],
-                        title: 'Mi Ticket de Compra',
-                        text: 'Aquí está el resumen de la compra.'
-                    });
-                } catch (err) {
-                    alert("Error al compartir. Intenta descargar la imagen.");
-                }
-            } else {
-                // Fallback: Descargar imagen si no se puede compartir directamente
-                const link = document.createElement('a');
-                link.download = 'ticket.png';
-                link.href = canvas.toDataURL();
-                link.click();
-                alert("Tu navegador no soporta compartir directamente. Se ha descargado la imagen para que la envíes manualmente.");
-            }
-        });
-    }
+function updateTotal(){
+    const total = items.reduce((s,i)=>s+i.price,0);
+    document.getElementById("total").innerText = "$"+total.toFixed(2);
+}
 
+// ================== STORAGE ==================
+function save(){
+    if(items.length === 0) return;
+
+    const record = {
+        id: Date.now(),
+        date: new Date().toLocaleString(),
+        items:[...items],
+        total: items.reduce((s,i)=>s+i.price,0)
+    };
+
+    history.unshift(record);
+    localStorage.setItem("history_v2", JSON.stringify(history));
+
+    items = [];
+    render();
     renderHistory();
+}
+
+function clearAll(){
+    if(!confirm("Limpiar lista?")) return;
+    items=[];
+    render();
+}
+
+function renderHistory(){
+    const container = document.getElementById("history");
+
+    container.innerHTML = history.map(h => `
+        <div style="margin-bottom:10px;">
+            <strong>#${h.id.toString().slice(-4)}</strong>
+            <br>${h.date}
+            <br>Total: $${h.total.toFixed(2)}
+        </div>
+    `).join("");
+}
+
+// ================== SHARE ==================
+async function share(){
+    const el = document.body;
+
+    const canvas = await html2canvas(el);
+    canvas.toBlob(async blob=>{
+        const file = new File([blob], "ticket.png",{type:"image/png"});
+
+        if(navigator.canShare && navigator.canShare({files:[file]})){
+            await navigator.share({
+                files:[file],
+                title:"Ticket"
+            });
+        } else {
+            const a=document.createElement("a");
+            a.href=canvas.toDataURL();
+            a.download="ticket.png";
+            a.click();
+        }
+    });
+}
+
+// INIT
+render();
+renderHistory();
 </script>
 
 </body>
