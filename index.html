@@ -4,18 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Smart Receipt Pro</title>
+<title>Notas</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+
+  
 <style>
-body { font-family: 'Inter', sans-serif; }
+body { font-family: Inter, sans-serif; }
 .ticket-dashed {
-    background-image: radial-gradient(#e2e8f0 2px, transparent 2px);
-    background-size: 12px 12px;
+  background-image: radial-gradient(#e2e8f0 2px, transparent 2px);
+  background-size: 10px 10px;
 }
 </style>
 </head>
@@ -25,34 +29,54 @@ body { font-family: 'Inter', sans-serif; }
 <div class="max-w-md mx-auto p-4 space-y-4">
 
 <!-- HEADER -->
-<div>
-<h1 class="text-xl font-bold text-slate-800">Smart Receipt</h1>
-<p class="text-xs text-slate-500">Tickets rápidos para tu negocio</p>
+<div class="flex items-center justify-between">
+<h1 class="text-xl font-bold">Notas</h1>
+<i class="bi bi-receipt text-2xl text-indigo-600"></i>
 </div>
 
 <!-- FORM -->
-<div class="bg-white p-4 rounded-2xl shadow-sm space-y-3">
+<div class="bg-white p-4 rounded-2xl shadow space-y-3">
 
+<!-- BUSINESS -->
 <input id="business" placeholder="Nombre del negocio"
-class="w-full p-3 rounded-xl bg-slate-50">
+class="w-full p-3 bg-slate-50 rounded-xl">
 
-<input id="client" placeholder="Cliente"
-class="w-full p-3 rounded-xl bg-slate-50">
+<!-- LOGO -->
+<label class="flex items-center gap-2 text-sm text-indigo-600 cursor-pointer">
+<i class="bi bi-image"></i> Subir logo
+<input type="file" accept="image/*" hidden onchange="loadLogo(event)">
+</label>
 
+<div id="logoPreview" class="flex justify-center"></div>
+
+<!-- ITEM INPUT -->
 <div class="grid grid-cols-3 gap-2">
-<input id="name" placeholder="Producto"
-class="col-span-2 p-3 rounded-xl bg-slate-50">
+<input id="item" placeholder="Producto"
+class="col-span-2 p-3 bg-slate-50 rounded-xl">
 
 <input id="price" type="number" placeholder="$"
-class="p-3 rounded-xl bg-slate-50">
+class="p-3 bg-slate-50 rounded-xl">
 </div>
 
-<textarea id="notes" placeholder="Notas..."
-class="w-full p-3 rounded-xl bg-slate-50"></textarea>
-
+<!-- ADD BUTTON (PRIMERO) -->
 <button onclick="addItem()"
-class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold">
+class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2">
+
+<i class="bi bi-plus-circle"></i>
 Agregar producto
+
+</button>
+
+<!-- SPLIT (OPCIONAL) -->
+<input id="people" type="number" placeholder="Personas para dividir (opcional)"
+class="w-full p-3 bg-slate-50 rounded-xl">
+
+<button onclick="render()"
+class="w-full bg-slate-800 text-white py-3 rounded-xl flex items-center justify-center gap-2">
+
+<i class="bi bi-calculator"></i>
+Actualizar división
+
 </button>
 
 </div>
@@ -61,22 +85,26 @@ Agregar producto
 <div id="ticket" class="bg-white rounded-2xl shadow overflow-hidden">
 
 <div class="bg-indigo-600 text-white text-center p-4">
-<p id="tBusiness" class="font-bold"></p>
-<p id="tClient" class="text-xs opacity-80"></p>
-<p id="tDate" class="text-xs opacity-70"></p>
+
+<div id="logoTicket"></div>
+
+<p class="font-bold" id="tBusiness">Sin nombre</p>
+<p class="text-xs opacity-80" id="date"></p>
+
 </div>
 
-<div class="p-4 space-y-2">
+<div class="p-4 space-y-2" id="list"></div>
 
-<div id="list"></div>
+<div class="border-t p-4 space-y-1">
 
-<div class="border-t pt-2 text-sm">
-<p id="tNotes" class="text-slate-500"></p>
-</div>
-
-<div class="border-t pt-3 flex justify-between font-bold text-lg">
+<div class="flex justify-between font-bold">
 <span>Total</span>
 <span id="total">$0.00</span>
+</div>
+
+<div class="flex justify-between text-indigo-600 font-bold">
+<span>Por persona</span>
+<span id="split">$0.00</span>
 </div>
 
 </div>
@@ -86,167 +114,208 @@ Agregar producto
 </div>
 
 <!-- ACTIONS -->
-<div class="grid grid-cols-3 gap-2">
-<button onclick="save()" class="bg-slate-800 text-white py-3 rounded-xl">Guardar</button>
-<button onclick="share()" class="bg-green-500 text-white py-3 rounded-xl">WhatsApp</button>
-<button onclick="clearAll()" class="bg-red-100 text-red-600 py-3 rounded-xl">Limpiar</button>
-</div>
+<div class="grid grid-cols-2 gap-2">
 
-<!-- HISTORY -->
-<div>
-<h3 class="text-sm font-bold text-slate-600 mb-2">Historial</h3>
-<div id="history" class="space-y-3"></div>
+<button onclick="shareTicketImage()"
+class="bg-green-500 text-white py-3 rounded-xl flex items-center justify-center gap-2">
+
+<i class="bi bi-whatsapp"></i>
+Compartir
+
+</button>
+
+<button onclick="downloadTicket()"
+class="bg-indigo-600 text-white py-3 rounded-xl flex items-center justify-center gap-2">
+
+<i class="bi bi-download"></i>
+Descargar
+
+</button>
+
 </div>
 
 </div>
 
 <script>
 
-// STATE
+// ================= STATE =================
 let items = [];
-let history = JSON.parse(localStorage.getItem("receipts_full")) || [];
+let logoBase64 = null;
 
-// SECURITY
-function escapeHTML(str){
-return str.replace(/[&<>"']/g, t => ({
-"&":"&amp;","<":"&lt;",">":"&gt;",
-'"':"&quot;","'":"&#39;"
-}[t]));
+// ================= INIT =================
+window.onload = () => {
+document.getElementById("date").innerText = new Date().toLocaleString();
+};
+
+// ================= LOGO =================
+function loadLogo(e){
+const file = e.target.files[0];
+const reader = new FileReader();
+
+reader.onload = () => {
+logoBase64 = reader.result;
+
+document.getElementById("logoPreview").innerHTML =
+`<img src="${logoBase64}" class="w-14 h-14 rounded-xl shadow">`;
+
+document.getElementById("logoTicket").innerHTML =
+`<img src="${logoBase64}" class="w-10 h-10 mx-auto mb-2 rounded-lg">`;
+};
+
+reader.readAsDataURL(file);
 }
 
-// ADD
+// ================= ADD ITEM =================
 function addItem(){
-const name = document.getElementById("name").value.trim();
+
+const item = document.getElementById("item").value.trim();
 const price = parseFloat(document.getElementById("price").value);
 
-if(!name || isNaN(price) || price<=0){
+if(!item || isNaN(price) || price <= 0){
 alert("Datos inválidos");
 return;
 }
 
-items.push({
-id: crypto.randomUUID(),
-name,
-price
-});
+items.push({ item, price });
 
-document.getElementById("name").value="";
+document.getElementById("item").value="";
 document.getElementById("price").value="";
 
 render();
 }
 
-// RENDER
+// ================= RENDER =================
 function render(){
 
 document.getElementById("tBusiness").innerText =
-document.getElementById("business").value;
-
-document.getElementById("tClient").innerText =
-document.getElementById("client").value;
-
-document.getElementById("tNotes").innerText =
-document.getElementById("notes").value;
-
-document.getElementById("tDate").innerText =
-new Date().toLocaleString();
+document.getElementById("business").value || "Sin nombre";
 
 const list = document.getElementById("list");
 
 list.innerHTML = items.map(i=>`
 <div class="flex justify-between text-sm">
-<span>${escapeHTML(i.name)}</span>
+<span>${i.item}</span>
 <span>$${i.price.toFixed(2)}</span>
 </div>
 `).join("");
 
 const total = items.reduce((s,i)=>s+i.price,0);
-document.getElementById("total").innerText="$"+total.toFixed(2);
+const people = parseInt(document.getElementById("people").value);
+
+document.getElementById("total").innerText = "$"+total.toFixed(2);
+
+// SOLO si hay valor válido
+if(people && people > 0){
+document.getElementById("split").innerText =
+"$"+(total/people).toFixed(2);
+}else{
+document.getElementById("split").innerText = "$0.00";
+}
 }
 
-// SAVE
-function save(){
+// ================= DOWNLOAD =================
+async function downloadTicket(){
 
-if(items.length===0){
-alert("Agrega productos");
-return;
-}
-
-const record = {
-id: Date.now(),
-business: document.getElementById("business").value,
-client: document.getElementById("client").value,
-notes: document.getElementById("notes").value,
-items:[...items],
-total: items.reduce((s,i)=>s+i.price,0),
-date: new Date().toLocaleString()
-};
-
-history.unshift(record);
-localStorage.setItem("receipts_full", JSON.stringify(history));
-
-items=[];
-render();
-renderHistory();
-}
-
-// HISTORY (ahora muestra ticket completo)
-function renderHistory(){
-const h = document.getElementById("history");
-
-h.innerHTML = history.map(r=>`
-<div class="bg-white p-3 rounded-xl shadow-sm">
-<p class="font-bold">${escapeHTML(r.business)}</p>
-<p class="text-xs text-slate-400">${escapeHTML(r.client)}</p>
-
-<div class="text-sm mt-2 space-y-1">
-${r.items.map(i=>`
-<div class="flex justify-between">
-<span>${escapeHTML(i.name)}</span>
-<span>$${i.price.toFixed(2)}</span>
-</div>
-`).join("")}
-</div>
-
-<div class="flex justify-between font-bold mt-2 border-t pt-2">
-<span>Total</span>
-<span>$${r.total.toFixed(2)}</span>
-</div>
-</div>
-`).join("");
-}
-
-// CLEAR
-function clearAll(){
-if(!confirm("Limpiar?")) return;
-items=[];
-render();
-}
-
-// SHARE
-async function share(){
 const el = document.getElementById("ticket");
 
-const canvas = await html2canvas(el,{scale:2});
-canvas.toBlob(async blob=>{
-const file = new File([blob],"ticket.png",{type:"image/png"});
+const canvas = await html2canvas(el,{
+scale:2,
+useCORS:true,
+backgroundColor:"#ffffff"
+});
 
-if(navigator.canShare && navigator.canShare({files:[file]})){
-await navigator.share({files:[file]});
-}else{
-const a=document.createElement("a");
-a.href=canvas.toDataURL();
-a.download="ticket.png";
+const a = document.createElement("a");
+a.href = canvas.toDataURL();
+a.download = "ticket.png";
 a.click();
 }
+
+// ================= SHARE =================
+async function shareTicketImage(){
+
+const el = document.getElementById("ticket");
+
+const canvas = await html2canvas(el,{
+scale:2,
+useCORS:true,
+backgroundColor:"#ffffff"
 });
+
+canvas.toBlob(async blob=>{
+
+const file = new File([blob], "ticket.png", { type: "image/png" });
+
+if(navigator.canShare && navigator.canShare({files:[file]})){
+
+await navigator.share({
+files:[file],
+title:"Ticket de gasto"
+});
+
+}else{
+
+const a = document.createElement("a");
+a.href = canvas.toDataURL();
+a.download = "ticket.png";
+a.click();
+
+alert("Descargado para compartir manualmente");
+
 }
 
-// INIT
-render();
-renderHistory();
+});
+
+}
 
 </script>
+
+<script>
+
+// ================= PWA INSTALL EN HEADER =================
+let deferredPrompt;
+
+// Crear botón
+const installBtn = document.createElement("button");
+installBtn.innerHTML = `<i class="bi bi-download"></i>`;
+installBtn.className =
+"bg-indigo-600 text-white p-2 rounded-xl text-sm hidden";
+
+// Insertarlo en el header
+window.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".flex.items-center.justify-between");
+  if (header) {
+    header.appendChild(installBtn);
+  }
+});
+
+// Detectar instalación disponible
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.classList.remove("hidden");
+});
+
+// Click instalar
+installBtn.addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+
+  if (outcome === "accepted") {
+    console.log("App instalada");
+  }
+
+  deferredPrompt = null;
+  installBtn.classList.add("hidden");
+});
+
+// Ocultar si ya está instalada
+window.addEventListener("appinstalled", () => {
+  installBtn.classList.add("hidden");
+});
+
+</script>  
 
 </body>
 </html>
