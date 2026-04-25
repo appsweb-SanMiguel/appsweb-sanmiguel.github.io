@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
 
+  
 <style>
 body { font-family: Inter, sans-serif; }
 .ticket-dashed {
@@ -266,6 +268,53 @@ alert("Descargado para compartir manualmente");
 }
 
 </script>
+
+<script>
+
+// ================= PWA INSTALL BUTTON =================
+let deferredPrompt;
+
+// Crear botón dinámicamente
+const installBtn = document.createElement("button");
+installBtn.innerHTML = `<i class="bi bi-download"></i> Instalar app`;
+installBtn.className =
+"fixed bottom-4 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-2 text-sm font-semibold hidden";
+document.body.appendChild(installBtn);
+
+// Escuchar evento de instalación
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Mostrar botón
+  installBtn.classList.remove("hidden");
+});
+
+// Click en instalar
+installBtn.addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+
+  deferredPrompt.prompt();
+
+  const { outcome } = await deferredPrompt.userChoice;
+
+  if (outcome === "accepted") {
+    console.log("App instalada");
+  }
+
+  deferredPrompt = null;
+  installBtn.classList.add("hidden");
+});
+
+// Ocultar si ya está instalada
+window.addEventListener("appinstalled", () => {
+  installBtn.classList.add("hidden");
+});
+
+</script>
+
+  
+  
 
 </body>
 </html>
