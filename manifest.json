@@ -1,6 +1,6 @@
 {
-  "name": "POS Sistema de Ventas",
-  "short_name": "POS",
+  "name": "Web Apps San Miguel",
+  "short_name": "Web Apps San Miguel",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
