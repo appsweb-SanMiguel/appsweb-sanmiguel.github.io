@@ -271,31 +271,35 @@ alert("Descargado para compartir manualmente");
 
 <script>
 
-// ================= PWA INSTALL BUTTON =================
+// ================= PWA INSTALL EN HEADER =================
 let deferredPrompt;
 
-// Crear botón dinámicamente
+// Crear botón
 const installBtn = document.createElement("button");
-installBtn.innerHTML = `<i class="bi bi-download"></i> Instalar app`;
+installBtn.innerHTML = `<i class="bi bi-download"></i>`;
 installBtn.className =
-"fixed bottom-4 left-1/2 -translate-x-1/2 bg-indigo-600 text-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-2 text-sm font-semibold hidden";
-document.body.appendChild(installBtn);
+"bg-indigo-600 text-white p-2 rounded-xl text-sm hidden";
 
-// Escuchar evento de instalación
+// Insertarlo en el header
+window.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".flex.items-center.justify-between");
+  if (header) {
+    header.appendChild(installBtn);
+  }
+});
+
+// Detectar instalación disponible
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
-
-  // Mostrar botón
   installBtn.classList.remove("hidden");
 });
 
-// Click en instalar
+// Click instalar
 installBtn.addEventListener("click", async () => {
   if (!deferredPrompt) return;
 
   deferredPrompt.prompt();
-
   const { outcome } = await deferredPrompt.userChoice;
 
   if (outcome === "accepted") {
@@ -311,10 +315,7 @@ window.addEventListener("appinstalled", () => {
   installBtn.classList.add("hidden");
 });
 
-</script>
-
-  
-  
+</script>  
 
 </body>
 </html>
