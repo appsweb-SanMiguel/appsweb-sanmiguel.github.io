@@ -2,15 +2,24 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Catálogo de Pizzas</title>
+  <title>Pizzería Demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
 
   <script>
     function pedirPizza(nombre) {
-      const numero = "5215512345678"; // CAMBIA por el número real
+      const numero = "5215512345678"; // CAMBIA ESTO
       const mensaje = encodeURIComponent("Hola, quiero pedir la pizza: " + nombre);
       window.open(`https://wa.me/${numero}?text=${mensaje}`, "_blank");
     }
@@ -22,15 +31,23 @@
   <!-- Header -->
   <header class="bg-red-600 text-white p-6 text-center shadow-lg">
     <h1 class="text-3xl font-bold">🍕 Pizzería Demo</h1>
-    <p class="text-sm mt-2">Ordena fácil desde WhatsApp</p>
+    <p class="text-sm mt-2">Pide en segundos por WhatsApp</p>
+    <p class="text-xs mt-1 opacity-80">📲 Instala esta app y ordena más rápido</p>
   </header>
 
   <!-- Catalogo -->
   <main class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
     <!-- Pizza 1 -->
-    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1601924928376-8cfd3b4c1c6d" class="w-full h-48 object-cover">
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition fade-in">
+      <div class="relative">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=800"
+             onerror="this.src='https://via.placeholder.com/800x600?text=Pizza'"
+             class="w-full h-48 object-cover">
+        <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full">
+          🔥 Más vendida
+        </span>
+      </div>
       <div class="p-4">
         <h2 class="text-xl font-bold">Pizza Pepperoni</h2>
         <p class="text-gray-600 text-sm mt-2">Clásica con extra pepperoni y queso.</p>
@@ -42,8 +59,10 @@
     </div>
 
     <!-- Pizza 2 -->
-    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65" class="w-full h-48 object-cover">
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition fade-in">
+      <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=800"
+           onerror="this.src='https://via.placeholder.com/800x600?text=Pizza'"
+           class="w-full h-48 object-cover">
       <div class="p-4">
         <h2 class="text-xl font-bold">Pizza Hawaiana</h2>
         <p class="text-gray-600 text-sm mt-2">Jamón y piña, combinación perfecta.</p>
@@ -55,8 +74,10 @@
     </div>
 
     <!-- Pizza 3 -->
-    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1548365328-9f547fb0953d" class="w-full h-48 object-cover">
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition fade-in">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800"
+           onerror="this.src='https://via.placeholder.com/800x600?text=Pizza'"
+           class="w-full h-48 object-cover">
       <div class="p-4">
         <h2 class="text-xl font-bold">Pizza Mexicana</h2>
         <p class="text-gray-600 text-sm mt-2">Chorizo, jalapeño y cebolla.</p>
@@ -68,8 +89,10 @@
     </div>
 
     <!-- Pizza 4 -->
-    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143" class="w-full h-48 object-cover">
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition fade-in">
+      <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?q=80&w=800"
+           onerror="this.src='https://via.placeholder.com/800x600?text=Pizza'"
+           class="w-full h-48 object-cover">
       <div class="p-4">
         <h2 class="text-xl font-bold">Pizza 4 Quesos</h2>
         <p class="text-gray-600 text-sm mt-2">Mezcla cremosa de quesos premium.</p>
@@ -82,51 +105,50 @@
 
   </main>
 
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/5215512345678"
+     target="_blank"
+     class="fixed bottom-20 right-4 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600">
+     💬
+  </a>
+
   <!-- CTA -->
   <footer class="bg-gray-900 text-white text-center p-6 mt-6">
     <p class="text-lg font-semibold">🚀 Deja de imprimir volantes</p>
     <p class="text-sm mt-2">Recibe pedidos directos por WhatsApp y aumenta tus ventas hoy mismo.</p>
   </footer>
 
-  <!-- Botón de instalación -->
-<div id="installContainer" class="fixed bottom-4 left-0 right-0 flex justify-center hidden">
-  <button id="installBtn" class="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition">
-    📲 Instalar App
-  </button>
-</div>
+  <!-- Botón instalar -->
+  <div id="installContainer" class="fixed bottom-4 left-0 right-0 flex justify-center hidden">
+    <button id="installBtn" class="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700">
+      📲 Instalar App
+    </button>
+  </div>
 
-<script>
-  let deferredPrompt;
+  <script>
+    let deferredPrompt;
+    const installContainer = document.getElementById('installContainer');
+    const installBtn = document.getElementById('installBtn');
 
-  const installContainer = document.getElementById('installContainer');
-  const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installContainer.classList.remove('hidden');
+    });
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installContainer.classList.remove('hidden');
-  });
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
 
-  installBtn.addEventListener('click', async () => {
-    if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installContainer.classList.add('hidden');
+    });
 
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
+    window.addEventListener('appinstalled', () => {
+      installContainer.classList.add('hidden');
+    });
+  </script>
 
-    if (outcome === 'accepted') {
-      console.log('Usuario instaló la app');
-    } else {
-      console.log('Usuario canceló la instalación');
-    }
-
-    deferredPrompt = null;
-    installContainer.classList.add('hidden');
-  });
-
-  window.addEventListener('appinstalled', () => {
-    console.log('PWA instalada');
-    installContainer.classList.add('hidden');
-  });
-</script>
 </body>
 </html>
