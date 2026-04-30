@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo de Pizzas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    function pedirPizza(nombre) {
+      const numero = "5215512345678"; // CAMBIA por el número real
+      const mensaje = encodeURIComponent("Hola, quiero pedir la pizza: " + nombre);
+      window.open(`https://wa.me/${numero}?text=${mensaje}`, "_blank");
+    }
+  </script>
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- Header -->
+  <header class="bg-red-600 text-white p-6 text-center shadow-lg">
+    <h1 class="text-3xl font-bold">🍕 Pizzería Demo</h1>
+    <p class="text-sm mt-2">Ordena fácil desde WhatsApp</p>
+  </header>
+
+  <!-- Catalogo -->
+  <main class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- Pizza 1 -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1601924928376-8cfd3b4c1c6d" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-bold">Pizza Pepperoni</h2>
+        <p class="text-gray-600 text-sm mt-2">Clásica con extra pepperoni y queso.</p>
+        <p class="text-lg font-semibold mt-2">$150 MXN</p>
+        <button onclick="pedirPizza('Pizza Pepperoni')" class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl hover:bg-green-600">
+          Pedir por WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- Pizza 2 -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-bold">Pizza Hawaiana</h2>
+        <p class="text-gray-600 text-sm mt-2">Jamón y piña, combinación perfecta.</p>
+        <p class="text-lg font-semibold mt-2">$140 MXN</p>
+        <button onclick="pedirPizza('Pizza Hawaiana')" class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl hover:bg-green-600">
+          Pedir por WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- Pizza 3 -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1548365328-9f547fb0953d" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-bold">Pizza Mexicana</h2>
+        <p class="text-gray-600 text-sm mt-2">Chorizo, jalapeño y cebolla.</p>
+        <p class="text-lg font-semibold mt-2">$160 MXN</p>
+        <button onclick="pedirPizza('Pizza Mexicana')" class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl hover:bg-green-600">
+          Pedir por WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- Pizza 4 -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-bold">Pizza 4 Quesos</h2>
+        <p class="text-gray-600 text-sm mt-2">Mezcla cremosa de quesos premium.</p>
+        <p class="text-lg font-semibold mt-2">$170 MXN</p>
+        <button onclick="pedirPizza('Pizza 4 Quesos')" class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl hover:bg-green-600">
+          Pedir por WhatsApp
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- CTA -->
+  <footer class="bg-gray-900 text-white text-center p-6 mt-6">
+    <p class="text-lg font-semibold">🚀 Deja de imprimir volantes</p>
+    <p class="text-sm mt-2">Recibe pedidos directos por WhatsApp y aumenta tus ventas hoy mismo.</p>
+  </footer>
+
+</body>
+</html>
