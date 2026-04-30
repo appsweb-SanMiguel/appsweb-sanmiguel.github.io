@@ -1,321 +1,165 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Pizzería Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Notas</title>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="manifest" href="manifest.json">
+  <script>
+    function pedirPedido(texto) {
+      const mensaje = `Hola, quiero pedir:\n${texto}\n\n📍 Dirección:\n💳 Forma de pago:`;
 
-  
-<style>
-body { font-family: Inter, sans-serif; }
-.ticket-dashed {
-  background-image: radial-gradient(#e2e8f0 2px, transparent 2px);
-  background-size: 10px 10px;
-}
-</style>
+      if (navigator.share) {
+        navigator.share({
+          title: "Pedido de pizza",
+          text: mensaje
+        });
+      } else {
+        const url = "https://wa.me/?text=" + encodeURIComponent(mensaje);
+        window.open(url, "_blank");
+      }
+    }
+  </script>
 </head>
 
-<body class="bg-slate-100">
-
-<div class="max-w-md mx-auto p-4 space-y-4">
-
-<!-- HEADER -->
-<div class="flex items-center justify-between">
-<h1 class="text-xl font-bold">Notas</h1>
-<i class="bi bi-receipt text-2xl text-indigo-600"></i>
-</div>
-
-<!-- FORM -->
-<div class="bg-white p-4 rounded-2xl shadow space-y-3">
-
-<!-- BUSINESS -->
-<input id="business" placeholder="Nombre del negocio"
-class="w-full p-3 bg-slate-50 rounded-xl">
-
-<!-- LOGO -->
-<label class="flex items-center gap-2 text-sm text-indigo-600 cursor-pointer">
-<i class="bi bi-image"></i> Subir logo
-<input type="file" accept="image/*" hidden onchange="loadLogo(event)">
-</label>
-
-<div id="logoPreview" class="flex justify-center"></div>
-
-<!-- ITEM INPUT -->
-<div class="grid grid-cols-3 gap-2">
-<input id="item" placeholder="Producto"
-class="col-span-2 p-3 bg-slate-50 rounded-xl">
-
-<input id="price" type="number" placeholder="$"
-class="p-3 bg-slate-50 rounded-xl">
-</div>
-
-<!-- ADD BUTTON (PRIMERO) -->
-<button onclick="addItem()"
-class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2">
-
-<i class="bi bi-plus-circle"></i>
-Agregar producto
-
-</button>
-
-<!-- SPLIT (OPCIONAL) -->
-<input id="people" type="number" placeholder="Personas para dividir (opcional)"
-class="w-full p-3 bg-slate-50 rounded-xl">
-
-<button onclick="render()"
-class="w-full bg-slate-800 text-white py-3 rounded-xl flex items-center justify-center gap-2">
-
-<i class="bi bi-calculator"></i>
-Actualizar división
-
-</button>
-
-</div>
-
-<!-- TICKET -->
-<div id="ticket" class="bg-white rounded-2xl shadow overflow-hidden">
-
-<div class="bg-indigo-600 text-white text-center p-4">
-
-<div id="logoTicket"></div>
-
-<p class="font-bold" id="tBusiness">Sin nombre</p>
-<p class="text-xs opacity-80" id="date"></p>
-
-</div>
-
-<div class="p-4 space-y-2" id="list"></div>
-
-<div class="border-t p-4 space-y-1">
-
-<div class="flex justify-between font-bold">
-<span>Total</span>
-<span id="total">$0.00</span>
-</div>
-
-<div class="flex justify-between text-indigo-600 font-bold">
-<span>Por persona</span>
-<span id="split">$0.00</span>
-</div>
-
-</div>
-
-<div class="h-3 ticket-dashed"></div>
-
-</div>
-
-<!-- ACTIONS -->
-<div class="grid grid-cols-2 gap-2">
-
-<button onclick="shareTicketImage()"
-class="bg-green-500 text-white py-3 rounded-xl flex items-center justify-center gap-2">
-
-<i class="bi bi-whatsapp"></i>
-Compartir
-
-</button>
-
-<button onclick="downloadTicket()"
-class="bg-indigo-600 text-white py-3 rounded-xl flex items-center justify-center gap-2">
-
-<i class="bi bi-download"></i>
-Descargar
-
-</button>
-
-</div>
-
-</div>
-
-<script>
-
-// ================= STATE =================
-let items = [];
-let logoBase64 = null;
-
-// ================= INIT =================
-window.onload = () => {
-document.getElementById("date").innerText = new Date().toLocaleString();
-};
-
-// ================= LOGO =================
-function loadLogo(e){
-const file = e.target.files[0];
-const reader = new FileReader();
-
-reader.onload = () => {
-logoBase64 = reader.result;
-
-document.getElementById("logoPreview").innerHTML =
-`<img src="${logoBase64}" class="w-14 h-14 rounded-xl shadow">`;
-
-document.getElementById("logoTicket").innerHTML =
-`<img src="${logoBase64}" class="w-10 h-10 mx-auto mb-2 rounded-lg">`;
-};
-
-reader.readAsDataURL(file);
-}
-
-// ================= ADD ITEM =================
-function addItem(){
-
-const item = document.getElementById("item").value.trim();
-const price = parseFloat(document.getElementById("price").value);
-
-if(!item || isNaN(price) || price <= 0){
-alert("Datos inválidos");
-return;
-}
-
-items.push({ item, price });
-
-document.getElementById("item").value="";
-document.getElementById("price").value="";
-
-render();
-}
-
-// ================= RENDER =================
-function render(){
-
-document.getElementById("tBusiness").innerText =
-document.getElementById("business").value || "Sin nombre";
-
-const list = document.getElementById("list");
-
-list.innerHTML = items.map(i=>`
-<div class="flex justify-between text-sm">
-<span>${i.item}</span>
-<span>$${i.price.toFixed(2)}</span>
-</div>
-`).join("");
-
-const total = items.reduce((s,i)=>s+i.price,0);
-const people = parseInt(document.getElementById("people").value);
-
-document.getElementById("total").innerText = "$"+total.toFixed(2);
-
-// SOLO si hay valor válido
-if(people && people > 0){
-document.getElementById("split").innerText =
-"$"+(total/people).toFixed(2);
-}else{
-document.getElementById("split").innerText = "$0.00";
-}
-}
-
-// ================= DOWNLOAD =================
-async function downloadTicket(){
-
-const el = document.getElementById("ticket");
-
-const canvas = await html2canvas(el,{
-scale:2,
-useCORS:true,
-backgroundColor:"#ffffff"
-});
-
-const a = document.createElement("a");
-a.href = canvas.toDataURL();
-a.download = "ticket.png";
-a.click();
-}
-
-// ================= SHARE =================
-async function shareTicketImage(){
-
-const el = document.getElementById("ticket");
-
-const canvas = await html2canvas(el,{
-scale:2,
-useCORS:true,
-backgroundColor:"#ffffff"
-});
-
-canvas.toBlob(async blob=>{
-
-const file = new File([blob], "ticket.png", { type: "image/png" });
-
-if(navigator.canShare && navigator.canShare({files:[file]})){
-
-await navigator.share({
-files:[file],
-title:"Ticket de gasto"
-});
-
-}else{
-
-const a = document.createElement("a");
-a.href = canvas.toDataURL();
-a.download = "ticket.png";
-a.click();
-
-alert("Descargado para compartir manualmente");
-
-}
-
-});
-
-}
-
-</script>
-
-<script>
-
-// ================= PWA INSTALL EN HEADER =================
-let deferredPrompt;
-
-// Crear botón
-const installBtn = document.createElement("button");
-installBtn.innerHTML = `<i class="bi bi-download"></i>`;
-installBtn.className =
-"bg-indigo-600 text-white p-2 rounded-xl text-sm hidden";
-
-// Insertarlo en el header
-window.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".flex.items-center.justify-between");
-  if (header) {
-    header.appendChild(installBtn);
-  }
-});
-
-// Detectar instalación disponible
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.classList.remove("hidden");
-});
-
-// Click instalar
-installBtn.addEventListener("click", async () => {
-  if (!deferredPrompt) return;
-
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-
-  if (outcome === "accepted") {
-    console.log("App instalada");
-  }
-
-  deferredPrompt = null;
-  installBtn.classList.add("hidden");
-});
-
-// Ocultar si ya está instalada
-window.addEventListener("appinstalled", () => {
-  installBtn.classList.add("hidden");
-});
-
-</script>  
+<body class="bg-gray-100">
+
+  <!-- HEADER -->
+  <header class="bg-red-600 text-white p-4 shadow-lg flex justify-between items-center">
+    <div>
+      <h1 class="text-xl font-bold">🍕 Pizzería Demo</h1>
+      <p class="text-xs opacity-80">Pide en segundos</p>
+    </div>
+
+    <!-- BOTÓN INSTALAR -->
+    <button id="installBtn" class="bg-white text-red-600 px-3 py-2 rounded-lg text-sm flex items-center gap-2">
+      <i class="bi bi-download"></i> Instalar
+    </button>
+  </header>
+
+  <!-- COMBOS -->
+  <section class="p-6">
+    <h2 class="text-2xl font-bold mb-4 text-center">🔥 Combos Especiales</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="bg-white rounded-2xl shadow-lg p-4 border-2 border-green-500 fade-in">
+        <h3 class="font-bold">🍕 Combo Individual</h3>
+        <p class="text-sm text-gray-600">1 pizza + refresco</p>
+        <p class="text-lg font-bold mt-2">$180 MXN</p>
+        <button onclick="pedirPedido('Combo Individual (1 pizza + refresco)')"
+          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
+          <i class="bi bi-whatsapp"></i> Pedir
+        </button>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-4 border-2 border-red-500 relative fade-in">
+        <span class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full">
+          🔥 Popular
+        </span>
+        <h3 class="font-bold">🍕🍕 Combo Pareja</h3>
+        <p class="text-sm text-gray-600">2 pizzas + refresco grande</p>
+        <p class="text-lg font-bold mt-2">$299 MXN</p>
+        <button onclick="pedirPedido('Combo Pareja (2 pizzas + refresco grande)')"
+          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
+          <i class="bi bi-whatsapp"></i> Pedir
+        </button>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-4 border-2 border-yellow-500 fade-in">
+        <h3 class="font-bold">👨‍👩‍👧‍👦 Combo Familiar</h3>
+        <p class="text-sm text-gray-600">3 pizzas + refresco + envío</p>
+        <p class="text-lg font-bold mt-2">$420 MXN</p>
+        <button onclick="pedirPedido('Combo Familiar (3 pizzas + refresco + envío)')"
+          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
+          <i class="bi bi-whatsapp"></i> Pedir
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CATALOGO -->
+  <main class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden fade-in">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=800"
+           onerror="this.src='https://via.placeholder.com/800x600?text=Pizza'"
+           class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="font-bold">Pizza Pepperoni</h2>
+        <p class="text-sm text-gray-600">Clásica con extra pepperoni</p>
+        <p class="font-bold mt-2">$150 MXN</p>
+        <button onclick="pedirPedido('Pizza Pepperoni')"
+          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
+          <i class="bi bi-whatsapp"></i> Pedir
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden fade-in">
+      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800"
+           onerror="this.src='https://via.placeholder.com/800x600?text=Pizza'"
+           class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="font-bold">Pizza Mexicana</h2>
+        <p class="text-sm text-gray-600">Chorizo, jalapeño y cebolla</p>
+        <p class="font-bold mt-2">$160 MXN</p>
+        <button onclick="pedirPedido('Pizza Mexicana')"
+          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
+          <i class="bi bi-whatsapp"></i> Pedir
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTÓN FLOTANTE -->
+  <button onclick="pedirPedido('Hola, quiero información del menú')"
+    class="fixed bottom-6 right-4 bg-green-500 text-white p-4 rounded-full shadow-lg">
+    <i class="bi bi-whatsapp text-xl"></i>
+  </button>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-white text-center p-6 mt-6">
+    <p class="font-semibold">🚀 Deja de imprimir volantes</p>
+    <p class="text-sm">Recibe pedidos directo en WhatsApp</p>
+  </footer>
+
+  <!-- SCRIPT INSTALAR -->
+  <script>
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    document.getElementById('installBtn').addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+      } else {
+        alert("Para instalar, usa 'Agregar a pantalla de inicio' en tu navegador 📲");
+      }
+    });
+  </script>
 
 </body>
 </html>
