@@ -88,5 +88,45 @@
     <p class="text-sm mt-2">Recibe pedidos directos por WhatsApp y aumenta tus ventas hoy mismo.</p>
   </footer>
 
+  <!-- Botón de instalación -->
+<div id="installContainer" class="fixed bottom-4 left-0 right-0 flex justify-center hidden">
+  <button id="installBtn" class="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition">
+    📲 Instalar App
+  </button>
+</div>
+
+<script>
+  let deferredPrompt;
+
+  const installContainer = document.getElementById('installContainer');
+  const installBtn = document.getElementById('installBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installContainer.classList.remove('hidden');
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+      console.log('Usuario instaló la app');
+    } else {
+      console.log('Usuario canceló la instalación');
+    }
+
+    deferredPrompt = null;
+    installContainer.classList.add('hidden');
+  });
+
+  window.addEventListener('appinstalled', () => {
+    console.log('PWA instalada');
+    installContainer.classList.add('hidden');
+  });
+</script>
 </body>
 </html>
