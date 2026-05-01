@@ -20,11 +20,11 @@
       overflow-x: hidden;
     }
 
-    /* Glow dinámico */
+    /* Glow suave (adaptado a fondo claro) */
     .bg-glow {
       position: fixed;
       inset: 0;
-      background: radial-gradient(600px at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 40%);
+      background: radial-gradient(600px at var(--x, 50%) var(--y, 50%), rgba(0,0,0,0.05), transparent 40%);
       pointer-events: none;
       z-index: 0;
     }
@@ -43,29 +43,27 @@
       }
     }
 
-    /* Cards */
-    .card {
-      transition: all 0.35s ease;
+    /* Hover estilo app */
+    .app-icon {
+      transition: all 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 25px rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.25);
+    .app-icon:hover {
+      transform: translateY(-6px) scale(1.08);
     }
 
-    .card img {
-      transition: transform 0.35s ease;
+    .app-icon img {
+      transition: transform 0.3s ease;
     }
 
-    .card:hover img {
-      transform: scale(1.15) rotate(2deg);
+    .app-icon:hover img {
+      transform: scale(1.1);
     }
   </style>
 
 </head>
 
-<body class="bg-neutral-950 text-white min-h-screen flex flex-col">
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
 
   <!-- Glow -->
 
@@ -73,9 +71,9 @@
 
   <!-- HEADER -->
 
-  <header class="relative z-10 w-full px-6 py-4 flex justify-between items-center border-b border-white/10 backdrop-blur">
+  <header class="relative z-10 w-full px-6 py-4 flex justify-between items-center border-b border-black/10 bg-white/70 backdrop-blur">
     <h1 class="text-lg font-semibold tracking-wide">Workspace</h1>
-    <span class="text-sm text-white/40">Launcher</span>
+    <span class="text-sm text-gray-500">Launcher</span>
   </header>
 
   <!-- MAIN -->
@@ -83,56 +81,49 @@
   <main class="relative z-10 flex-1 flex items-center justify-center px-6">
 
 ```
-<div class="w-full max-w-5xl text-center">
+<div class="w-full max-w-4xl text-center">
 
-  <h2 class="fade-up text-4xl font-semibold mb-3" style="animation-delay: 0.1s;">
-    Tus aplicaciones
+  <h2 class="fade-up text-3xl font-semibold mb-10" style="animation-delay: 0.1s;">
+    Aplicaciones
   </h2>
 
-  <p class="fade-up text-white/50 mb-12" style="animation-delay: 0.2s;">
-    Acceso rápido y elegante
-  </p>
-
   <!-- GRID -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-10 justify-items-center">
 
     <!-- APP 1 -->
     <a href="https://appsweb-sanmiguel.github.io/pizzasapp.html" target="_blank"
-       class="card fade-up group bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10"
-       style="animation-delay: 0.3s;">
+       class="app-icon fade-up flex flex-col items-center"
+       style="animation-delay: 0.2s;">
 
-      <div class="flex flex-col items-center">
-        <img src="pizza512.png" alt="App 1" class="w-14 h-14 mb-4"/>
-        <h3 class="text-lg font-medium">Nombre App 1</h3>
-        <p class="text-sm text-white/40 mt-1">Descripción breve</p>
+      <div class="w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center">
+        <img src="pizza512.png" class="w-12 h-12"/>
       </div>
 
+      <span class="mt-3 text-sm font-medium">Pizzas</span>
     </a>
 
     <!-- APP 2 -->
     <a href="https://app-puntodeventa.github.io/" target="_blank"
-       class="card fade-up group bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10"
-       style="animation-delay: 0.4s;">
+       class="app-icon fade-up flex flex-col items-center"
+       style="animation-delay: 0.3s;">
 
-      <div class="flex flex-col items-center">
-        <img src="icon-512.png" alt="App 2" class="w-14 h-14 mb-4"/>
-        <h3 class="text-lg font-medium">Nombre App 2</h3>
-        <p class="text-sm text-white/40 mt-1">Descripción breve</p>
+      <div class="w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center">
+        <img src="icon-512.png" class="w-12 h-12"/>
       </div>
 
+      <span class="mt-3 text-sm font-medium">Ventas</span>
     </a>
 
     <!-- APP 3 -->
     <a href="https://appsweb-sanmiguel.github.io/Notas.html" target="_blank"
-       class="card fade-up group bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10"
-       style="animation-delay: 0.5s;">
+       class="app-icon fade-up flex flex-col items-center"
+       style="animation-delay: 0.4s;">
 
-      <div class="flex flex-col items-center">
-        <img src="pizza180.png" alt="App 3" class="w-14 h-14 mb-4"/>
-        <h3 class="text-lg font-medium">Nombre App 3</h3>
-        <p class="text-sm text-white/40 mt-1">Descripción breve</p>
+      <div class="w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center">
+        <img src="pizza180.png" class="w-12 h-12"/>
       </div>
 
+      <span class="mt-3 text-sm font-medium">Notas</span>
     </a>
 
   </div>
@@ -144,7 +135,7 @@
 
   <!-- FOOTER -->
 
-  <footer class="relative z-10 text-center text-white/30 text-xs pb-4">
+  <footer class="relative z-10 text-center text-gray-400 text-xs pb-4">
     © 2026 Workspace
   </footer>
 
