@@ -1,163 +1,161 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Pizzería Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workspace</title>
 
   <!-- Tailwind -->
+
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Fuente -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    .fade-in {
-      animation: fadeIn 0.6s ease-in-out;
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
     }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
+
+    /* Glow dinámico */
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(600px at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Animación entrada */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Cards */
+    .card {
+      transition: all 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 25px rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .card img {
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.15) rotate(2deg);
     }
   </style>
 
-  <script>
-    function pedirPedido(texto) {
-      const mensaje = `Hola, quiero pedir:\n${texto}\n\n📍 Dirección:\n💳 Forma de pago:`;
-
-      if (navigator.share) {
-        navigator.share({
-          title: "Pedido de pizza",
-          text: mensaje
-        });
-      } else {
-        const url = "https://wa.me/?text=" + encodeURIComponent(mensaje);
-        window.open(url, "_blank");
-      }
-    }
-  </script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-neutral-950 text-white min-h-screen flex flex-col">
+
+  <!-- Glow -->
+
+  <div class="bg-glow"></div>
 
   <!-- HEADER -->
-  <header class="bg-red-600 text-white p-4 shadow-lg flex justify-between items-center">
-    <div>
-      <h1 class="text-xl font-bold">🍕 Pizzería Demo</h1>
-      <p class="text-xs opacity-80">Pide en segundos</p>
-    </div>
 
-    <!-- BOTÓN INSTALAR -->
-    <button id="installBtn" class="bg-white text-red-600 px-3 py-2 rounded-lg text-sm flex items-center gap-2">
-      <i class="bi bi-download"></i> Instalar
-    </button>
+  <header class="relative z-10 w-full px-6 py-4 flex justify-between items-center border-b border-white/10 backdrop-blur">
+    <h1 class="text-lg font-semibold tracking-wide">Workspace</h1>
+    <span class="text-sm text-white/40">Launcher</span>
   </header>
 
-  <!-- COMBOS -->
-  <section class="p-6">
-    <h2 class="text-2xl font-bold mb-4 text-center">🔥 Combos Especiales</h2>
+  <!-- MAIN -->
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <main class="relative z-10 flex-1 flex items-center justify-center px-6">
 
-      <div class="bg-white rounded-2xl shadow-lg p-4 border-2 border-green-500 fade-in">
-        <h3 class="font-bold">🍕 Combo Individual</h3>
-        <p class="text-sm text-gray-600">1 pizza + refresco</p>
-        <p class="text-lg font-bold mt-2">$180 MXN</p>
-        <button onclick="pedirPedido('Combo Individual (1 pizza + refresco)')"
-          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
-          <i class="bi bi-whatsapp"></i> Pedir
-        </button>
+```
+<div class="w-full max-w-5xl text-center">
+
+  <h2 class="fade-up text-4xl font-semibold mb-3" style="animation-delay: 0.1s;">
+    Tus aplicaciones
+  </h2>
+
+  <p class="fade-up text-white/50 mb-12" style="animation-delay: 0.2s;">
+    Acceso rápido y elegante
+  </p>
+
+  <!-- GRID -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+    <!-- APP 1 -->
+    <a href="https://TU_APP_1.com" target="_blank"
+       class="card fade-up group bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10"
+       style="animation-delay: 0.3s;">
+
+      <div class="flex flex-col items-center">
+        <img src="ICONO_1.png" alt="App 1" class="w-14 h-14 mb-4"/>
+        <h3 class="text-lg font-medium">Nombre App 1</h3>
+        <p class="text-sm text-white/40 mt-1">Descripción breve</p>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-lg p-4 border-2 border-red-500 relative fade-in">
-        <span class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full">
-          🔥 Popular
-        </span>
-        <h3 class="font-bold">🍕🍕 Combo Pareja</h3>
-        <p class="text-sm text-gray-600">2 pizzas + refresco grande</p>
-        <p class="text-lg font-bold mt-2">$299 MXN</p>
-        <button onclick="pedirPedido('Combo Pareja (2 pizzas + refresco grande)')"
-          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
-          <i class="bi bi-whatsapp"></i> Pedir
-        </button>
+    </a>
+
+    <!-- APP 2 -->
+    <a href="https://TU_APP_2.com" target="_blank"
+       class="card fade-up group bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10"
+       style="animation-delay: 0.4s;">
+
+      <div class="flex flex-col items-center">
+        <img src="ICONO_2.png" alt="App 2" class="w-14 h-14 mb-4"/>
+        <h3 class="text-lg font-medium">Nombre App 2</h3>
+        <p class="text-sm text-white/40 mt-1">Descripción breve</p>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-lg p-4 border-2 border-yellow-500 fade-in">
-        <h3 class="font-bold">👨‍👩‍👧‍👦 Combo Familiar</h3>
-        <p class="text-sm text-gray-600">3 pizzas + refresco + envío</p>
-        <p class="text-lg font-bold mt-2">$420 MXN</p>
-        <button onclick="pedirPedido('Combo Familiar (3 pizzas + refresco + envío)')"
-          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
-          <i class="bi bi-whatsapp"></i> Pedir
-        </button>
+    </a>
+
+    <!-- APP 3 -->
+    <a href="https://TU_APP_3.com" target="_blank"
+       class="card fade-up group bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10"
+       style="animation-delay: 0.5s;">
+
+      <div class="flex flex-col items-center">
+        <img src="ICONO_3.png" alt="App 3" class="w-14 h-14 mb-4"/>
+        <h3 class="text-lg font-medium">Nombre App 3</h3>
+        <p class="text-sm text-white/40 mt-1">Descripción breve</p>
       </div>
 
-    </div>
-  </section>
+    </a>
 
-  <!-- CATALOGO -->
-  <main class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+  </div>
 
-    <div class="bg-white rounded-2xl shadow-md overflow-hidden fade-in">
-      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=800"
-           onerror="this.src='https://via.placeholder.com/800x600?text=Pizza'"
-           class="w-full h-48 object-cover">
-      <div class="p-4">
-        <h2 class="font-bold">Pizza Pepperoni</h2>
-        <p class="text-sm text-gray-600">Clásica con extra pepperoni</p>
-        <p class="font-bold mt-2">$150 MXN</p>
-        <button onclick="pedirPedido('Pizza Pepperoni')"
-          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
-          <i class="bi bi-whatsapp"></i> Pedir
-        </button>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-2xl shadow-md overflow-hidden fade-in">
-      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800"
-           onerror="this.src='https://via.placeholder.com/800x600?text=Pizza'"
-           class="w-full h-48 object-cover">
-      <div class="p-4">
-        <h2 class="font-bold">Pizza Mexicana</h2>
-        <p class="text-sm text-gray-600">Chorizo, jalapeño y cebolla</p>
-        <p class="font-bold mt-2">$160 MXN</p>
-        <button onclick="pedirPedido('Pizza Mexicana')"
-          class="mt-4 w-full bg-green-500 text-white py-2 rounded-xl flex justify-center gap-2">
-          <i class="bi bi-whatsapp"></i> Pedir
-        </button>
-      </div>
-    </div>
+</div>
+```
 
   </main>
 
-  <!-- BOTÓN FLOTANTE -->
-  <button onclick="pedirPedido('Hola, quiero información del menú')"
-    class="fixed bottom-6 right-4 bg-green-500 text-white p-4 rounded-full shadow-lg">
-    <i class="bi bi-whatsapp text-xl"></i>
-  </button>
-
   <!-- FOOTER -->
-  <footer class="bg-gray-900 text-white text-center p-6 mt-6">
-    <p class="font-semibold">🚀 Deja de imprimir volantes</p>
-    <p class="text-sm">Recibe pedidos directo en WhatsApp</p>
+
+  <footer class="relative z-10 text-center text-white/30 text-xs pb-4">
+    © 2026 Workspace
   </footer>
 
-  <!-- SCRIPT INSTALAR -->
+  <!-- Glow script -->
+
   <script>
-    let deferredPrompt;
+    const glow = document.querySelector('.bg-glow');
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
-
-    document.getElementById('installBtn').addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-      } else {
-        alert("Para instalar, usa 'Agregar a pantalla de inicio' en tu navegador 📲");
-      }
+    window.addEventListener('mousemove', (e) => {
+      glow.style.setProperty('--x', e.clientX + 'px');
+      glow.style.setProperty('--y', e.clientY + 'px');
     });
   </script>
 
