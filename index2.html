@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workspace</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(600px at var(--x, 50%) var(--y, 50%), rgba(0,0,0,0.05), transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .app-icon {
+      transition: all 0.3s ease;
+    }
+
+    .app-icon:hover {
+      transform: translateY(-6px) scale(1.08);
+    }
+
+    .app-icon img {
+      transition: transform 0.3s ease;
+    }
+
+    .app-icon:hover img {
+      transform: scale(1.1);
+    }
+  </style>
+
+</head>
+
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+
+  <div class="bg-glow"></div>
+
+  <header class="relative z-10 w-full px-6 py-4 flex justify-between items-center border-b border-black/10 bg-white/70 backdrop-blur">
+    <h1 class="text-lg font-semibold">Workspace</h1>
+    <span class="text-sm text-gray-500">Launcher</span>
+  </header>
+
+  <main class="relative z-10 flex-1 flex items-center justify-center px-6">
+
+```
+<div class="w-full max-w-4xl text-center">
+
+  <h2 class="fade-up text-3xl font-semibold mb-10" style="animation-delay: 0.1s;">
+    Aplicaciones
+  </h2>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-10 justify-items-center">
+
+    <!-- APP 1 (NOMBRE ORIGINAL + ICONO INTERCAMBIADO) -->
+    <a href="https://appsweb-sanmiguel.github.io/pizzasapp.html" target="_blank"
+       class="app-icon fade-up flex flex-col items-center"
+       style="animation-delay: 0.2s;">
+
+      <div class="w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center">
+        <img src="pizza180.png" class="w-12 h-12"/>
+      </div>
+
+      <span class="mt-3 text-sm font-medium">Nombre App 1</span>
+    </a>
+
+    <!-- APP 2 (SIN CAMBIOS) -->
+    <a href="https://app-puntodeventa.github.io/" target="_blank"
+       class="app-icon fade-up flex flex-col items-center"
+       style="animation-delay: 0.3s;">
+
+      <div class="w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center">
+        <img src="icon-512.png" class="w-12 h-12"/>
+      </div>
+
+      <span class="mt-3 text-sm font-medium">Nombre App 2</span>
+    </a>
+
+    <!-- APP 3 (NOMBRE ORIGINAL + ICONO INTERCAMBIADO) -->
+    <a href="https://appsweb-sanmiguel.github.io/Notas.html" target="_blank"
+       class="app-icon fade-up flex flex-col items-center"
+       style="animation-delay: 0.4s;">
+
+      <div class="w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center">
+        <img src="pizza512.png" class="w-12 h-12"/>
+      </div>
+
+      <span class="mt-3 text-sm font-medium">Nombre App 3</span>
+    </a>
+
+  </div>
+
+</div>
+```
+
+  </main>
+
+  <footer class="relative z-10 text-center text-gray-400 text-xs pb-4">
+    © 2026 Workspace
+  </footer>
+
+  <script>
+    const glow = document.querySelector('.bg-glow');
+
+    window.addEventListener('mousemove', (e) => {
+      glow.style.setProperty('--x', e.clientX + 'px');
+      glow.style.setProperty('--y', e.clientY + 'px');
+    });
+  </script>
+
+</body>
+</html>
