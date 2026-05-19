@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Interactivo - Juan Pérez</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+body { font-family: 'Inter', sans-serif; background: #f3f4f6; }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+.fade-in.show { opacity: 1; transform: translateY(0); }
+
+/* Animación foto de perfil */
+@keyframes profile-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+.profile-pic { animation: profile-bounce 2s infinite; }
+
+/* Flip card para portafolio */
+.flip-card { perspective: 1000px; }
+.flip-card-inner { transition: transform 0.6s; transform-style: preserve-3d; position: relative; }
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back { backface-visibility: hidden; position: absolute; width: 100%; height: 100%; border-radius: 0.5rem; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 1rem; text-align: center; }
+.flip-card-back { transform: rotateY(180deg); background: #1d4ed8; color: white; flex-direction: column; }
+.flip-card-back a { color: white; text-decoration: underline; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="bg-blue-700 text-white p-6 text-center">
+  <img src="https://via.placeholder.com/150" alt="Foto de prueba" class="w-32 h-32 mx-auto rounded-full border-4 border-white mb-4 profile-pic">
+  <h1 class="text-4xl font-bold mb-1">Juan Pérez</h1>
+  <p class="text-xl">Web Front End / Full Stack Junior | Maquetación de Emails</p>
+  <div class="mt-2 flex flex-col md:flex-row justify-center gap-4 text-sm">
+    <span><i class="bi bi-envelope"></i> juan.perez@example.com</span>
+    <span><i class="bi bi-telephone"></i> +52 55 1234 5678</span>
+    <span><i class="bi bi-github"></i> <a href="#" class="underline">GitHub</a></span>
+  </div>
+  <p class="text-sm mt-1"><i class="bi bi-geo-alt"></i> Ciudad de México, CDMX</p>
+</header>
+
+<!-- PERFIL PROFESIONAL -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Perfil Profesional</h2>
+  <p class="mt-2 text-gray-700">
+    Desarrollador web (Frontend / Full Stack Junior) con experiencia en configuración de plataformas, programación y soporte técnico. Capacidad de aprendizaje rápido y autodidacta, manejo de IA, home office eficiente y pasión por la tecnología. Destacado en concursos académicos y con experiencia en voluntariado ético y pastoral. Experiencia en creación de contenido digital, maquetación de emails y desarrollo de web apps. Actualmente aprendiendo Salesforce para ampliar habilidades en marketing cloud y gestión de campañas.
+  </p>
+</section>
+
+<!-- HABILIDADES TÉCNICAS -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Habilidades Técnicas</h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">HTML5</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">CSS / Tailwind</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">JavaScript</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">React</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Vue.js / Quasar</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Node.js / Backend</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">PHP / Java / Python</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">C / C++ / C# / .NET</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">SQL Server / MySQL</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Firebase / Notificaciones Push</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">GitHub / VS Code / Vercel</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">VMware / VirtualBox / AnyDesk / Zoom</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Microsoft Office / Google Suite / LibreOffice</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Mantenimiento Hardware y Software</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Programación con IA / Prompts / CapCut</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">UX/UI / Diseño Frontend</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Home Office / Trabajo Remoto</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Salesforce (Marketing Cloud)</div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA LABORAL -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Experiencia Laboral</h2>
+  <div class="space-y-4 mt-2">
+    <div class="p-4 rounded hover:bg-gray-50 transition">
+      <h3 class="font-bold">EFICIENCIA | Configuración de Plataformas | 2021 – 2025 (Home Office)</h3>
+      <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+        <li>Lideré desarrollo y configuración de plataformas para múltiples clientes de forma remota.</li>
+        <li>Optimicé el rendimiento del crawler y spider, asegurando eficiencia de los sistemas.</li>
+        <li>Capacité al equipo interno en uso de software y procedimientos.</li>
+        <li>Realicé consultas a bases de datos y alimentación de sistemas internos.</li>
+        <li>Destacado por habilidades técnicas y soft skills, contribuyendo al éxito de los proyectos.</li>
+      </ul>
+    </div>
+    <div class="p-4 rounded hover:bg-gray-50 transition">
+      <h3 class="font-bold">INFO | Becario de Programación | 2017</h3>
+      <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+        <li>Apoyo en diseño y actualización de sistemas internos y dashboards.</li>
+        <li>Desarrollo en HTML, CSS y JavaScript.</li>
+        <li>Participación en proyectos de investigación tecnológica.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-4 border-b-4 border-blue-700 inline-block">Portafolio</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="flip-card h-48">
+      <div class="flip-card-inner">
+        <div class="flip-card-front bg-gray-200 flex items-center justify-center">
+          <p>Email HTML - Promoción</p>
+        </div>
+        <div class="flip-card-back">
+          <a href="./email1.html" target="_blank"><i class="bi bi-envelope-fill"></i> Ver Email 1</a>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card h-48">
+      <div class="flip-card-inner">
+        <div class="flip-card-front bg-gray-200 flex items-center justify-center">
+          <p>Email HTML - Informativo</p>
+        </div>
+        <div class="flip-card-back">
+          <a href="./email2.html" target="_blank"><i class="bi bi-envelope-fill"></i> Ver Email 2</a>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card h-48">
+      <div class="flip-card-inner">
+        <div class="flip-card-front bg-gray-200 flex items-center justify-center">
+          <p>Email Confirmación</p>
+        </div>
+        <div class="flip-card-back">
+          <a href="./email3.html" target="_blank"><i class="bi bi-envelope-fill"></i> Ver Email 3</a>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card h-48">
+      <div class="flip-card-inner">
+        <div class="flip-card-front bg-gray-200 flex items-center justify-center">
+          <p>PWA Proyecto 1</p>
+        </div>
+        <div class="flip-card-back">
+          <a href="./pwa1.html" target="_blank"><i class="bi bi-window-stack"></i> Ver Proyecto 1</a>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card h-48">
+      <div class="flip-card-inner">
+        <div class="flip-card-front bg-gray-200 flex items-center justify-center">
+          <p>PWA Proyecto 2</p>
+        </div>
+        <div class="flip-card-back">
+          <a href="./pwa2.html" target="_blank"><i class="bi bi-window-stack"></i> Ver Proyecto 2</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCACIÓN -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-4 border-b-4 border-blue-700 inline-block">Educación</h2>
+  <ul class="list-disc list-inside text-gray-700 space-y-1">
+    <li>Ingeniería en Computación | UNAM</li>
+    <li>Bachillerato Técnico en Sistemas</li>
+  </ul>
+</section>
+
+<!-- VOLUNTARIADO Y REDES -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-4 border-b-4 border-blue-700 inline-block">Voluntariado y Redes</h2>
+  <ul class="list-disc list-inside text-gray-700 space-y-1">
+    <li>Participación en programas de investigación tecnológica y voluntariado ético/religioso (Cáritas A.C.).</li>
+    <li>Canal de YouTube e Instagram con contenido creativo utilizando IA y edición de videos.</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-blue-700 text-white p-6 mt-6 text-center">
+  <p>Juan Pérez | Web Front End / Full Stack Junior</p>
+  <p>📧 juan.perez@example.com | 📞 +52 55 1234 5678 | 🌐 <a href="#" class="underline text-white">GitHub</a></p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const elements = document.querySelectorAll('.fade-in');
+  elements.forEach((el) => el.classList.add('show'));
+});
+</script>
+
+</body>
+</html>
