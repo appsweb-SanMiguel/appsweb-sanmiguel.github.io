@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Interactivo - Juan Pérez</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+body { font-family: 'Inter', sans-serif; background: #f3f4f6; }
+
+/* Fade-in animation */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+.fade-in.show { opacity: 1; transform: translateY(0); }
+
+/* Animación foto de perfil */
+@keyframes profile-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+.profile-pic { animation: profile-bounce 2s infinite; }
+
+/* Flip card mejorada */
+.flip-card { perspective: 1000px; }
+.flip-card-inner {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s;
+  transform-style: preserve-3d;
+  position: relative;
+  border-radius: 0.5rem;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+}
+.flip-card-front {
+  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+  background: #1d4ed8;
+  color: white;
+  flex-direction: column;
+  font-weight: 600;
+}
+.flip-card-back a {
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="bg-blue-700 text-white p-6 text-center">
+  <img src="https://via.placeholder.com/150" alt="Foto de Juan Pérez" class="w-32 h-32 mx-auto rounded-full border-4 border-white mb-4 profile-pic">
+  <h1 class="text-4xl font-bold mb-1">Juan Pérez</h1>
+  <p class="text-xl">Web Front End / Full Stack Junior | Maquetación de Emails</p>
+  <div class="mt-2 flex flex-col md:flex-row justify-center gap-4 text-sm">
+    <span><i class="bi bi-envelope"></i> juan.perez@example.com</span>
+    <span><i class="bi bi-telephone"></i> +52 55 1234 5678</span>
+    <span><i class="bi bi-github"></i> <a href="#" class="underline">GitHub</a></span>
+  </div>
+  <p class="text-sm mt-1"><i class="bi bi-geo-alt"></i> Ciudad de México, CDMX</p>
+</header>
+
+<!-- PERFIL PROFESIONAL -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Perfil Profesional</h2>
+  <p class="mt-2 text-gray-700">
+    Desarrollador web (Frontend / Full Stack Junior) con experiencia en configuración de plataformas, programación y soporte técnico. Capacidad de aprendizaje rápido y autodidacta, manejo de IA y Salesforce, home office eficiente y pasión por la tecnología. Destacado en concursos académicos y con experiencia en voluntariado ético y pastoral. Experiencia en creación de contenido digital, maquetación de emails y desarrollo de web apps.
+  </p>
+</section>
+
+<!-- HABILIDADES TÉCNICAS -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Habilidades Técnicas</h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">HTML5</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">CSS / Tailwind</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">JavaScript</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">React</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Vue.js / Quasar</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Node.js / Backend</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">PHP / Java / Python</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">C / C++ / C# / .NET</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">SQL Server / MySQL</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Firebase / Notificaciones Push</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">GitHub / VS Code / Vercel</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">VMware / VirtualBox / AnyDesk / Zoom</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Microsoft Office / Google Suite / LibreOffice</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Mantenimiento Hardware y Software</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Programación con IA / Prompts / CapCut</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">UX/UI / Diseño Frontend</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Salesforce</div>
+    <div class="p-4 bg-gray-100 rounded shadow hover:scale-105 transition">Home Office / Trabajo Remoto</div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA LABORAL -->
+<section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+  <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Experiencia Laboral</h2>
+  <div class="space-y-4 mt-2">
+    <div class="p-4 rounded hover:bg-gray-50 transition">
+      <h3 class="font-bold">EFICIENCIA | Configuración de Plataformas | 2021 – 2025 (Home Office)</h3>
+      <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+        <li>Lideré desarrollo y configuración de plataformas para múltiples clientes de forma remota.</li>
+        <li>Optimicé el rendimiento del crawler y spider, asegurando eficiencia de los sistemas.</li>
+        <li>Capacité al equipo interno en uso de software y procedimientos.</li>
+        <li>Realicé consultas a bases de datos y alimentación de sistemas internos.</li>
+        <li>Destacado por habilidades técnicas y soft skills, contribuyendo al éxito de los proyectos.</li>
+      </ul>
+    </div>
+    <div class="p-4 rounded
