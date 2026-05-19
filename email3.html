@@ -5,41 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Email Confirmación</title>
 <style>
-body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-body { margin:0; padding:0; width:100% !important; font-family: Arial, sans-serif; background:#f3f4f6; }
-.container { max-width:600px; margin:0 auto; border:1px solid #ddd; background:#ffffff; }
-.header { background:#10b981; color:white; text-align:center; padding:20px; font-size:24px; font-weight:bold; }
-.content { padding:20px; color:#333333; font-size:16px; line-height:1.5; }
-.button { display:inline-block; padding:12px 24px; background:#10b981; color:white; text-decoration:none; border-radius:5px; font-weight:bold; }
-.footer { padding:15px; text-align:center; font-size:12px; color:#777777; }
-@media screen and (max-width:600px){
-  .container { width:100% !important; }
-  .header { font-size:20px !important; }
-  .content { font-size:14px !important; }
-  .button { padding:10px 20px !important; font-size:14px !important; }
-}
+body { margin:0; padding:0; font-family: Arial, sans-serif; background:#f3f4f6; }
+.container { max-width:600px; margin:auto; border:1px solid #ddd; background:white; }
+.header { background:#10b981; color:white; text-align:center; padding:20px; }
+.content { padding:20px; color:#333; line-height:1.5; }
+.button { display:inline-block; padding:12px 25px; background:#10b981; color:white; text-decoration:none; border-radius:5px; margin-top:15px; }
+.footer { font-size:12px; color:#888; text-align:center; padding:15px; }
+@media(max-width:600px){ .container { width:100%; } .button { width:100%; text-align:center; } }
 </style>
 </head>
 <body>
-<center>
-<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f3f4f6">
-<tr>
-<td>
-<table class="container" border="0" cellpadding="0" cellspacing="0">
-<tr><td class="header">Confirmación de Registro</td></tr>
-<tr>
-<td class="content">
-<p>¡Gracias por registrarte! Tu cuenta ha sido creada exitosamente.</p>
-<p>Para completar tu perfil, haz clic en el botón a continuación.</p>
-<p style="text-align:center;"><a href="#" class="button">Completar Perfil</a></p>
-</td>
-</tr>
-<tr><td class="footer">Si no realizaste este registro, ignora este correo.</td></tr>
-</table>
-</td>
-</tr>
-</table>
-</center>
+<div class="container">
+  <div class="header"><h2>Confirmación de Registro</h2></div>
+  <div class="content">
+    <p>¡Gracias por registrarte! Tu cuenta ha sido creada exitosamente y ya puedes disfrutar de todos nuestros servicios.</p>
+    <a href="#" class="button">Ir a mi cuenta</a>
+  </div>
+  <div class="footer">Si no realizaste este registro, <a href="#">haz clic aquí</a>.</div>
+</div>
 </body>
 </html>
