@@ -1,24 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Promoción</title>
 <style>
-body { font-family: Arial, sans-serif; margin:0; padding:0; }
-.container { max-width:600px; margin:auto; border:1px solid #ddd; }
-.header { background:#1d4ed8; color:white; text-align:center; padding:20px; }
-.content { padding:20px; }
-.button { display:inline-block; padding:10px 20px; background:#1d4ed8; color:white; text-decoration:none; border-radius:5px; }
-@media(max-width:600px){ .container { width:100%; } }
+  /* Reseteo básico */
+  body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+  table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+  img { -ms-interpolation-mode: bicubic; }
+
+  /* Estilos generales */
+  body { margin:0; padding:0; width:100% !important; font-family: Arial, sans-serif; background:#f3f4f6; }
+  .container { max-width:600px; margin:0 auto; border:1px solid #ddd; background:#ffffff; }
+  .header { background:#1d4ed8; color:white; text-align:center; padding:20px; font-size:24px; font-weight:bold; }
+  .content { padding:20px; color:#333333; font-size:16px; line-height:1.5; }
+  .button { display:inline-block; padding:12px 24px; background:#1d4ed8; color:white; text-decoration:none; border-radius:5px; font-weight:bold; }
+  .footer { padding:15px; text-align:center; font-size:12px; color:#777777; }
+  
+  /* Responsive */
+  @media screen and (max-width:600px){
+    .container { width:100% !important; }
+    .header { font-size:20px !important; }
+    .content { font-size:14px !important; }
+    .button { padding:10px 20px !important; font-size:14px !important; }
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header"><h2>Promo Especial</h2></div>
-  <div class="content">
-    <p>¡Hola! Te presentamos nuestra promoción exclusiva.</p>
-    <a href="#" class="button">Ver más</a>
-  </div>
-</div>
+  <center>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f3f4f6">
+      <tr>
+        <td>
+          <table class="container" border="0" cellpadding="0" cellspacing="0">
+            <!-- Header -->
+            <tr>
+              <td class="header">
+                Promo Especial
+              </td>
+            </tr>
+            <!-- Contenido -->
+            <tr>
+              <td class="content">
+                <p>¡Hola! Te presentamos nuestra promoción exclusiva. Aprovecha nuestros descuentos especiales y mejora tu experiencia con nosotros.</p>
+                <p style="text-align:center;">
+                  <a href="#" class="button">Ver más</a>
+                </p>
+              </td>
+            </tr>
+            <!-- Footer -->
+            <tr>
+              <td class="footer">
+                Si no deseas recibir más correos, <a href="#" style="color:#1d4ed8; text-decoration:underline;">darte de baja</a>.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </center>
 </body>
 </html>
