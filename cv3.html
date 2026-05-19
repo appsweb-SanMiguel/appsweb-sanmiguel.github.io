@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Interactivo - Juan Pérez</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f3f4f6; }
+    .flip-card { perspective: 1000px; }
+    .flip-card-inner {
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back {
+      backface-visibility: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    .flip-card-back { transform: rotateY(180deg); background: #1d4ed8; color: white; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+    .fade-in.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="bg-blue-700 text-white p-6 text-center">
+    <img src="https://via.placeholder.com/150" alt="Foto de prueba" class="w-32 h-32 mx-auto rounded-full border-4 border-white mb-4">
+    <h1 class="text-4xl font-bold mb-1">Juan Pérez</h1>
+    <p class="text-xl">Web Front End Developer Jr | Maquetación de Emails</p>
+    <p class="mt-2 text-sm">
+      📧 juan.perez@example.com | 📞 +52 55 1234 5678 | 🌐 <a href="#" class="underline">GitHub</a> | 🎨 Portafolio
+    </p>
+    <p class="text-sm mt-1">📍 Ciudad de México, CDMX</p>
+  </header>
+
+  <!-- PERFIL PROFESIONAL -->
+  <section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+    <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Perfil Profesional</h2>
+    <p class="mt-2 text-gray-700">
+      Proactivo y responsable, con experiencia en desarrollo web, análisis de información y soporte técnico. Destacado por su capacidad de aprendizaje constante, demostrado en concursos académicos y proyectos personales. Busco integrarme a una empresa reconocida que valore la profesionalidad, la estabilidad laboral y el crecimiento continuo. Apasionado por la lectura y el aprendizaje diario. Valores éticos y participación en voluntariado reflejan mi compromiso y colaboración en equipo.
+    </p>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+    <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Habilidades Técnicas</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mt-4 text-center">
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">HTML5</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">CSS3 / Tailwind</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">JavaScript</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">React</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">Node.js</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">GitHub</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">Salesforce (Aprendiendo)</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">IA / ChatGPT</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">CapCut</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">QA / Pruebas A/B</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">Dashboards</div>
+      <div class="p-4 bg-gray-100 rounded shadow hover:scale-110 transition">Mantenimiento Web</div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+    <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Experiencia Laboral</h2>
+    <div class="space-y-4 mt-2">
+      <div class="p-4 rounded hover:bg-gray-50 transition">
+        <h3 class="font-bold">Eficiencia | Analista de Información y Soporte Técnico | 2021 – 2025</h3>
+        <p class="text-gray-600 italic">Empresa mexicana especializada en monitoreo y análisis de medios, con presencia internacional.</p>
+        <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+          <li>Seguimiento y análisis de medios y fuentes informativas en múltiples países.</li>
+          <li>Monitoreo de influencers y líderes de opinión digital.</li>
+          <li>Identificación de tendencias y patrones mediáticos.</li>
+          <li>Creación y actualización de dashboards personalizados.</li>
+          <li>Generación de newsletters corporativos diarios.</li>
+          <li>Colaboración en proyectos internos de desarrollo web, vistas y dashboards.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAFOLIO INTERACTIVO -->
+  <section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in">
+    <h2 class="text-2xl font-semibold mb-4 border-b-4 border-blue-700 inline-block">Portafolio</h2>
+
+    <!-- FILTROS -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      <button class="filter-btn px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800" data-category="all">Todos</button>
+      <button class="filter-btn px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300" data-category="emails">Emails</button>
+      <button class="filter-btn px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300" data-category="landing">Landing Pages</button>
+      <button class="filter-btn px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300" data-category="dashboards">Dashboards</button>
+      <button class="filter-btn px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300" data-category="webapps">Web Apps</button>
+    </div>
+
+    <!-- TARJETAS PORTAFOLIO -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 portfolio-container">
+      <!-- TARJETA DE EJEMPLO -->
+      <div class="flip-card" data-category="emails">
+        <div class="flip-card-inner bg-white rounded shadow h-64">
+          <div class="flip-card-front flex items-center justify-center bg-gray-100 p-4">
+            <p class="text-center font-bold">Email Promocional 1</p>
+          </div>
+          <div class="flip-card-back">
+            <a href="https://example.com/proyecto-email1" target="_blank" class="text-white underline">Ver Proyecto</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" data-category="landing">
+        <div class="flip-card-inner bg-white rounded shadow h-64">
+          <div class="flip-card-front flex items-center justify-center bg-gray-100 p-4">
+            <p class="text-center font-bold">Landing Page 1</p>
+          </div>
+          <div class="flip-card-back">
+            <a href="https://example.com/proyecto-landing1" target="_blank" class="text-white underline">Ver Proyecto</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" data-category="dashboards">
+        <div class="flip-card-inner bg-white rounded shadow h-64">
+          <div class="flip-card-front flex items-center justify-center bg-gray-100 p-4">
+            <p class="text-center font-bold">Dashboard 1</p>
+          </div>
+          <div class="flip-card-back">
+            <a href="https://example.com/proyecto-dashboard1" target="_blank" class="text-white underline">Ver Proyecto</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" data-category="webapps">
+        <div class="flip-card-inner bg-white rounded shadow h-64">
+          <div class="flip-card-front flex items-center justify-center bg-gray-100 p-4">
+            <p class="text-center font-bold">Web App 1</p>
+          </div>
+          <div class="flip-card-back">
+            <a href="https://example.com/proyecto-webapp1" target="_blank" class="text-white underline">Ver Proyecto</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Puedes duplicar estas tarjetas y cambiar categoría, título y link -->
+    </div>
+  </section>
+
+  <!-- EDUCACIÓN Y VOLUNTARIADO -->
+  <section class="max-w-6xl mx-auto p-6 bg-white mt-6 rounded shadow-lg fade-in mb-6">
+    <h2 class="text-2xl font-semibold mb-3 border-b-4 border-blue-700 inline-block">Educación y Voluntariado</h2>
+    <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+      <li>Participación destacada en concursos académicos y proyectos de aprendizaje continuo.</li>
+      <li>Becario de programación: apoyo en diseño y actualización de sistemas internos, dashboards y sitios web.</li>
+      <li>Voluntariado en fundaciones como Cáritas A.C., con enfoque en valores éticos y compromiso social.</li>
+    </ul>
+  </section>
+
+  <script>
+    // Scroll fade-in
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.1 };
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        entry.target.classList.add('show');
+        appearOnScroll.unobserve(entry.target);
+      });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // Portfolio filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-container .flip-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+        portfolioItems.forEach(item => {
+          if(category === 'all' || item.dataset.category === category) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        filterBtns.forEach(b => b.classList.replace('bg-blue-700','bg-gray-200'));
+        btn.classList.replace('bg-gray-200','bg-blue-700');
+        btn.classList.add('text-white'); 
+      });
+    });
+  </script>
+
+</body>
+</html>
