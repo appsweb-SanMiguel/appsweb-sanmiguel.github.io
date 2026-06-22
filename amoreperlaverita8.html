@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Veritas Sacerdotalis</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#cf2e2e;
+    --bg:#f5f5f5;
+    --card:#fff;
+    --text:#1c1c1c;
+    --muted:#777;
+    --border:#e6e6e6;
+}
+
+/* GLOBAL */
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:Inter;
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* HEADER */
+
+header{
+    background:white;
+    border-bottom:1px solid var(--border);
+    padding:12px 18px;
+}
+
+.brand{
+    color:var(--primary);
+    font-weight:700;
+}
+
+/* LAYOUT WRAPPER */
+
+.wrapper{
+    display:flex;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* MAIN CONTENT */
+
+.main{
+    flex:2;
+    padding:18px;
+}
+
+/* SIDEBAR (solo desktop) */
+
+.sidebar{
+    flex:1;
+    padding:18px;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:14px;
+    margin-bottom:14px;
+    overflow:hidden;
+}
+
+.card img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+}
+
+.inner{
+    padding:14px;
+}
+
+.tag{
+    display:inline-block;
+    font-size:0.7rem;
+    background:#fdeaea;
+    color:var(--primary);
+    padding:3px 8px;
+    border-radius:6px;
+    margin-bottom:6px;
+}
+
+h2{
+    font-size:1rem;
+    margin-bottom:5px;
+}
+
+p{
+    font-size:0.85rem;
+    color:var(--muted);
+}
+
+.btn{
+    display:block;
+    margin-top:10px;
+    padding:10px;
+    background:var(--primary);
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    text-decoration:none;
+}
+
+/* NAV (mobile only) */
+
+.nav{
+    display:none;
+}
+
+/* 📱 MOBILE MODE */
+
+@media (max-width: 900px){
+
+    .wrapper{
+        display:block;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .nav{
+        display:flex;
+        position:fixed;
+        bottom:0;
+        left:0;
+        right:0;
+        background:white;
+        border-top:1px solid var(--border);
+        justify-content:space-around;
+        padding:8px 0;
+    }
+
+    .nav div{
+        font-size:0.7rem;
+        color:var(--muted);
+        text-align:center;
+    }
+
+    .nav .active{
+        color:var(--primary);
+        font-weight:600;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="brand">Veritas Sacerdotalis</div>
+</header>
+
+<div class="wrapper">
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=1200&q=80">
+<div class="inner">
+<div class="tag">Hoy</div>
+<h2>Evangelio del día</h2>
+<p>Mt 6, 24-34 — Confianza en la Providencia</p>
+<a class="btn" href="#">Entrar</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520637836862-4d197d17c76a?auto=format&fit=crop&w=1200&q=80">
+<div class="inner">
+<div class="tag">Homilía</div>
+<h2>Domingo XII del Tiempo Ordinario</h2>
+<p>Guía teológica para predicación sacerdotal.</p>
+<a class="btn" href="#">Preparar</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80">
+<div class="inner">
+<div class="tag">Biblioteca</div>
+<h2>Centro de Recursos Teológicos</h2>
+<p>Magisterio, Biblia, Padres de la Iglesia, Santo Tomás.</p>
+<a class="btn" href="#">Acceder</a>
+</div>
+</div>
+
+</div>
+
+<!-- SIDEBAR (DESKTOP ONLY) -->
+<div class="sidebar">
+
+<div class="card">
+<div class="inner">
+<h2>📚 Biblioteca rápida</h2>
+<p>Catecismo de la Iglesia Católica</p>
+<p>Concilio Vaticano II</p>
+<p>Encíclicas papales</p>
+</div>
+</div>
+
+<div class="card">
+<div class="inner">
+<h2>🎓 Diplomados</h2>
+<p>Cristología</p>
+<p>Eclesiología</p>
+<p>Teología Moral</p>
+<p>Liturgia</p>
+</div>
+</div>
+
+<div class="card">
+<div class="inner">
+<h2>⛪ Universidad asociada</h2>
+<p>Programa de formación teológica avanzada en colaboración institucional.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- MOBILE NAV -->
+<div class="nav">
+<div class="active">🏠<br>Hoy</div>
+<div>📖<br>Evangelio</div>
+<div>✝️<br>Homilía</div>
+<div>🎓<br>Formación</div>
+<div>👤<br>Perfil</div>
+</div>
+
+</body>
+</html>
