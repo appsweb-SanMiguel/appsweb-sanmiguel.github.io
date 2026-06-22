@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Plataforma de Formación Teológica</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --primary:#8b1e1e;
+  --bg:#f6f6f6;
+  --card:#ffffff;
+  --text:#1c1c1c;
+  --muted:#666;
+  --border:#e5e5e5;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:Inter;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+/* HEADER */
+
+header{
+  background:white;
+  border-bottom:1px solid var(--border);
+  padding:14px 18px;
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+}
+
+.title{
+  font-weight:600;
+  font-size:1.1rem;
+  color:var(--primary);
+}
+
+.subtitle{
+  font-size:0.85rem;
+  color:var(--muted);
+}
+
+/* LAYOUT */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:2.2fr 1fr;
+  gap:20px;
+}
+
+/* CARD */
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:16px;
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.content{
+  padding:16px;
+}
+
+.tag{
+  font-size:0.75rem;
+  color:var(--primary);
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+h2{
+  font-size:1rem;
+  margin-bottom:6px;
+}
+
+p{
+  font-size:0.9rem;
+  color:var(--muted);
+}
+
+/* SIDEBAR */
+
+.sidebar .card{
+  padding:16px;
+}
+
+/* BUTTON */
+
+.link{
+  display:inline-block;
+  margin-top:10px;
+  color:var(--primary);
+  font-weight:600;
+  text-decoration:none;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .container{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+<div class="title">Plataforma de Formación Teológica</div>
+<div class="subtitle">Apoyo académico y pastoral para el ministerio sacerdotal</div>
+</div>
+</header>
+
+<div class="container">
+
+<!-- MAIN -->
+<div>
+
+<!-- EVANGELIO -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=1200&q=80">
+<div class="content">
+<div class="tag">Liturgia diaria</div>
+<h2>Evangelio del día</h2>
+<p>Comentario teológico y aplicación pastoral del texto bíblico del día.</p>
+<a class="link" href="#">Acceder al recurso</a>
+</div>
+</div>
+
+<!-- HOMILIA -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520637836862-4d197d17c76a?auto=format&fit=crop&w=1200&q=80">
+<div class="content">
+<div class="tag">Predicación</div>
+<h2>Guía de homilía dominical</h2>
+<p>Esquema teológico y pastoral para la preparación de la predicación.</p>
+<a class="link" href="#">Acceder al recurso</a>
+</div>
+</div>
+
+<!-- FORMACION -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80">
+<div class="content">
+<div class="tag">Formación académica</div>
+<h2>Rutas de estudio teológico</h2>
+<p>Cristología, Eclesiología, Moral, Liturgia y Teología Pastoral.</p>
+<a class="link" href="#">Ver itinerarios</a>
+</div>
+</div>
+
+<!-- BIBLIOTECA -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80">
+<div class="content">
+<div class="tag">Magisterio</div>
+<h2>Biblioteca teológica</h2>
+<p>Escritura, Catecismo, Concilios Ecuménicos y Tradición de la Iglesia.</p>
+<a class="link" href="#">Acceder</a>
+</div>
+</div>
+
+<!-- PASTORAL -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80">
+<div class="content">
+<div class="tag">Pastoral</div>
+<h2>Recursos para parroquias</h2>
+<p>Material para catequesis, homilía y formación comunitaria.</p>
+<a class="link" href="#">Ver recursos</a>
+</div>
+</div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<div class="card">
+<div class="content">
+<div class="tag">Formación continua</div>
+<h2>Diplomados teológicos</h2>
+<p>Programas de profundización en teología sistemática y pastoral.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="content">
+<div class="tag">Institucional</div>
+<h2>Facultad de Teología</h2>
+<p>Plataforma de apoyo académico para la formación del clero en colaboración con instituciones eclesiásticas.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="content">
+<div class="tag">Vida espiritual</div>
+<h2>Oración sacerdotal</h2>
+<p>Liturgia de las Horas, Lectio Divina y formación interior.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
