@@ -1,152 +1,331 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amor Veritatis | Impulsa tu Ministerio con la Alta Teología</title>
-    <meta name="description" content="Plataforma académica para sacerdotes. Descubre programas formativos en universidades pontificias, evalúa tu perfil teológico y accede a recursos litúrgicos.">
-    <!-- Tailwind CSS CDN para diseño rápido y responsivo -->
-    <script src="https://jsdelivr.net"></script>
-    <style>
-        /* Colores personalizados de estilo eclesial/académico */
-        :root {
-            --color-vatican-blue: #1e293b;
-            --color-vatican-gold: #d4af37;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Amore per la Verità</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#fafafa;
+    color:#222;
+    line-height:1.6;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+header{
+    background:white;
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:1px solid #eee;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem 0;
+}
+
+.logo{
+    font-size:1.3rem;
+    font-weight:700;
+    color:#8B0000;
+}
+
+.nav-links{
+    display:flex;
+    gap:1rem;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+}
+
+.hero{
+    background:linear-gradient(
+    rgba(0,0,0,.6),
+    rgba(0,0,0,.6)),
+    url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1400&q=80');
+
+    background-size:cover;
+    background-position:center;
+    color:white;
+    text-align:center;
+    padding:120px 20px;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:1rem;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    font-size:1.15rem;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:2rem;
+    background:#caa25d;
+    color:white;
+    text-decoration:none;
+    padding:15px 30px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+section{
+    padding:80px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-size:2rem;
+    color:#8B0000;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-bottom:15px;
+}
+
+.mission{
+    background:white;
+}
+
+.cta{
+    background:#8B0000;
+    color:white;
+    text-align:center;
+}
+
+.cta h2{
+    margin-bottom:20px;
+}
+
+footer{
+    background:#111;
+    color:#ddd;
+    text-align:center;
+    padding:30px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:2rem;
+}
+
+.hero p{
+    font-size:1rem;
+}
+
+.nav-links{
+    display:none;
+}
+
+}
+
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body>
 
-    <!-- NAV BAR -->
-    <header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl font-serif font-bold tracking-wider text-[#d4af37]">AMOR VERITATIS</span>
-            </div>
-            <nav class="hidden md:flex space-x-6 text-sm font-medium">
-                <a href="#beneficios" class="hover:text-[#d4af37] transition">Beneficios</a>
-                <a href="#herramientas" class="hover:text-[#d4af37] transition">Herramientas</a>
-                <a href="#test" class="hover:text-[#d4af37] transition">Test de Perfil</a>
-            </nav>
-            <a href="#test" class="bg-[#d4af37] text-slate-900 px-4 py-2 rounded-md font-semibold text-sm hover:bg-yellow-500 transition">
-                Evaluar Perfil
-            </a>
-        </div>
-    </header>
+<header>
+<div class="container">
+<nav>
 
-    <!-- HERO SECTION (Primer impacto visual y SEO) -->
-    <section class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white py-20 px-4 text-center">
-        <div class="max-w-3xl mx-auto">
-            <span class="text-[#d4af37] text-xs font-bold tracking-widest uppercase bg-slate-800 px-3 py-1 rounded-full border border-yellow-600/30">
-                Formación Pontificia Continua
-            </span>
-            <h1 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-6 leading-tight">
-                Profundiza en la Ciencia de Dios para Guiar a tu Pueblo
-            </h1>
-            <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-                Una herramienta digital exclusiva para sacerdotes y clérigos. Conecta con facultades eclesiásticas, gestiona tu ministerio y descubre tu próximo paso académico.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#test" class="bg-[#d4af37] text-slate-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-500 transition shadow-lg">
-                    Iniciar Test de Especialización
-                </a>
-                <a href="#herramientas" class="bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white/20 transition border border-white/20">
-                    Ver Herramientas Pastorales
-                </a>
-            </div>
-        </div>
-    </section>
+<div class="logo">
+Amore per la Verità
+</div>
 
-    <!-- SECCIÓN DE BENEFICIOS ACADÉMICOS -->
-    <section id="beneficios" class="py-16 px-4 max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-serif font-bold text-slate-900">¿Por qué especializarse en una Universidad Pontificia?</h2>
-            <p class="text-slate-600 mt-2">El intelecto al servicio de la fe y el cuidado de las almas.</p>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Beneficio 1 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
-                    <span class="text-2xl text-amber-700">📜</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-slate-900">Rigor y Grados Canónicos</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Títulos reconocidos por la Santa Sede y legislados por la Constitución Apostólica *Veritatis Gaudium*, válidos en toda la Iglesia universal.
-                </p>
-            </div>
-            <!-- Beneficio 2 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
-                    <span class="text-2xl text-amber-700">⚖️</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-slate-900">Respuestas a la Modernidad</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Herramientas teológicas, filosóficas y de Derecho Canónico para resolver los desafíos morales y pastorales de la sociedad actual.
-                </p>
-            </div>
-            <!-- Beneficio 3 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
-                    <span class="text-2xl text-amber-700">🌍</span>
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-slate-900">Red Global de Pastores</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Forma parte de una comunidad internacional de clérigos, compartiendo experiencias pastorales y visiones de la Iglesia en el mundo.
-                </p>
-            </div>
-        </div>
-    </section>
+<div class="nav-links">
+<a href="#">Inicio</a>
+<a href="#">Formación</a>
+<a href="#">Recursos</a>
+<a href="#">Universidades</a>
+<a href="#">Contacto</a>
+</div>
 
-    <!-- SECCIÓN HERRAMIENTAS (Gancho / Lead Magnet) -->
-    <section id="herramientas" class="bg-slate-950 text-white py-16 px-4">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <span class="text-[#d4af37] text-xs font-bold tracking-widest uppercase">Más que promoción académica</span>
-                <h2 class="text-3xl font-serif font-bold mt-2 mb-6">Un ecosistema digital concebido para tu día a día pastoral</h2>
-                <ul class="space-y-4">
-                    <li class="flex items-start space-x-3">
-                        <span class="text-[#d4af37] mt-1">✔</span>
-                        <span class="text-slate-300 text-sm"><strong class="text-white">Subsidios Homiléticos:</strong> Bosquejos de apoyo basados en la patrística para tus predicaciones dominicales.</span>
-                    </li>
-                    <li class="flex items-start space-x-3">
-                        <span class="text-[#d4af37] mt-1">✔</span>
-                        <span class="text-slate-300 text-sm"><strong class="text-white">Casos de Derecho Canónico:</strong> Consultas frecuentes resueltas de manera práctica para la administración de sacramentos.</span>
-                    </li>
-                    <li class="flex items-start space-x-3">
-                        <span class="text-[#d4af37] mt-1">✔</span>
-                        <span class="text-slate-300 text-sm"><strong class="text-white">Simulador de Becas:</strong> Analiza las opciones de financiamiento y ayudas de la universidad según tu diócesis de origen.</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl text-center">
-                <span class="text-4xl block mb-2">⏱️</span>
-                <h3 class="text-lg font-bold mb-2">¿Cuánto tiempo te tomaría convalidar?</h3>
-                <p class="text-slate-400 text-xs mb-6">Nuestra calculadora académica estima la duración de tu Licenciatura o Doctorado cruzando tus estudios previos del seminario mayor.</p>
-                <button class="w-full bg-slate-800 border border-slate-700 hover:border-[#d4af37] text-slate-200 py-3 rounded-lg text-sm font-semibold transition">
-                    Probar Calculadora de Convalidaciones
-                </button>
-            </div>
-        </div>
-    </section>
+</nav>
+</div>
+</header>
 
-    <!-- FORMULARIO / TEST DE PERFIL (Captación de Datos) -->
-    <section id="test" class="py-20 px-4 bg-gradient-to-b from-slate-50 to-amber-50/30">
-        <div class="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-md border border-slate-100">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-serif font-bold text-slate-900">Encuentra tu Ruta de Especialización</h2>
-                <p class="text-xs text-slate-500 mt-1">Responde este breve test y recibe una recomendación académica adaptada a las necesidades pastorales de tu diócesis.</p>
-            </div>
-            
-            <form action="#" method="POST" class="space-y-5">
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Nombre Completo</label>
-                    <input type="text" required placeholder="Pbro. Juan Pérez" class="w-full px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:border-[#d4af37] text-sm bg-slate-50">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Correo Electrónico Diocesano</label>
-                    <input type="email" required placeholder="ejemplo@diocesis.org" class="w-full px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:border-[#d4af37] text-sm bg-slate-50">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Área de mayor interés pastoral</label>
-                    <select class="w-full px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:border-[#d4af37] text-sm bg-slate-50">
+<section class="hero">
+
+<h1>Amor por la Verdad</h1>
+
+<p>
+Una comunidad dedicada a promover la formación teológica,
+espiritual y pastoral de sacerdotes y seminaristas para la Gloria de Dios.
+</p>
+
+<a href="#" class="btn">
+Comenzar
+</a>
+
+</section>
+
+<section class="mission">
+
+<div class="container">
+
+<div class="section-title">
+<h2>Nuestra Misión</h2>
+</div>
+
+<p style="text-align:center; max-width:800px; margin:auto;">
+Ayudar a sacerdotes, seminaristas y agentes de pastoral
+a profundizar en la Verdad revelada mediante recursos,
+formación permanente y recomendaciones académicas de excelencia.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+<h2>Recursos Gratuitos</h2>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Reflexiones Teológicas</h3>
+<p>
+Artículos y estudios para profundizar en la fe católica.
+</p>
+</div>
+
+<div class="card">
+<h3>Biblioteca Digital</h3>
+<p>
+Documentos del Magisterio, Padres de la Iglesia y recursos pastorales.
+</p>
+</div>
+
+<div class="card">
+<h3>Formación Permanente</h3>
+<p>
+Cursos y recomendaciones para el crecimiento intelectual y espiritual.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+<h2>¿Por qué formarse?</h2>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Mayor profundidad doctrinal</h3>
+<p>
+Comprender mejor el depósito de la fe.
+</p>
+</div>
+
+<div class="card">
+<h3>Mejor servicio pastoral</h3>
+<p>
+Responder a los desafíos actuales de la evangelización.
+</p>
+</div>
+
+<div class="card">
+<h3>Formación integral</h3>
+<p>
+Crecimiento humano, espiritual, intelectual y pastoral.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<div class="container">
+
+<h2>
+Descubre oportunidades de formación teológica
+</h2>
+
+<p>
+Conoce programas académicos recomendados para sacerdotes y seminaristas.
+</p>
+
+<a href="#" class="btn">
+Explorar Programas
+</a>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Amore per la Verità
+</p>
+
+<p>
+Formando para la Gloria de Dios.
+</p>
+
+</footer>
+
+</body>
+</html>
