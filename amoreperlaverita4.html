@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Veritas Sacerdotalis | Plataforma de Formación Sacerdotal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#cf2e2e;
+    --bg:#f5f5f5;
+    --card:#ffffff;
+    --text:#1b1b1b;
+    --muted:#666;
+    --border:#e6e6e6;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+}
+
+/* HEADER */
+
+header{
+    background:white;
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    font-weight:700;
+    color:var(--primary);
+    letter-spacing:0.3px;
+}
+
+.subtitle{
+    font-size:0.85rem;
+    color:var(--muted);
+}
+
+/* LAYOUT */
+
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:22px;
+}
+
+/* CARDS */
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:18px;
+    transition:0.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+.tag{
+    display:inline-block;
+    background:#fdeaea;
+    color:var(--primary);
+    font-size:0.75rem;
+    padding:4px 10px;
+    border-radius:6px;
+    margin-bottom:10px;
+}
+
+/* TYPO */
+
+h1{
+    font-size:1.6rem;
+    margin-bottom:8px;
+}
+
+h2{
+    font-size:1.2rem;
+    color:var(--primary);
+    margin-bottom:10px;
+}
+
+h3{
+    font-size:1rem;
+    margin-bottom:8px;
+}
+
+p{
+    font-size:0.95rem;
+}
+
+.meta{
+    font-size:0.85rem;
+    color:var(--muted);
+    margin-top:6px;
+}
+
+/* BUTTON */
+
+.btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 14px;
+    background:var(--primary);
+    color:white;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:0.85rem;
+    font-weight:500;
+}
+
+/* SIDEBAR */
+
+ul{
+    list-style:none;
+}
+
+li{
+    padding:6px 0;
+    border-bottom:1px solid var(--border);
+    font-size:0.9rem;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:35px;
+    font-size:0.85rem;
+    color:var(--muted);
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+<div>
+<div class="brand">Veritas Sacerdotalis</div>
+<div class="subtitle">Plataforma de formación teológica y sacerdotal</div>
+</div>
+<div class="subtitle">GitHub Pages MVP</div>
+</div>
+</header>
+
+<div class="container">
+
+<div class="grid">
+
+<!-- MAIN CONTENT -->
+<div>
+
+<!-- EVANGELIO -->
+<div class="card">
+<div class="tag">Evangelio del día</div>
+<h1>Mt 6, 24-34</h1>
+<h3>“No podéis servir a Dios y al dinero”</h3>
+<p>
+Cristo invita al discípulo a una confianza absoluta en la Providencia divina.
+La vida sacerdotal se fundamenta en la libertad interior y la entrega total a Dios.
+</p>
+<p class="meta">
+📌 Clave teológica: Providencia divina y libertad del ministerio sacerdotal
+</p>
+<a class="btn" href="#">Ver reflexión completa</a>
+</div>
+
+<!-- HOMILIA -->
+<div class="card">
+<div class="tag">Homilía guiada</div>
+<h2>Domingo XII del Tiempo Ordinario</h2>
+<h3>Identidad de Cristo en la predicación</h3>
+
+<p>
+1. Cristología: “¿Quién dicen que soy yo?”<br>
+2. Respuesta de fe de Pedro<br>
+3. Crisis contemporánea de identidad religiosa
+</p>
+
+<p class="meta">
+📖 Texto clave: Mt 16, 15–16
+</p>
+
+<a class="btn" href="#">Preparar homilía</a>
+</div>
+
+<!-- TEOLOGIA -->
+<div class="card">
+<div class="tag">Formación teológica</div>
+<h2>Eclesiología fundamental</h2>
+<h3>La Iglesia como sacramento universal de salvación</h3>
+
+<p>
+Estudio basado en el Concilio Vaticano II, especialmente <i>Lumen Gentium</i>.
+Comprensión del misterio de la Iglesia en su dimensión visible e invisible.
+</p>
+
+<p class="meta">
+📚 Autoridad: Magisterio de la Iglesia
+</p>
+
+<a class="btn" href="#">Continuar estudio</a>
+</div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div>
+
+<div class="card">
+<h2>Vida espiritual del sacerdote</h2>
+<ul>
+<li>Liturgia de las Horas</li>
+<li>Lectio Divina</li>
+<li>Oración mental diaria</li>
+<li>Examen de conciencia</li>
+<li>Adoración eucarística</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Ruta de formación</h2>
+<ul>
+<li>Fundamentos teológicos</li>
+<li>Dogmática avanzada</li>
+<li>Homilética pastoral</li>
+<li>Derecho Canónico</li>
+<li>Teología moral</li>
+</ul>
+<p class="meta">
+Incluye recomendaciones de universidades católicas
+</p>
+</div>
+
+<div class="card">
+<h2>Centro de estudio</h2>
+<p>
+Acceso estructurado a Biblia, Catecismo de la Iglesia Católica, Concilios y Padres de la Iglesia.
+</p>
+</div>
+
+<div class="card">
+<h2>Estado de formación</h2>
+<p>
+Progreso estimado: 38%<br>
+Cursos activos: 3<br>
+Última actividad: hoy
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Veritas Sacerdotalis — Formación teológica para la Iglesia universal
+</footer>
+
+</body>
+</html>
