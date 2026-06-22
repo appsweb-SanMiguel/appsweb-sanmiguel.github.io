@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Amore per la Verità</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#fafafa;
+    color:#222;
+    line-height:1.6;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+header{
+    background:white;
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:1px solid #eee;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem 0;
+}
+
+.logo{
+    font-size:1.3rem;
+    font-weight:700;
+    color:#8B0000;
+}
+
+.nav-links{
+    display:flex;
+    gap:1rem;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+}
+
+.hero{
+    background:linear-gradient(
+    rgba(0,0,0,.6),
+    rgba(0,0,0,.6)),
+    url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1400&q=80');
+
+    background-size:cover;
+    background-position:center;
+    color:white;
+    text-align:center;
+    padding:120px 20px;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:1rem;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    font-size:1.15rem;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:2rem;
+    background:#caa25d;
+    color:white;
+    text-decoration:none;
+    padding:15px 30px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+section{
+    padding:80px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-size:2rem;
+    color:#8B0000;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-bottom:15px;
+}
+
+.mission{
+    background:white;
+}
+
+.cta{
+    background:#8B0000;
+    color:white;
+    text-align:center;
+}
+
+.cta h2{
+    margin-bottom:20px;
+}
+
+footer{
+    background:#111;
+    color:#ddd;
+    text-align:center;
+    padding:30px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:2rem;
+}
+
+.hero p{
+    font-size:1rem;
+}
+
+.nav-links{
+    display:none;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<nav>
+
+<div class="logo">
+Amore per la Verità
+</div>
+
+<div class="nav-links">
+<a href="#">Inicio</a>
+<a href="#">Formación</a>
+<a href="#">Recursos</a>
+<a href="#">Universidades</a>
+<a href="#">Contacto</a>
+</div>
+
+</nav>
+</div>
+</header>
+
+<section class="hero">
+
+<h1>Amor por la Verdad</h1>
+
+<p>
+Una comunidad dedicada a promover la formación teológica,
+espiritual y pastoral de sacerdotes y seminaristas para la Gloria de Dios.
+</p>
+
+<a href="#" class="btn">
+Comenzar
+</a>
+
+</section>
+
+<section class="mission">
+
+<div class="container">
+
+<div class="section-title">
+<h2>Nuestra Misión</h2>
+</div>
+
+<p style="text-align:center; max-width:800px; margin:auto;">
+Ayudar a sacerdotes, seminaristas y agentes de pastoral
+a profundizar en la Verdad revelada mediante recursos,
+formación permanente y recomendaciones académicas de excelencia.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+<h2>Recursos Gratuitos</h2>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Reflexiones Teológicas</h3>
+<p>
+Artículos y estudios para profundizar en la fe católica.
+</p>
+</div>
+
+<div class="card">
+<h3>Biblioteca Digital</h3>
+<p>
+Documentos del Magisterio, Padres de la Iglesia y recursos pastorales.
+</p>
+</div>
+
+<div class="card">
+<h3>Formación Permanente</h3>
+<p>
+Cursos y recomendaciones para el crecimiento intelectual y espiritual.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+<h2>¿Por qué formarse?</h2>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Mayor profundidad doctrinal</h3>
+<p>
+Comprender mejor el depósito de la fe.
+</p>
+</div>
+
+<div class="card">
+<h3>Mejor servicio pastoral</h3>
+<p>
+Responder a los desafíos actuales de la evangelización.
+</p>
+</div>
+
+<div class="card">
+<h3>Formación integral</h3>
+<p>
+Crecimiento humano, espiritual, intelectual y pastoral.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<div class="container">
+
+<h2>
+Descubre oportunidades de formación teológica
+</h2>
+
+<p>
+Conoce programas académicos recomendados para sacerdotes y seminaristas.
+</p>
+
+<a href="#" class="btn">
+Explorar Programas
+</a>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Amore per la Verità
+</p>
+
+<p>
+Formando para la Gloria de Dios.
+</p>
+
+</footer>
+
+</body>
+</html>
