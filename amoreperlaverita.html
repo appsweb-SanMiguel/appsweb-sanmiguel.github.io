@@ -4,21 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Amore per la Verità | Formación Sacerdotal y Teología Católica</title>
+<title>Amore per la Verità | Formación Sacerdotal</title>
 
-<meta name="description" content="Plataforma de formación teológica para sacerdotes y seminaristas. Recursos, estudios y recomendaciones académicas al servicio de la Iglesia.">
-
-<meta name="keywords" content="formación sacerdotal, teología católica, cursos para sacerdotes, estudios eclesiásticos, homilética, formación católica">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
     --primary:#cf2e2e;
-    --dark:#1a1a1a;
-    --gray:#666;
-    --light:#f7f7f7;
+    --bg:#f6f6f6;
+    --card:#ffffff;
+    --text:#1c1c1c;
+    --muted:#666;
+    --border:#e8e8e8;
 }
 
 *{
@@ -29,154 +27,115 @@
 
 body{
     font-family:'Inter',sans-serif;
-    background:#fff;
-    color:var(--dark);
-    line-height:1.6;
+    background:var(--bg);
+    color:var(--text);
 }
 
-/* HEADER */
+/* TOP BAR */
 
-header{
-    position:sticky;
-    top:0;
+.topbar{
     background:white;
-    border-bottom:1px solid #eee;
-    z-index:1000;
-}
-
-.container{
-    width:92%;
-    max-width:1100px;
-    margin:auto;
-}
-
-nav{
+    border-bottom:1px solid var(--border);
+    padding:12px 20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px 0;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
-.logo{
+.brand{
     font-weight:700;
     color:var(--primary);
-    font-size:1.2rem;
 }
 
-.nav a{
-    margin-left:15px;
-    text-decoration:none;
-    color:var(--dark);
-    font-weight:500;
-    font-size:0.95rem;
+.date{
+    font-size:0.9rem;
+    color:var(--muted);
 }
 
-/* HERO */
+/* LAYOUT */
 
-.hero{
-    background:linear-gradient(135deg, rgba(207,46,46,.92), rgba(120,10,10,.85)),
-    url('https://images.unsplash.com/photo-1520637836862-4d197d17c76a?auto=format&fit=crop&w=1600&q=80');
-
-    background-size:cover;
-    background-position:center;
-    color:white;
-    text-align:center;
-    padding:120px 20px;
+.container{
+    max-width:1100px;
+    margin:20px auto;
+    padding:0 15px;
 }
 
-.hero h1{
-    font-size:2.8rem;
-    font-weight:700;
-}
-
-.hero p{
-    max-width:700px;
-    margin:15px auto;
-    font-size:1.1rem;
-    opacity:0.95;
-}
-
-.btn{
-    display:inline-block;
-    margin-top:25px;
-    background:white;
-    color:var(--primary);
-    padding:14px 26px;
-    border-radius:10px;
-    font-weight:600;
-    text-decoration:none;
-}
-
-/* SECTIONS */
-
-section{
-    padding:70px 0;
-}
-
-h2{
-    text-align:center;
-    font-size:1.9rem;
-    margin-bottom:40px;
-    color:var(--primary);
-}
-
-/* CARDS */
+/* GRID */
 
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    grid-template-columns:2fr 1fr;
     gap:20px;
 }
 
+/* CARD */
+
 .card{
-    background:white;
-    border:1px solid #eee;
-    padding:25px;
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:12px;
-    transition:0.3s;
+    padding:20px;
+    margin-bottom:15px;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
+/* TITLES */
 
-.card h3{
+h2{
+    font-size:1.2rem;
     margin-bottom:10px;
-}
-
-/* CTA */
-
-.cta{
-    background:var(--primary);
-    color:white;
-    text-align:center;
-}
-
-.cta a{
-    background:white;
     color:var(--primary);
 }
 
-/* FOOTER */
+h3{
+    font-size:1rem;
+    margin-bottom:8px;
+}
 
-footer{
-    background:#111;
-    color:#ccc;
-    text-align:center;
-    padding:30px;
+/* LEFT COLUMN */
+
+.main-section .card{
+    min-height:120px;
+}
+
+/* RIGHT SIDEBAR */
+
+.sidebar .card{
+    font-size:0.95rem;
+}
+
+/* BUTTON */
+
+.btn{
+    display:inline-block;
+    margin-top:10px;
+    background:var(--primary);
+    color:white;
+    padding:10px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:0.9rem;
+}
+
+/* LIST */
+
+ul{
+    list-style:none;
+}
+
+li{
+    padding:6px 0;
+    border-bottom:1px solid var(--border);
     font-size:0.9rem;
 }
 
 /* MOBILE */
 
-@media(max-width:768px){
-    .nav{
-        display:none;
-    }
-
-    .hero h1{
-        font-size:2rem;
+@media(max-width:900px){
+    .grid{
+        grid-template-columns:1fr;
     }
 }
 
@@ -185,90 +144,84 @@ footer{
 
 <body>
 
-<header>
-<div class="container">
-<nav>
-<div class="logo">Amore per la Verità</div>
-<div class="nav">
-<a href="#recursos">Recursos</a>
-<a href="#formacion">Formación</a>
-<a href="#universidades">Universidades</a>
+<div class="topbar">
+<div class="brand">Amore per la Verità</div>
+<div class="date">Evangelio del día • 21 Jun 2026</div>
 </div>
-</nav>
-</div>
-</header>
 
-<section class="hero">
-<h1>Formación sacerdotal al servicio de la Verdad</h1>
+<div class="container">
+
+<div class="grid">
+
+<!-- MAIN -->
+<div class="main-section">
+
+<div class="card">
+<h2>📖 Evangelio del día</h2>
+<p><b>Lectura:</b> Mt 6, 24-34</p>
 <p>
-Una plataforma dedicada a sacerdotes y seminaristas que buscan profundizar en la teología, la espiritualidad y el servicio pastoral en fidelidad a la Iglesia.
+“No se puede servir a Dios y al dinero… Buscad primero el Reino de Dios.”
 </p>
-<a href="#recursos" class="btn">Acceder a recursos</a>
-</section>
-
-<section id="recursos">
-<div class="container">
-<h2>Recursos para la formación sacerdotal</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Evangelio y reflexión diaria</h3>
-<p>Contenido espiritual para la meditación y la homilía diaria.</p>
+<a class="btn" href="#">Ver reflexión completa</a>
 </div>
 
 <div class="card">
-<h3>Biblioteca teológica</h3>
-<p>Magisterio, Padres de la Iglesia y documentos eclesiales.</p>
+<h2>✝️ Homilía guiada</h2>
+<h3>Tema: La confianza en la Providencia</h3>
+<p>
+• Idea central: Dios sostiene la vida del sacerdote<br>
+• Aplicación pastoral: abandono confiado en la misión<br>
+• Punto teológico: gracia y providencia
+</p>
+<a class="btn" href="#">Preparar homilía</a>
 </div>
 
 <div class="card">
-<h3>Formación continua</h3>
-<p>Cursos breves para el crecimiento intelectual y pastoral.</p>
+<h2>📚 Estudio teológico</h2>
+<p><b>Hoy:</b> Cristología fundamental</p>
+<p>
+Naturaleza de Cristo según el Concilio de Calcedonia y Santo Tomás de Aquino.
+</p>
+<a class="btn" href="#">Continuar estudio</a>
 </div>
 
 </div>
-</div>
-</section>
 
-<section id="formacion">
-<div class="container">
-<h2>Formación permanente del clero</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Teología dogmática</h3>
-<p>Profundización en los misterios centrales de la fe.</p>
-</div>
+<!-- SIDEBAR -->
+<div class="sidebar">
 
 <div class="card">
-<h3>Homilética</h3>
-<p>Preparación eficaz para la predicación pastoral.</p>
+<h2>🕊 Vida espiritual</h2>
+<ul>
+<li>Oración de la mañana</li>
+<li>Examen de conciencia</li>
+<li>Liturgia de las Horas</li>
+<li>Lectio Divina</li>
+</ul>
 </div>
 
 <div class="card">
-<h3>Derecho Canónico</h3>
-<p>Comprensión de la estructura jurídica de la Iglesia.</p>
+<h2>🎓 Formación recomendada</h2>
+<ul>
+<li>Teología Dogmática</li>
+<li>Derecho Canónico</li>
+<li>Homilética avanzada</li>
+<li>Teología moral</li>
+</ul>
+<a class="btn" href="#">Ver universidades</a>
+</div>
+
+<div class="card">
+<h2>⛪ Perfil sacerdotal</h2>
+<p>Progreso: 32% formación continua</p>
+<p>Cursos activos: 3</p>
 </div>
 
 </div>
-</div>
-</section>
 
-<section class="cta">
-<div class="container">
-<h2>Explora programas de formación recomendados</h2>
-<p>Descubre oportunidades académicas para sacerdotes y seminaristas.</p>
-<br>
-<a href="#">Ver programas</a>
 </div>
-</section>
 
-<footer>
-<p>© 2026 Amore per la Verità</p>
-<p>Formación sacerdotal para la Gloria de Dios</p>
-</footer>
+</div>
 
 </body>
 </html>
