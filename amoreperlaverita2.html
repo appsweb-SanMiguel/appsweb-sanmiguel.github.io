@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Amore per la Verità | Formación Sacerdotal y Teología Católica</title>
+
+<meta name="description" content="Plataforma de formación teológica para sacerdotes y seminaristas. Recursos, estudios y recomendaciones académicas al servicio de la Iglesia.">
+
+<meta name="keywords" content="formación sacerdotal, teología católica, cursos para sacerdotes, estudios eclesiásticos, homilética, formación católica">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#cf2e2e;
+    --dark:#1a1a1a;
+    --gray:#666;
+    --light:#f7f7f7;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#fff;
+    color:var(--dark);
+    line-height:1.6;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    background:white;
+    border-bottom:1px solid #eee;
+    z-index:1000;
+}
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+}
+
+.logo{
+    font-weight:700;
+    color:var(--primary);
+    font-size:1.2rem;
+}
+
+.nav a{
+    margin-left:15px;
+    text-decoration:none;
+    color:var(--dark);
+    font-weight:500;
+    font-size:0.95rem;
+}
+
+/* HERO */
+
+.hero{
+    background:linear-gradient(135deg, rgba(207,46,46,.92), rgba(120,10,10,.85)),
+    url('https://images.unsplash.com/photo-1520637836862-4d197d17c76a?auto=format&fit=crop&w=1600&q=80');
+
+    background-size:cover;
+    background-position:center;
+    color:white;
+    text-align:center;
+    padding:120px 20px;
+}
+
+.hero h1{
+    font-size:2.8rem;
+    font-weight:700;
+}
+
+.hero p{
+    max-width:700px;
+    margin:15px auto;
+    font-size:1.1rem;
+    opacity:0.95;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:25px;
+    background:white;
+    color:var(--primary);
+    padding:14px 26px;
+    border-radius:10px;
+    font-weight:600;
+    text-decoration:none;
+}
+
+/* SECTIONS */
+
+section{
+    padding:70px 0;
+}
+
+h2{
+    text-align:center;
+    font-size:1.9rem;
+    margin-bottom:40px;
+    color:var(--primary);
+}
+
+/* CARDS */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border:1px solid #eee;
+    padding:25px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+/* CTA */
+
+.cta{
+    background:var(--primary);
+    color:white;
+    text-align:center;
+}
+
+.cta a{
+    background:white;
+    color:var(--primary);
+}
+
+/* FOOTER */
+
+footer{
+    background:#111;
+    color:#ccc;
+    text-align:center;
+    padding:30px;
+    font-size:0.9rem;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+    .nav{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:2rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container">
+<nav>
+<div class="logo">Amore per la Verità</div>
+<div class="nav">
+<a href="#recursos">Recursos</a>
+<a href="#formacion">Formación</a>
+<a href="#universidades">Universidades</a>
+</div>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<h1>Formación sacerdotal al servicio de la Verdad</h1>
+<p>
+Una plataforma dedicada a sacerdotes y seminaristas que buscan profundizar en la teología, la espiritualidad y el servicio pastoral en fidelidad a la Iglesia.
+</p>
+<a href="#recursos" class="btn">Acceder a recursos</a>
+</section>
+
+<section id="recursos">
+<div class="container">
+<h2>Recursos para la formación sacerdotal</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Evangelio y reflexión diaria</h3>
+<p>Contenido espiritual para la meditación y la homilía diaria.</p>
+</div>
+
+<div class="card">
+<h3>Biblioteca teológica</h3>
+<p>Magisterio, Padres de la Iglesia y documentos eclesiales.</p>
+</div>
+
+<div class="card">
+<h3>Formación continua</h3>
+<p>Cursos breves para el crecimiento intelectual y pastoral.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="formacion">
+<div class="container">
+<h2>Formación permanente del clero</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Teología dogmática</h3>
+<p>Profundización en los misterios centrales de la fe.</p>
+</div>
+
+<div class="card">
+<h3>Homilética</h3>
+<p>Preparación eficaz para la predicación pastoral.</p>
+</div>
+
+<div class="card">
+<h3>Derecho Canónico</h3>
+<p>Comprensión de la estructura jurídica de la Iglesia.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="cta">
+<div class="container">
+<h2>Explora programas de formación recomendados</h2>
+<p>Descubre oportunidades académicas para sacerdotes y seminaristas.</p>
+<br>
+<a href="#">Ver programas</a>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Amore per la Verità</p>
+<p>Formación sacerdotal para la Gloria de Dios</p>
+</footer>
+
+</body>
+</html>
