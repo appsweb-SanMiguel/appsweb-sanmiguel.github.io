@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Veritas Sacerdotalis App</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#cf2e2e;
+    --bg:#f4f4f4;
+    --card:#fff;
+    --text:#1c1c1c;
+    --muted:#777;
+    --border:#e6e6e6;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:Inter;
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* APP CONTAINER */
+
+.app{
+    max-width:430px;
+    margin:auto;
+    background:#fff;
+    min-height:100vh;
+    box-shadow:0 0 20px rgba(0,0,0,0.08);
+}
+
+/* TOP BAR */
+
+.top{
+    padding:15px;
+    background:white;
+    border-bottom:1px solid var(--border);
+}
+
+.title{
+    font-weight:700;
+    color:var(--primary);
+}
+
+.subtitle{
+    font-size:0.85rem;
+    color:var(--muted);
+}
+
+/* CONTENT */
+
+.content{
+    padding:15px;
+    padding-bottom:80px;
+}
+
+/* CARDS */
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:12px;
+}
+
+.tag{
+    display:inline-block;
+    font-size:0.7rem;
+    background:#fdeaea;
+    color:var(--primary);
+    padding:3px 8px;
+    border-radius:6px;
+    margin-bottom:8px;
+}
+
+h2{
+    font-size:1rem;
+    margin-bottom:6px;
+}
+
+p{
+    font-size:0.9rem;
+    color:var(--muted);
+}
+
+.btn{
+    display:inline-block;
+    margin-top:10px;
+    background:var(--primary);
+    color:white;
+    padding:10px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:0.85rem;
+    text-align:center;
+    width:100%;
+}
+
+/* HERO CARD */
+
+.hero{
+    background:linear-gradient(rgba(207,46,46,0.9), rgba(120,10,10,0.9));
+    color:white;
+}
+
+.hero p{
+    color:white;
+    opacity:0.9;
+}
+
+/* BOTTOM NAV */
+
+.nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:white;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-around;
+    padding:8px 0;
+    max-width:430px;
+    margin:auto;
+}
+
+.nav div{
+    font-size:0.75rem;
+    color:var(--muted);
+    text-align:center;
+}
+
+.nav .active{
+    color:var(--primary);
+    font-weight:600;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- TOP -->
+<div class="top">
+<div class="title">Veritas Sacerdotalis</div>
+<div class="subtitle">Formación sacerdotal diaria</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- HERO / TODAY -->
+<div class="card hero">
+<div class="tag">Hoy</div>
+<h2>Evangelio del día</h2>
+<p>Mt 6, 24-34 — “Buscad primero el Reino de Dios”</p>
+<a class="btn" href="#">Entrar al día de hoy</a>
+</div>
+
+<!-- HOMILIA -->
+<div class="card">
+<div class="tag">Homilía</div>
+<h2>Domingo XII del Tiempo Ordinario</h2>
+<p>Preparación homilética con estructura teológica y pastoral.</p>
+<a class="btn" href="#">Preparar homilía</a>
+</div>
+
+<!-- FORMACION -->
+<div class="card">
+<div class="tag">Formación</div>
+<h2>Eclesiología</h2>
+<p>La Iglesia como sacramento universal de salvación.</p>
+<a class="btn" href="#">Continuar estudio</a>
+</div>
+
+<!-- ESPIRITUALIDAD -->
+<div class="card">
+<div class="tag">Vida espiritual</div>
+<h2>Oración del sacerdote</h2>
+<p>Liturgia de las Horas, Lectio Divina, adoración eucarística.</p>
+<a class="btn" href="#">Entrar</a>
+</div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="nav">
+<div class="active">🏠<br>Hoy</div>
+<div>📖<br>Evangelio</div>
+<div>✝️<br>Homilía</div>
+<div>🎓<br>Formación</div>
+<div>👤<br>Perfil</div>
+</div>
+
+</div>
+
+</body>
+</html>
