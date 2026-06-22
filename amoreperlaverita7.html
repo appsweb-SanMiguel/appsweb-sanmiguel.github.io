@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Veritas Sacerdotalis | Plataforma de Formación Teológica</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#cf2e2e;
+    --bg:#f4f4f4;
+    --card:#fff;
+    --text:#1c1c1c;
+    --muted:#777;
+    --border:#e6e6e6;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:Inter;
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* APP WRAPPER */
+
+.app{
+    max-width:430px;
+    margin:auto;
+    background:white;
+    min-height:100vh;
+    box-shadow:0 0 25px rgba(0,0,0,0.1);
+}
+
+/* TOP */
+
+.top{
+    padding:15px;
+    border-bottom:1px solid var(--border);
+}
+
+.brand{
+    color:var(--primary);
+    font-weight:700;
+}
+
+.small{
+    font-size:0.8rem;
+    color:var(--muted);
+}
+
+/* CONTENT */
+
+.content{
+    padding:15px;
+    padding-bottom:80px;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:14px;
+    margin-bottom:14px;
+    overflow:hidden;
+}
+
+.card img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+}
+
+.inner{
+    padding:14px;
+}
+
+.tag{
+    display:inline-block;
+    font-size:0.7rem;
+    background:#fdeaea;
+    color:var(--primary);
+    padding:3px 8px;
+    border-radius:6px;
+    margin-bottom:6px;
+}
+
+h2{
+    font-size:1rem;
+    margin-bottom:5px;
+}
+
+p{
+    font-size:0.85rem;
+    color:var(--muted);
+}
+
+.btn{
+    display:block;
+    margin-top:10px;
+    padding:10px;
+    background:var(--primary);
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:0.85rem;
+}
+
+/* UNIVERSITY BLOCK */
+
+.uni{
+    background:linear-gradient(rgba(207,46,46,0.92), rgba(120,10,10,0.9));
+    color:white;
+}
+
+.uni p{
+    color:white;
+    opacity:0.9;
+}
+
+/* BOTTOM NAV */
+
+.nav{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    max-width:430px;
+    background:white;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-around;
+    padding:8px 0;
+}
+
+.nav div{
+    font-size:0.7rem;
+    color:var(--muted);
+    text-align:center;
+}
+
+.nav .active{
+    color:var(--primary);
+    font-weight:600;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- TOP -->
+<div class="top">
+<div class="brand">Veritas Sacerdotalis</div>
+<div class="small">Formación teológica y sacerdotal</div>
+</div>
+
+<div class="content">
+
+<!-- TODAY -->
+<div class="card uni">
+<div class="inner">
+<div class="tag">Hoy</div>
+<h2>Evangelio del día</h2>
+<p>Mt 6, 24-34 — Confianza en la Providencia divina</p>
+<a class="btn" href="#">Entrar al día</a>
+</div>
+</div>
+
+<!-- UNIVERSITY -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+<div class="tag">Universidad colaboradora</div>
+<h2>Facultad de Teología</h2>
+<p>
+Programa académico de formación sacerdotal en colaboración con instituciones eclesiásticas de alto nivel.
+</p>
+<a class="btn" href="#">Ver programas académicos</a>
+</div>
+</div>
+
+<!-- HOMILIA -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520637836862-4d197d17c76a?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+<div class="tag">Homilía</div>
+<h2>Domingo XII del Tiempo Ordinario</h2>
+<p>Guía estructurada para la predicación sacerdotal.</p>
+<a class="btn" href="#">Preparar homilía</a>
+</div>
+</div>
+
+<!-- BIBLIOTECA -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+<div class="tag">Biblioteca</div>
+<h2>Centro de Recursos Teológicos</h2>
+<p>
+Biblia, Catecismo de la Iglesia Católica, Magisterio, Padres de la Iglesia y Santo Tomás de Aquino.
+</p>
+<a class="btn" href="#">Acceder a la biblioteca</a>
+</div>
+</div>
+
+<!-- DIPLOMADOS -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+<div class="tag">Diplomados</div>
+<h2>Formación teológica avanzada</h2>
+<p>
+Diplomados en Cristología, Eclesiología, Moral, Liturgia y Derecho Canónico.
+</p>
+<a class="btn" href="#">Ver diplomados</a>
+</div>
+</div>
+
+<!-- VIDA ESPIRITUAL -->
+<div class="card">
+<div class="inner">
+<div class="tag">Espiritualidad</div>
+<h2>Vida del sacerdote</h2>
+<p>
+Liturgia de las Horas, Lectio Divina, oración personal y formación interior.
+</p>
+<a class="btn" href="#">Entrar</a>
+</div>
+</div>
+
+</div>
+
+<!-- NAV -->
+<div class="nav">
+<div class="active">🏠<br>Hoy</div>
+<div>📖<br>Evangelio</div>
+<div>✝️<br>Homilía</div>
+<div>🎓<br>Formación</div>
+<div>👤<br>Perfil</div>
+</div>
+
+</div>
+
+</body>
+</html>
