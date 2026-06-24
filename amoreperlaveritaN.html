@@ -1,1 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Veritas Sacerdotalis | Formación Sacerdotal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --primary:#cf2e2e;
+  --bg:#f5f5f5;
+  --card:#fff;
+  --text:#1c1c1c;
+  --muted:#777;
+  --border:#e6e6e6;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:Inter;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* HEADER */
+
+header{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:12px 16px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.brand{
+  color:var(--primary);
+  font-weight:700;
+}
+
+/* LAYOUT */
+
+.wrapper{
+  display:flex;
+  max-width:1200px;
+  margin:auto;
+}
+
+/* MAIN */
+
+.main{
+  flex:2;
+  padding:16px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  flex:1;
+  padding:16px;
+}
+
+/* CARD */
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  margin-bottom:14px;
+  overflow:hidden;
+}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+}
+
+.inner{
+  padding:14px;
+}
+
+.tag{
+  display:inline-block;
+  background:#fdeaea;
+  color:var(--primary);
+  font-size:0.7rem;
+  padding:3px 8px;
+  border-radius:6px;
+  margin-bottom:6px;
+}
+
+h2{
+  font-size:1rem;
+  margin-bottom:5px;
+}
+
+p{
+  font-size:0.85rem;
+  color:var(--muted);
+}
+
+/* BUTTON */
+
+.btn{
+  display:block;
+  margin-top:10px;
+  padding:10px;
+  background:var(--primary);
+  color:white;
+  text-align:center;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:0.85rem;
+}
+
+/* FOCO DEL DÍA */
+
+.focus{
+  background:linear-gradient(135deg, #cf2e2e, #7a0d0d);
+  color:white;
+}
+
+.focus p{color:white;opacity:0.9;}
+
+/* BOTTOM NAV (MOBILE) */
+
+.nav{
+  display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .wrapper{
+    display:block;
+  }
+
+  .sidebar{
+    display:none;
+  }
+
+  .nav{
+    display:flex;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:white;
+    border-top:1px solid var(--border);
+    justify-content:space-around;
+    padding:8px 0;
+  }
+
+  .nav div{
+    font-size:0.7rem;
+    color:var(--muted);
+    text-align:center;
+  }
+
+  .nav .active{
+    color:var(--primary);
+    font-weight:600;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="brand">Veritas Sacerdotalis</div>
+</header>
+
+<div class="wrapper">
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- FOCO DEL DÍA -->
+<div class="card focus">
+<div class="inner">
+<div class="tag">Foco del día</div>
+<h2>Confianza en la Providencia</h2>
+<p>Mt 6, 24-34 — El sacerdote como testigo de la libertad interior en Dios.</p>
+<a class="btn" href="#">Entrar al día</a>
+</div>
+</div>
+
+<!-- EVANGELIO -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=1200&q=80">
+<div class="inner">
+<div class="tag">Evangelio</div>
+<h2>Lectura del día</h2>
+<p>Comentario bíblico y teológico del Evangelio diario.</p>
+<a class="btn" href="#">Leer</a>
+</div>
+</div>
+
+<!-- HOMILIA -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520637836862-4d197d17c76a?auto=format&fit=crop&w=1200&q=80">
+<div class="inner">
+<div class="tag">Homilía</div>
+<h2>Preparación pastoral</h2>
+<p>Esquema estructurado para predicación dominical.</p>
+<a class="btn" href="#">Preparar</a>
+</div>
+</div>
+
+<!-- KIT PARROQUIAL -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80">
+<div class="inner">
+<div class="tag">Parroquia</div>
+<h2>Kit pastoral semanal</h2>
+<p>Homilía + catequesis + grupos parroquiales.</p>
+<a class="btn" href="#">Acceder</a>
+</div>
+</div>
+
+<!-- BIBLIOTECA -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80">
+<div class="inner">
+<div class="tag">Biblioteca</div>
+<h2>Centro de recursos</h2>
+<p>Biblia, Catecismo, Magisterio, Padres de la Iglesia.</p>
+<a class="btn" href="#">Explorar</a>
+</div>
+</div>
+
+<!-- DIPLOMADOS -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80">
+<div class="inner">
+<div class="tag">Diplomados</div>
+<h2>Formación académica</h2>
+<p>Cristología, Moral, Liturgia, Eclesiología.</p>
+<a class="btn" href="#">Ver programas</a>
+</div>
+</div>
+
+<!-- TEST -->
+<div class="card">
+<div class="inner">
+<div class="tag">Evaluación</div>
+<h2>Mini test teológico</h2>
+<p>Refuerzo continuo de formación doctrinal.</p>
+<a class="btn" href="#">Iniciar test</a>
+</div>
+</div>
+
+<!-- UNIVERSIDAD -->
+<div class="card">
+<div class="inner">
+<div class="tag">Institución</div>
+<h2>Universidad colaboradora</h2>
+<p>Programa de formación teológica avanzada en colaboración académica eclesial.</p>
+<a class="btn" href="#">Ver institución</a>
+</div>
+</div>
+
+</div>
+
+<!-- SIDEBAR (DESKTOP) -->
+<div class="sidebar">
+
+<div class="card">
+<div class="inner">
+<h2>📚 Biblioteca rápida</h2>
+<p>• Catecismo</p>
+<p>• Concilio Vaticano II</p>
+<p>• Encíclicas</p>
+</div>
+</div>
+
+<div class="card">
+<div class="inner">
+<h2>🎓 Rutas formativas</h2>
+<p>• Cristología</p>
+<p>• Eclesiología</p>
+<p>• Moral</p>
+<p>• Liturgia</p>
+</div>
+</div>
+
+<div class="card">
+<div class="card-content">
+<h2>Formación diaria</h2>
+<p>
+Progreso estimado: 42%<br>
+Cursos activos: 3<br>
+Actividad: hoy
+</p>
+</div>
+</div>
+  
+<div class="card">
+<div class="inner">
+<h2>⛪ Vida espiritual</h2>
+<p>Lectio Divina, Liturgia de las Horas, oración diaria</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- MOBILE NAV -->
+<div class="nav">
+<div class="active">🏠<br>Hoy</div>
+<div>📖<br>Evangelio</div>
+<div>✝️<br>Homilía</div>
+<div>🎓<br>Formación</div>
+<div>👤<br>Perfil</div>
+</div>
+
+</body>
+</html>
