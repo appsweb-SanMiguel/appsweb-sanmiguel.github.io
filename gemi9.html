@@ -6,6 +6,8 @@
     <title>Universidad Pontificia | Herramientas Pastorales</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght=0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
         :root {
@@ -63,6 +65,9 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        .brand i {
+            font-size: 1.4rem;
         }
         .badge-univ {
             background: var(--purple-church);
@@ -324,6 +329,7 @@
         .social-row {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 15px;
             margin-top: 15px;
             border-top: 1px solid var(--border);
@@ -336,7 +342,7 @@
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
         .social-icon:hover { color: var(--purple-church); }
 
@@ -426,12 +432,12 @@
             background: none; border: none; flex: 1; display: flex; flex-direction: column;
             align-items: center; font-size: 0.72rem; color: var(--text-muted); cursor: pointer; font-weight: 500; gap: 4px;
         }
-        .nav-item svg { width: 20px; height: 20px; fill: currentColor; }
+        .nav-item i { font-size: 1.25rem; }
         .nav-item.active { color: var(--purple-church); font-weight: 700; }
-        .nav-item.active svg { color: var(--vatican-gold); }
+        .nav-item.active i { color: var(--vatican-gold); }
 
         .program-card { border-left: 4px solid var(--vatican-gold); }
-        .section-title { margin: 5px 0 15px 0; font-size: 1.35rem; color: var(--purple-church); border-bottom: 2px solid var(--vatican-gold); padding-bottom: 6px;}
+        .section-title { margin: 5px 0 15px 0; font-size: 1.35rem; color: var(--purple-church); border-bottom: 2px solid var(--vatican-gold); padding-bottom: 6px; display: flex; align-items: center; gap: 8px;}
 
         /* RESPONSIBLE DESKTOP */
         @media (min-width: 992px) {
@@ -450,7 +456,7 @@
 <header>
     <div class="header-wrap">
         <div class="brand">
-            🏛️ Universidad <span style="font-family: 'Inter'; font-weight:300; color: var(--text-dark);">Pontificia</span>
+            <i class="bi bi-bank"></i> Universidad <span style="font-family: 'Inter'; font-weight:300; color: var(--text-dark);">Pontificia</span>
         </div>
         <div class="badge-univ">Teología</div>
     </div>
@@ -474,31 +480,31 @@
 <div class="app-container">
 
     <section id="view-recursos" class="app-view active-view">
-        <h3 class="section-title">📖 Homilía y Predicación Dominical</h3>
+        <h3 class="section-title"><i class="bi bi-book"></i> Homilía y Predicación Dominical</h3>
         <img class="section-img" src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop" alt="Libro Litúrgico">
         
         <div class="card" style="background: #fffdf5; border-color: var(--vatican-gold);">
             <span class="tag" style="color: var(--purple-church)">Material Gratuito Descargable</span>
             <h4 style="font-size: 1.15rem; font-style: italic; margin-bottom: 6px;">«Discípulos Misioneros en la Realidad de México»</h4>
             <p style="font-size: 0.88rem; color:#4a4a4a; line-height: 1.45;">Pautas exegéticas y subsidios teológico-pastorales listos para enriquecer tu homilía del próximo domingo. Pensado para iluminar las problemáticas actuales de nuestras comunidades mexicanas.</p>
-            <button class="btn btn-gold" style="margin-top:12px;">Descargar Material de Apoyo Homilético</button>
+            <button class="btn btn-gold" style="margin-top:12px;"><i class="bi bi-cloud-arrow-down-fill"></i> Descargar Material de Apoyo Homilético</button>
         </div>
 
-        <h4 style="margin: 20px 0 12px 0; font-size: 1.1rem; color: var(--purple-church);">✨ Subsidios para Redes (Frases Compartibles)</h4>
+        <h4 style="margin: 20px 0 12px 0; font-size: 1.1rem; color: var(--purple-church);"><i class="bi bi-stars"></i> Subsidios para Redes (Frases Compartibles)</h4>
         
         <div class="quote-grid">
             <div class="quote-thumb-card" onclick="openQuoteModal('https://images.unsplash.com/photo-1507692049790-de58290a4334?q=80&w=500&auto=format&fit=crop', '«La oración es la mejor arma que tenemos; es una llave que abre el corazón de Dios»', 'San Pío de Pietrelcina')">
                 <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?q=80&w=500&auto=format&fit=crop" alt="Frase 1">
                 <div class="quote-thumb-body">
                     <p>San Pío de Pietrelcina</p>
-                    <span style="font-size:0.7rem; color:var(--vatican-dark); font-weight:700;">👁️ Ver y Compartir</span>
+                    <span style="font-size:0.7rem; color:var(--vatican-dark); font-weight:700;"><i class="bi bi-eye"></i> Ver y Compartir</span>
                 </div>
             </div>
             <div class="quote-thumb-card" onclick="openQuoteModal('https://images.unsplash.com/photo-1438211394456-73aae3e2632b?q=80&w=500&auto=format&fit=crop', '«La teología se hace de rodillas, porque el estudio debe alimentar la caridad pastoral»', 'Reflexión Teológica')">
                 <img src="https://images.unsplash.com/photo-1438211394456-73aae3e2632b?q=80&w=500&auto=format&fit=crop" alt="Frase 2">
                 <div class="quote-thumb-body">
                     <p>Reflexión Teológica</p>
-                    <span style="font-size:0.7rem; color:var(--vatican-dark); font-weight:700;">👁️ Ver y Compartir</span>
+                    <span style="font-size:0.7rem; color:var(--vatican-dark); font-weight:700;"><i class="bi bi-eye"></i> Ver y Compartir</span>
                 </div>
             </div>
         </div>
@@ -507,12 +513,12 @@
             <span class="tag">Biblioteca de Consulta</span>
             <h4>Catálogo Teológico Digital</h4>
             <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.45;">Documentos vigentes del Magisterio de la Iglesia, encíclicas y las líneas pastorales de la Conferencia del Episcopado Mexicano (CEM).</p>
-            <a href="https://www.vatican.va/content/vatican/es.html" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; text-decoration: none;">Abrir Repositorio de Documentos</a>
+            <a href="https://www.vatican.va/content/vatican/es.html" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; text-decoration: none;"><i class="bi bi-folder2-open"></i> Abrir Repositorio de Documentos</a>
         </div>
     </section>
 
     <section id="view-formacion" class="app-view">
-        <h3 class="section-title">🌱 Actualización Presbiteral</h3>
+        <h3 class="section-title"><i class="bi bi-tree"></i> Actualización Presbiteral</h3>
         <img class="section-img" src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?q=80&w=800&auto=format&fit=crop" alt="Aula de Altos Estudios">
         
         <div class="card" style="border-top: 4px solid var(--purple-church);">
@@ -536,32 +542,32 @@
                 <div class="quiz-option" onclick="answerQuiz(this, false)">C) Pastores Dabo Vobis</div>
             </div>
             <div id="quiz-feedback" style="display:none; margin-top: 12px; padding: 10px; background: #e8f4fd; border-radius: 6px; font-size:0.85rem;">
-                <strong>¡Es correcto!</strong> Mantenerse actualizado teológicamente vigoriza el ministerio diario. Un posgrado te otorga herramientas científicas para afrontar la realidad pastoral con seguridad.
+                <strong>¡Es correcto!</strong> Mantenerse actualizado teológicamente vigoriza el ministerio diario. Un posgrado te otorga herramientas científicas para afrontar la reality pastoral con seguridad.
             </div>
         </div>
     </section>
 
     <section id="view-universidad" class="app-view">
-        <h3 class="section-title">🎓 Oferta Académica Superior</h3>
+        <h3 class="section-title"><i class="bi bi-mortarboard"></i> Oferta Académica Superior</h3>
         <img class="section-img" src="https://images.unsplash.com/photo-1590073844006-33379778ae09?q=80&w=800&auto=format&fit=crop" alt="Edificio Universitario">
         
         <div class="card program-card">
             <span style="font-size: 0.7rem; color: var(--purple-church); font-weight: bold; text-transform: uppercase;">Grado Canónico y Civil</span>
             <h4 style="margin: 2px 0 6px 0; font-size: 1.1rem;">Licenciatura Pontificia en Teología Dogmática</h4>
             <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.45;">Modalidad semipresencial / intensiva. Estructurada específicamente para balancear el estudio de alto nivel con las necesidades de la cura de almas parroquial.</p>
-            <button class="btn btn-outline" style="padding: 10px; font-size:0.8rem; margin-top: 10px;">Ver Plan de Estudios</button>
+            <button class="btn btn-outline" style="padding: 10px; font-size:0.8rem; margin-top: 10px;"><i class="bi bi-eye"></i> Ver Plan de Estudios</button>
         </div>
 
         <div class="card program-card">
             <span style="font-size: 0.7rem; color: var(--purple-church); font-weight: bold; text-transform: uppercase;">Especialización</span>
             <h4 style="margin: 2px 0 6px 0; font-size: 1.1rem;">Diplomado de Actualización en Teología Pastoral</h4>
             <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.45;">Herramientas para la dirección espiritual contemporánea, discernimiento comunitario y desafíos de las nuevas tecnologías en la parroquia.</p>
-            <button class="btn btn-outline" style="padding: 10px; font-size:0.8rem; margin-top: 10px;">Ver Plan de Estudios</button>
+            <button class="btn btn-outline" style="padding: 10px; font-size:0.8rem; margin-top: 10px;"><i class="bi bi-eye"></i> Ver Plan de Estudios</button>
         </div>
     </section>
 
     <section id="view-perfil" class="app-view">
-        <h3 class="section-title">⛪ Admisiones e Incorporaciones</h3>
+        <h3 class="section-title"><i class="bi bi-church"></i> Admisiones e Incorporaciones</h3>
         <img class="section-img" src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=800&auto=format&fit=crop" alt="Secretaría Universidad">
         
         <div class="card lead-form" style="border: 2px solid var(--purple-church);">
@@ -576,7 +582,7 @@
                     <option>Diplomado de Actualización en Teología Pastoral</option>
                 </select>
                 <input type="text" id="referral-field" placeholder="¿Código promocional / Frase compartida?" style="background: #f1f5f9; border-inline-start: 3px solid var(--vatican-gold);">
-                <button class="btn" type="submit">Solicitar Cuadernillo de Información</button>
+                <button class="btn" type="submit"><i class="bi bi-envelope-paper"></i> Solicitar Cuadernillo de Información</button>
             </form>
         </div>
 
@@ -593,7 +599,7 @@
         </div>
 
         <div class="card">
-            <h4 style="font-size: 1rem; color: var(--purple-church); margin-bottom: 4px;">📸 Comunidad Universitaria</h4>
+            <h4 style="font-size: 1rem; color: var(--purple-church); margin-bottom: 4px;"><i class="bi bi-camera"></i> Comunidad Universitaria</h4>
             <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Sigue el día a día de nuestro campus en Instagram:</p>
             
             <div class="instagram-preview">
@@ -603,10 +609,10 @@
             </div>
 
             <div class="social-row">
-                <a href="#" class="social-icon">🌐 Web</a>
-                <a href="#" class="social-icon">🔵 Facebook</a>
-                <a href="#" class="social-icon">📸 Instagram</a>
-                <a href="#" class="social-icon">📺 YouTube</a>
+                <a href="#" class="social-icon"><i class="bi bi-globe" style="color: #0d6efd;"></i> Web</a>
+                <a href="#" class="social-icon"><i class="bi bi-facebook" style="color: #1877f2;"></i> Facebook</a>
+                <a href="#" class="social-icon"><i class="bi bi-instagram" style="color: #e1306c;"></i> Instagram</a>
+                <a href="#" class="social-icon"><i class="bi bi-youtube" style="color: #ff0000;"></i> YouTube</a>
             </div>
         </div>
     </section>
@@ -626,11 +632,11 @@
         </div>
         
         <div class="modal-actions">
-            <button class="btn-modal-dl" onclick="simulateDownload()">
-                📥 Descargar
+            <button class="btn-modal-dl" onclick="realDownload()">
+                <i class="bi bi-download"></i> Descargar
             </button>
             <button class="btn-modal-wa" id="modalWhatsAppBtn" onclick="">
-                🟢 WhatsApp
+                <i class="bi bi-whatsapp"></i> WhatsApp
             </button>
         </div>
     </div>
@@ -638,19 +644,19 @@
 
 <nav class="bottom-nav">
     <button class="nav-item active" id="nav-recursos" onclick="switchView('recursos')">
-        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <i class="bi bi-journal-text"></i>
         Homilías
     </button>
     <button class="nav-item" id="nav-formacion" onclick="switchView('formacion')">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        <i class="bi bi-arrow-repeat"></i>
         Actualización
     </button>
     <button class="nav-item" id="nav-universidad" onclick="switchView('universidad')">
-        <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.47 12.5L12 16l6.53-3.5L12 9l-6.53 3.5z"/></svg>
+        <i class="bi bi-mortarboard"></i>
         Estudios
     </button>
     <button class="nav-item" id="nav-perfil" onclick="switchView('perfil')">
-        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <i class="bi bi-person-badge"></i>
         Admisión
     </button>
 </nav>
@@ -692,8 +698,8 @@
         document.getElementById('modalQuoteText').innerText = text;
         document.getElementById('modalQuoteAuthor').innerText = "— " + author;
         
-        // Configurar acción de compartir en WhatsApp pasando el texto
-        const fullMessage = encodeURIComponent(`✨ *Subsidio Pastoral* ✨\n\n${text}\n— *${author}*\n\n🖼️ Imagen con diseño institucional adjunta.\n\n🏛️ *Inscríbete a la Universidad Pontificia.*`);
+        // WhatsApp link compartiendo el texto estructurado
+        const fullMessage = encodeURIComponent(`✨ *Subsidio Pastoral* ✨\n\n${text}\n— *${author}*\n\n🏛️ *Inscríbete a la Universidad Pontificia.*`);
         document.getElementById('modalWhatsAppBtn').setAttribute('onclick', `window.open('https://api.whatsapp.com/send?text=${fullMessage}', '_blank')`);
         
         document.getElementById('quoteModal').classList.add('active');
@@ -703,8 +709,14 @@
         document.getElementById('quoteModal').classList.remove('active');
     }
 
-    function simulateDownload() {
-        alert("📥 Simulación de descarga en Frontend:\nLa imagen con diseño de alta resolución y la marca de agua de la Universidad se ha guardado en tu carpeta de descargas.");
+    /* FUNCIÓN PARA DESCARGA REAL DESDE LA RAÍZ DE GITHUB PAGES */
+    function realDownload() {
+        const link = document.createElement('a');
+        link.href = 'image1.png'; // Ruta relativa directa a tu archivo en la raíz
+        link.download = 'subsidio-pastoral.png'; // Nombre con el que se guardará el archivo
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 </script>
 </body>
