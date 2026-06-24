@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Veritas Sacerdotalis | Formación Sacerdotal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --primary:#9a2643;
+  --primary-dark:#731c32;
+  --bg:#f6f5f7;
+  --card:#ffffff;
+  --text:#1f1f1f;
+  --muted:#707070;
+  --border:#e7e7e7;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  background:white;
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+}
+
+.brand{
+  color:var(--primary);
+  font-weight:800;
+  font-size:1rem;
+}
+
+.menu-btn{
+  border:none;
+  background:none;
+  font-size:1.6rem;
+  cursor:pointer;
+  color:var(--primary);
+}
+
+.menu{
+  display:none;
+  flex-direction:column;
+  border-top:1px solid var(--border);
+}
+
+.menu a{
+  padding:14px 18px;
+  text-decoration:none;
+  color:var(--text);
+  border-bottom:1px solid var(--border);
+}
+
+.menu.show{
+  display:flex;
+}
+
+/* HERO */
+
+.hero{
+  background:
+  linear-gradient(
+    rgba(154,38,67,.90),
+    rgba(115,28,50,.90)
+  );
+  color:white;
+  padding:40px 20px;
+}
+
+.hero-content{
+  max-width:900px;
+  margin:auto;
+}
+
+.hero-badge{
+  display:inline-block;
+  background:rgba(255,255,255,.15);
+  padding:6px 12px;
+  border-radius:30px;
+  font-size:.75rem;
+  margin-bottom:15px;
+}
+
+.hero h1{
+  font-size:2rem;
+  line-height:1.1;
+  margin-bottom:14px;
+}
+
+.hero p{
+  color:white;
+  opacity:.95;
+  max-width:700px;
+  margin-bottom:18px;
+}
+
+.hero-btn{
+  display:inline-block;
+  background:white;
+  color:var(--primary);
+  text-decoration:none;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:600;
+}
+
+/* LAYOUT */
+
+.wrapper{
+  display:flex;
+  max-width:1200px;
+  margin:auto;
+}
+
+.main{
+  flex:2;
+  padding:16px;
+}
+
+.sidebar{
+  flex:1;
+  padding:16px;
+}
+
+/* CARDS */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  margin-bottom:16px;
+  overflow:hidden;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.inner{
+  padding:16px;
+}
+
+.tag{
+  display:inline-block;
+  background:#f7e8ed;
+  color:var(--primary);
+  font-size:.72rem;
+  padding:4px 10px;
+  border-radius:8px;
+  margin-bottom:8px;
+}
+
+h2{
+  font-size:1.05rem;
+  margin-bottom:6px;
+}
+
+p{
+  font-size:.9rem;
+  color:var(--muted);
+}
+
+.btn{
+  display:block;
+  margin-top:12px;
+  padding:11px;
+  background:var(--primary);
+  color:white;
+  text-align:center;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:.85rem;
+  font-weight:600;
+}
+
+/* FOCO */
+
+.focus{
+  background:
+  linear-gradient(
+    135deg,
+    #9a2643,
+    #63182b
+  );
+  color:white;
+}
+
+.focus p{
+  color:white;
+  opacity:.9;
+}
+
+.focus .tag{
+  background:rgba(255,255,255,.15);
+  color:white;
+}
+
+/* SIDEBAR */
+
+.sidebar h3{
+  margin-bottom:10px;
+}
+
+.progress{
+  height:10px;
+  background:#ececec;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.progress span{
+  display:block;
+  width:42%;
+  height:100%;
+  background:var(--primary);
+}
+
+/* FOOTER */
+
+footer{
+  background:#111;
+  color:#bbb;
+  text-align:center;
+  padding:30px 20px 90px;
+}
+
+footer h3{
+  color:white;
+  margin-bottom:10px;
+}
+
+/* MOBILE NAV */
+
+.nav{
+  display:none;
+}
+
+/* DESKTOP MENU */
+
+@media(min-width:901px){
+
+  .menu-btn{
+    display:none;
+  }
+
+  .menu{
+    display:flex !important;
+    flex-direction:row;
+    justify-content:center;
+    gap:30px;
+    border-top:none;
+    padding-bottom:12px;
+  }
+
+  .menu a{
+    border:none;
+    padding:0;
+  }
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .wrapper{
+    display:block;
+  }
+
+  .sidebar{
+    display:none;
+  }
+
+  body{
+    padding-bottom:80px;
+  }
+
+  .nav{
+    display:flex;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:white;
+    border-top:1px solid var(--border);
+    justify-content:space-around;
+    padding:10px 0;
+    z-index:1000;
+  }
+
+  .nav div{
+    font-size:.72rem;
+    color:var(--muted);
+    text-align:center;
+  }
+
+  .nav .active{
+    color:var(--primary);
+    font-weight:700;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-top">
+
+```
+<div class="brand">
+  ✝ Veritas Sacerdotalis
+</div>
+
+<button class="menu-btn" id="menuBtn">
+  ☰
+</button>
+```
+
+  </div>
+
+  <nav class="menu" id="menu">
+
+```
+<a href="#">Inicio</a>
+<a href="#">Recursos</a>
+<a href="#">Biblioteca</a>
+<a href="#">Diplomados</a>
+<a href="#">Universidad</a>
+```
+
+  </nav>
+
+</header>
+
+<section class="hero">
+
+  <div class="hero-content">
+
+```
+<div class="hero-badge">
+  Formación Permanente del Clero
+</div>
+
+<h1>
+  Formación sacerdotal al servicio de la Verdad
+</h1>
+
+<p>
+  Una plataforma dedicada a sacerdotes y seminaristas
+  que buscan profundizar en la teología, la espiritualidad
+  y el servicio pastoral en fidelidad a la Iglesia.
+</p>
+
+<a href="#" class="hero-btn">
+  Acceder a recursos
+</a>
+```
+
+  </div>
+
+</section>
+
+<div class="wrapper">
+
+<div class="main">
+
+<div class="card focus">
+<div class="inner">
+
+<div class="tag">
+Foco del día
+</div>
+
+<h2>
+Confianza en la Providencia
+</h2>
+
+<p>
+Mt 6, 24-34 — El sacerdote como testigo de la libertad interior en Dios.
+</p>
+
+<a class="btn" href="#">
+Entrar al día
+</a>
+
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+
+<div class="tag">
+Evangelio
+</div>
+
+<h2>
+Lectura del día
+</h2>
+
+<p>
+Comentario bíblico y teológico del Evangelio diario.
+</p>
+
+<a class="btn" href="#">
+Leer
+</a>
+
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520637836862-4d197d17c76a?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+
+<div class="tag">
+Homilía
+</div>
+
+<h2>
+Preparación pastoral
+</h2>
+
+<p>
+Esquema estructurado para predicación dominical.
+</p>
+
+<a class="btn" href="#">
+Preparar
+</a>
+
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+
+<div class="tag">
+Parroquia
+</div>
+
+<h2>
+Kit pastoral semanal
+</h2>
+
+<p>
+Homilía + catequesis + grupos parroquiales.
+</p>
+
+<a class="btn" href="#">
+Acceder
+</a>
+
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+
+<div class="tag">
+Biblioteca
+</div>
+
+<h2>
+Centro de recursos
+</h2>
+
+<p>
+Biblia, Catecismo, Magisterio y Padres de la Iglesia.
+</p>
+
+<a class="btn" href="#">
+Explorar
+</a>
+
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80">
+
+<div class="inner">
+
+<div class="tag">
+Diplomados
+</div>
+
+<h2>
+Formación académica
+</h2>
+
+<p>
+Cristología, Moral, Liturgia y Eclesiología.
+</p>
+
+<a class="btn" href="#">
+Ver programas
+</a>
+
+</div>
+</div>
+
+<div class="card">
+<div class="inner">
+
+<div class="tag">
+Universidad
+</div>
+
+<h2>
+¿Por qué seguir formándose?
+</h2>
+
+<p>
+La actualización permanente fortalece la predicación,
+la dirección espiritual y la misión evangelizadora.
+</p>
+
+<a class="btn" href="#">
+Conocer programas
+</a>
+
+</div>
+</div>
+
+</div>
+
+<div class="sidebar">
+
+<div class="card">
+<div class="inner">
+
+<h2>
+📚 Biblioteca rápida
+</h2>
+
+<p>• Catecismo</p>
+<p>• Vaticano II</p>
+<p>• Encíclicas</p>
+
+</div>
+</div>
+
+<div class="card">
+<div class="inner">
+
+<h2>
+🎓 Próximo Diplomado
+</h2>
+
+<p>
+Teología Moral<br>
+Inicio: Agosto 2026
+</p>
+
+<a class="btn" href="#">
+Más información
+</a>
+
+</div>
+</div>
+
+<div class="card">
+<div class="inner">
+
+<h2>
+📈 Formación diaria
+</h2>
+
+<p>
+Progreso estimado: 42%
+</p>
+
+<div class="progress">
+<span></span>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<div class="inner">
+
+<h2>
+⛪ Vida espiritual
+</h2>
+
+<p>
+Lectio Divina, Liturgia de las Horas y oración diaria.
+</p>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h3>
+Veritas Sacerdotalis
+</h3>
+
+<p>
+Plataforma de formación sacerdotal impulsada por la universidad.
+</p>
+
+</footer>
+
+<div class="nav">
+
+<div class="active">
+🏠<br>Hoy
+</div>
+
+<div>
+📖<br>Evangelio
+</div>
+
+<div>
+✝️<br>Homilía
+</div>
+
+<div>
+🎓<br>Cursos
+</div>
+
+<div>
+👤<br>Perfil
+</div>
+
+</div>
+
+<script>
+
+const menuBtn=document.getElementById("menuBtn");
+const menu=document.getElementById("menu");
+
+menuBtn.addEventListener("click",()=>{
+  menu.classList.toggle("show");
+});
+
+</script>
+
+</body>
+</html>
