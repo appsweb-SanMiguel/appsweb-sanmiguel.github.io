@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pontificia Universitas | Veritas Sacerdotalis</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Colores Oficiales de Universidad Pontificia (Vaticano & Academic) */
+            --vatican-gold: #D4AF37;   /* Oro Nobiliario / Pontificio */
+            --vatican-dark: #A3801C;
+            --purple-church: #721c24;  /* Rojo Carmesí Académico / Institucional */
+            --bg-app: #f4f5f7;
+            --surface: #ffffff;
+            --text-dark: #1e2229;
+            --text-muted: #656e7b;
+            --border: #e2e8f0;
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-app);
+            color: var(--text-dark);
+            padding-bottom: 75px; /* Espacio para la botonera app inferior */
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* HEADER INSTITUCIONAL */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-wrap {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--purple-church);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .badge-univ {
+            background: var(--vatican-gold);
+            color: white;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* CONTENEDOR DE VISTAS (PWA Style) */
+        .app-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .app-view {
+            display: none; /* Controlado por JS */
+        }
+        .app-view.active-view {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* COMPONENTE: TARJETAS (CARDS) */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+        .card-hero {
+            background: linear-gradient(135deg, var(--purple-church), #4a1016);
+            color: white;
+            border: none;
+        }
+        .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--vatican-gold);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        /* BOTONES */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            background: var(--purple-church);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #56141a; }
+        .btn-gold {
+            background: var(--vatican-gold);
+            color: var(--text-dark);
+        }
+        .btn-gold:hover { background: var(--vatican-dark); color: white; }
+
+        /* VISTA: TEST INTERACTIVO */
+        .quiz-option {
+            display: block;
+            background: var(--bg-app);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .quiz-option:hover {
+            border-color: var(--vatican-gold);
+        }
+        .quiz-option.correct {
+            background: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        /* COMPONENTE: PROGRESO */
+        .progress-container {
+            margin-top: 15px;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--vatican-gold), var(--purple-church));
+            transition: width 0.5s ease;
+        }
+
+        /* BARRA NAVEGACIÓN INFERIOR (APP BOTTOM NAV) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 cubic-bezier(0.1, 0.7, 0.1, 1);
+            z-index: 1000;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
+        }
+        .nav-item {
+            background: none;
+            border: none;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 500;
+            gap: 4px;
+        }
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+        .nav-item.active {
+            color: var(--purple-church);
+            font-weight: 700;
+        }
+        .nav-item.active svg {
+            color: var(--vatican-gold);
+        }
+
+        /* SECCIÓN UNIVERSIDAD LISTADO */
+        .program-card {
+            border-left: 4px solid var(--vatican-gold);
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-wrap">
+        <div class="brand">
+            🏛️ Veritas <span style="font-family: 'Inter'; font-weight:300; color: var(--text-dark);">Pontificia</span>
+        </div>
+        <div class="badge-univ">Facultad de Teología</div>
+    </div>
+</header>
+
+<div class="app-container">
+
+    <!-- ================= VISTA 1: UNIVERSIDAD PONTIFICIA ================= -->
+    <section id="view-universidad" class="app-view active-view">
+        <div class="card card-hero">
+            <span class="tag" style="color: var(--vatican-gold);">Sapientia Christiana</span>
+            <h1 style="font-size: 1.8rem; margin-bottom: 10px;">Formación Teológica de Excelencia Ecclesial</h1>
+            <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 15px;">Lleva tu ministerio pastoral al siguiente nivel intelectual con títulos pontificios reconocidos canónica e internacionalmente.</p>
+            <button class="btn btn-gold" onclick="switchView('perfil')">Solicitar Información de Admisión</button>
+        </div>
+
+        <h3 style="margin-bottom: 12px;">Oferta Académica de Altos Estudios</h3>
+        
+        <div class="card program-card">
+            <h3>Licenciatura en Teología Dogmática</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin: 6px 0 12px;">Modalidad semipresencial diseñada especialmente para párrocos en activo.</p>
+            <button class="btn" style="padding: 6px 12px; font-size:0.8rem; width: auto;">Ver Plan de Estudios</button>
+        </div>
+
+        <div class="card program-card">
+            <h3>Diplomado en Actualización Teológico-Pastoral</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin: 6px 0 12px;">Plan de formación permanente exigido por la Ratio Fundamentalis.</p>
+            <button class="btn" style="padding: 6px 12px; font-size:0.8rem; width: auto;">Ver Plan de Estudios</button>
+        </div>
+    </section>
+
+    <!-- ================= VISTA 2: HERRAMIENTAS SACERDOTALES (DIARIO) ================= -->
+    <section id="view-herramientas" class="app-view">
+        <div class="card" style="background: #fffdf5; border-color: var(--vatican-gold);">
+            <span class="tag">Foco de Hoy</span>
+            <h2 style="font-size: 1.3rem; font-style: italic;">«Testigos de la Verdad en la Esfera Pública»</h2>
+            <p style="font-size: 0.9rem; margin-top: 6px; color:#4a4a4a;"><strong>Subsido Homilético:</strong> Sugerencia de exégesis para el Domingo. Enfoque dogmático para combatir el secularismo.</p>
+            <button class="btn btn-gold" style="margin-top:12px;">Descargar Esquema de Homilía</button>
+        </div>
+
+        <div class="card">
+            <span class="tag">Lectio Divina</span>
+            <h3>Evangelio y Comentario Patrístico</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top:4px;">Acceso al texto original grecolatino con notas de San Agustín y Santo Tomás.</p>
+            <button class="btn" style="margin-top:10px; background: transparent; color: var(--purple-church); border: 1px solid var(--purple-church);">Abrir Recursos</button>
+        </div>
+    </section>
+
+    <!-- ================= VISTA 3: TEST INTERACTIVO ================= -->
+    <section id="view-test" class="app-view">
+        <div class="card">
+            <span class="tag">Universitas Quaestio</span>
+            <h2>Test de Actualización Teológica</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Mide tu nivel en los últimos desarrollos doctrinales y del Magisterio de la Iglesia.</p>
+            
+            <div id="quiz-box">
+                <p style="font-weight: 600; font-size: 0.95rem;">¿Cuál de los siguientes documentos reformó la formación en los seminarios y la actualización del clero?</p>
+                <div class="quiz-option" onclick="answerQuiz(this, false)">A) Lumen Gentium</div>
+                <div class="quiz-option" onclick="answerQuiz(this, true)">B) Ratio Fundamentalis Institutionis Sacerdotalis</div>
+                <div class="quiz-option" onclick="answerQuiz(this, false)">C) Ad Gentes</div>
+            </div>
+
+            <div id="quiz-feedback" style="display:none; margin-top: 15px; padding: 12px; background: #e8f4fd; border-radius: 8px; font-size:0.85rem;">
+                <strong>¡Excelente análisis!</strong> Como ves, la formación requiere actualización continua. La Universidad Pontificia ofrece planes específicos basados en este documento.
+                <button class="btn btn-gold" style="margin-top: 10px;" onclick="switchView('universidad')">Ver Diplomados Relacionados</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VISTA 4: PERFIL Y PROGRESO ================= -->
+    <section id="view-perfil" class="app-view">
+        <div class="card">
+            <h3>Pbro. Buscador de la Verdad</h3>
+            <p style="font-size:0.8rem; color: var(--text-muted);">Diócesis Primada / Formación Permanente</p>
+            
+            <div class="progress-container">
+                <div style="display:flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600;">
+                    <span>Progreso de Estudio Mensual</span>
+                    <span>42%</span>
+                </div>
+                <div class="progress-bar">
+                    <span style="width: 42%;"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border: 2px dashed var(--vatican-gold); text-align: center;">
+            <h3>¿Listo para la Admisión Oficial?</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 8px 0 15px;">Completa tu expediente digital para matricularte en el próximo periodo académico pontificio.</p>
+            <button class="btn">Iniciar Solicitud de Inscripción</button>
+        </div>
+    </section>
+
+</div>
+
+<!-- APP NAVIGATION INFERIOR -->
+<nav class="bottom-nav">
+    <button class="nav-item active" onclick="switchView('universidad', this)">
+        <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.47 12.5L12 16l6.53-3.5L12 9l-6.53 3.5z"/></svg>
+        Universidad
+    </button>
+    <button class="nav-item" onclick="switchView('herramientas', this)">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        Herramientas
+    </button>
+    <button class="nav-item" onclick="switchView('test', this)">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        Test
+    </button>
+    <button class="nav-item" onclick="switchView('perfil', this)">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        Mi Progreso
+    </button>
+</nav>
+
+<script>
+    function switchView(viewId, buttonElement) {
+        // Ocultar todas las vistas
+        const views = document.querySelectorAll('.app-view');
+        views.forEach(view => view.classList.remove('active-view'));
+        
+        // Mostrar vista seleccionada
+        document.getElementById('view-' + viewId).classList.add('active-view');
+        
+        // Manejar estado activo en la botonera inferior
+        if(buttonElement) {
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(item => item.classList.remove('active'));
+            buttonElement.classList.add('active');
+        } else {
+            // Si el cambio viene de un botón interno, buscar y activar el botón de la barra inferior correspondente
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(item => {
+                if(item.textContent.toLowerCase().includes(viewId === 'universidad' ? 'universidad' : viewId)) {
+                    items.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                }
+            });
+        }
+        window.scrollTo(0,0);
+    }
+
+    function answerQuiz(option, isCorrect) {
+        if(isCorrect) {
+            option.classList.add('correct');
+            document.getElementById('quiz-feedback').style.display = 'block';
+        } else {
+            option.style.background = '#f8d7da';
+            option.style.color = '#721c24';
+            alert('Respuesta incorrecta. Recuerda la importancia de la actualización constante.');
+        }
+    }
+</script>
+</body>
+</html>
