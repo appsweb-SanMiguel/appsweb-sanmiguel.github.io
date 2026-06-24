@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidad Pastoral - Espacio para el Clero y las Vocaciones</title>
+    <style>
+        /* --- VARIABLES DE COLOR (Paleta Eclesial Elegante) --- */
+        :root {
+            --primary-color: #1a365d;    /* Azul Vaticano / Institucional */
+            --secondary-color: #d69e2e;  /* Dorado Litúrgico Accent */
+            --text-dark: #2d3748;        /* Gris Oscuro para lectura */
+            --bg-light: #f7f9fa;         /* Fondo suave */
+            --white: #ffffff;
+            --success-color: #25d366;    /* Verde WhatsApp */
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 5px solid var(--secondary-color);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- ARQUITECTURA DE LA WEB (Grid Adaptable) --- */
+        .main-layout {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .column-main {
+            flex: 3;
+        }
+        .column-sidebar {
+            flex: 2;
+        }
+
+        @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+            }
+        }
+
+        /* --- SECCIÓN DE VALOR / TESTIMONIOS --- */
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 12px;
+        }
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        .testimonial-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border-top: 3px solid var(--primary-color);
+        }
+        .testimonial-quote {
+            font-style: italic;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        /* --- FORMULARIO DE CAPTACIÓN REFINADO --- */
+        .form-container {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+        .form-container h2 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #102a43;
+        }
+
+        /* --- SECCIÓN INSTAGRAM WIDGET --- */
+        .instagram-section {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        /* --- BOTÓN FLOTANTE WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--success-color);
+            color: var(--white);
+            padding: 14px 22px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>Apoyo Pastoral y Fraternidad Sacerdotal</h1>
+        <p>Un espacio dedicado al fortalecimiento de los pastores de la Iglesia y al acompañamiento de nuevas vocaciones.</p>
+    </header>
+
+    <main class="container">
+        <div class="main-layout">
+            
+            <div class="column-main">
+                <h2 class="section-title">Nuestra Misión con el Clero</h2>
+                <p class="intro-text">
+                    Entendemos las exigencias y la belleza del ministerio presbiteral. Ofrecemos herramientas teológicas, subsidios litúrgicos y un espacio seguro de encuentro fraterno para sacerdotes, párrocos y seminaristas en formación.
+                </p>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Encontrar herramientas pensadas exactamente para los desafíos de nuestras parroquias ha sido una bendición para mi ministerio."</p>
+                    <p class="testimonial-author">— Pbro. Manuel Torres, Párroco</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Un espacio ideal para mantenernos conectados como hermanos en el ministerio y compartir recursos que edifican la comunidad."</p>
+                    <p class="testimonial-author">— Pbro. Carlos Delgado, Vicario</p>
+                </div>
+            </div>
+
+            <div class="column-sidebar">
+                <div class="form-container">
+                    <h2>Acceso a Recursos Especializados</h2>
+                    <form action="#" method="POST">
+                        
+                        <div class="form-group">
+                            <label for="tratamiento">Condición / Ministerio</label>
+                            <select id="tratamiento" name="tratamiento" class="form-control" required>
+                                <option value="">Seleccione su opción...</option>
+                                <option value="sacerdote">Sacerdote / Presbítero</option>
+                                <option value="parroco">Párroco</option>
+                                <option value="seminarista">Seminarista</option>
+                                <option value="religioso">Vida Consagrada / Religioso</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ej: Padre Juan Gómez" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico Diocesano o Personal</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="ejemplo@diocesis.org" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="diocesis">Diócesis o Comunidad</label>
+                            <input type="text" id="diocesis" name="diocesis" class="form-control" placeholder="Ej: Archidiócesis de México" required>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Descargar Materiales Litúrgicos</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="instagram-section">
+            <h2 class="section-title" style="border-left: none; padding-left: 0;">Nuestra Vida Comunitaria en Instagram</h2>
+            <p style="margin-bottom: 20px; color: #718096;">Sigue de cerca las actividades, retiros y novedades diarias.</p>
+            
+            <div style="width:100%; overflow:hidden; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <iframe src="https://lightwidget.com/widgets/75b6e2617f6b5b5ba92f6a73c09b83b8.html" 
+                        scrolling="no" 
+                        allowtransparency="true" 
+                        class="lightwidget-widget" 
+                        style="width: 100%; border: 0; overflow: hidden; height: 450px;">
+                </iframe>
+            </div>
+        </section>
+    </main>
+
+    <a href="https://wa.me/34600000000?text=Estimado%20equipo,%20soy%20el%20Padre%20[Nombre]%20y%20me%20gustaría%20conversar%20sobre%20el%20proyecto." 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer">
+       💬 Contacto Fraterno (Clero)
+    </a>
+
+</body>
+</html>
