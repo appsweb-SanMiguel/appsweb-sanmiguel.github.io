@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Universidad Pontificia | Herramientas Pastorales</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght=0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --vatican-gold: #D4AF37;   
+            --vatican-dark: #A3801C;
+            --purple-church: #5C1D24;  
+            --bg-app: #f8f9fa;
+            --surface: #ffffff;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --border: #dee2e6;
+            --radius: 12px;
+            --whatsapp-green: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-app);
+            color: var(--text-dark);
+            padding-bottom: 80px; /* Espacio para la barra móvil */
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* HEADER INSTITUCIONAL */
+        header {
+            background: var(--surface);
+            border-bottom: 3px solid var(--vatican-gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .header-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--purple-church);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand i {
+            font-size: 1.4rem;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .badge-univ {
+            background: var(--purple-church);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--vatican-gold);
+        }
+
+        /* BOTÓN HAMBURGUESA - Visible en todas las pantallas */
+        .menu-hamburger {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--purple-church);
+            cursor: pointer;
+            display: block;
+        }
+
+        /* MENÚ LATERAL (SIDERBAR) */
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: var(--surface);
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            z-index: 2001;
+            transition: left 0.3s ease;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .sidebar-menu.active {
+            left: 0;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--purple-church);
+        }
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .sidebar-item {
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s;
+        }
+        .sidebar-item:hover, .sidebar-item.active {
+            background: rgba(92, 29, 36, 0.08);
+            color: var(--purple-church);
+        }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 2000;
+            display: none;
+        }
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* MENÚ DE PESTAÑAS PARA ESCRITORIO */
+        .desktop-tabs {
+            display: none;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            position: sticky;
+            top: 68px;
+            z-index: 99;
+        }
+        .tabs-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 18px 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { color: var(--purple-church); }
+        .tab-btn.active { color: var(--purple-church); border-bottom-color: var(--purple-church); }
+
+        /* HERO MAIN */
+        .desktop-hero {
+            display: none;
+            background: linear-gradient(rgba(92, 29, 36, 0.93), rgba(60, 18, 22, 0.96)), url('https://images.unsplash.com/photo-1548625361-155de0cbb558?q=80&w=1200&auto=format&fit=crop') center/cover;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-bottom: 4px solid var(--vatican-gold);
+        }
+        .desktop-hero h2 { font-size: 2.4rem; margin-bottom: 12px; font-weight: 700; }
+        .desktop-hero p { font-size: 1.15rem; max-width: 800px; margin: 0 auto 15px; opacity: 0.95; font-style: italic; }
+
+        /* IMÁGENES DE SECCIÓN */
+        .section-img {
+            display: none;
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+
+        /* CONTENEDOR DE VISTAS */
+        .app-container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .app-view {
+            display: none;
+        }
+        .app-view.active-view {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* COMPONENTE: TARJETAS (CARDS) */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+        }
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--vatican-dark);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        /* CARDS RE DISEÑADAS PARA MOSTRAR IMAGEN PRE-DISEÑADA */
+        .quote-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .quote-thumb-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+        .quote-thumb-card:hover {
+            transform: translateY(-2px);
+        }
+        .quote-thumb-card img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            display: block;
+        }
+        .quote-thumb-body {
+            padding: 10px;
+            text-align: center;
+        }
+        .quote-thumb-body p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* DISEÑO DE PANTALLA EMERGENTE (MODAL PREVIEW) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(33, 37, 41, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.2s ease-out;
+        }
+        .modal-content {
+            background: var(--surface);
+            border-radius: 16px;
+            max-width: 380px;
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            text-align: center;
+        }
+        .close-modal {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: #e2e8f0;
+            border: none; width: 28px; height: 28px;
+            border-radius: 50%; font-weight: bold;
+            cursor: pointer; color: var(--text-dark);
+        }
+        .modal-image-container {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        .modal-image-container img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .modal-watermark-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(92, 29, 36, 0.95));
+            color: white;
+            padding: 15px 10px 10px 10px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-quote-overlay {
+            position: absolute;
+            top: 40%; left: 5%; right: 5%;
+            transform: translateY(-50%);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.4;
+        }
+        .modal-author-overlay {
+            position: absolute;
+            top: 68%; left: 5%; right: 5%;
+            color: var(--vatican-gold);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        }
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-modal-wa {
+            background: var(--whatsapp-green);
+            color: white; flex: 1; padding: 12px; border: none; border-radius: 8px;
+            font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; text-decoration: none;
+        }
+        .btn-modal-dl {
+            background: var(--purple-church);
+            color: white; flex: 1; padding: 12px; border: none; border-radius: 8px;
+            font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;
+        }
+
+        /* GRID DE INSTAGRAM SIMULADO */
+        .instagram-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .insta-post {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 6px;
+            background: #e2e8f0;
+            transition: transform 0.2s;
+        }
+        .insta-post:hover {
+            transform: scale(1.03);
+        }
+        .social-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+        .social-icon {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .social-icon:hover { color: var(--purple-church); }
+
+        /* BOTONES GENÉRICOS */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 14px 20px;
+            background: var(--purple-church);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: #421419; }
+        .btn-gold {
+            background: var(--vatican-gold);
+            color: var(--text-dark);
+        }
+        .btn-gold:hover { background: var(--vatican-dark); color: white; }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--purple-church);
+            border: 1px solid var(--purple-church);
+        }
+
+        /* FORMULARIO DE ADMISIÓN */
+        .lead-form input, .lead-form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        /* OPCIONES DEL TEST */
+        .quiz-option {
+            display: block;
+            background: var(--bg-app);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .quiz-option.correct { background: #d4edda; color: #155724; }
+
+        /* TESTIMONIOS */
+        .quote-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .quote-author img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* PROGRESO */
+        .progress-container { margin-top: 12px; }
+        .progress-bar {
+            height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin-top: 4px;
+        }
+        .progress-bar span {
+            display: block; height: 100%; background: linear-gradient(90deg, var(--vatican-gold), var(--purple-church));
+        }
+
+        /* BARRA NAVEGACIÓN INFERIOR (MÓVIL) */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--surface); border-top: 1px solid var(--border);
+            display: flex; justify-content: space-around; padding: 10px 0;
+            z-index: 1000; box-shadow: 0 -3px 10px rgba(0,0,0,0.04);
+        }
+        .nav-item {
+            background: none; border: none; flex: 1; display: flex; flex-direction: column;
+            align-items: center; font-size: 0.72rem; color: var(--text-muted); cursor: pointer; font-weight: 500; gap: 4px;
+        }
+        .nav-item i { font-size: 1.25rem; }
+        .nav-item.active { color: var(--purple-church); font-weight: 700; }
+        .nav-item.active i { color: var(--vatican-gold); }
+
+        .program-card { border-left: 4px solid var(--vatican-gold); }
+        .section-title { margin: 5px 0 15px 0; font-size: 1.35rem; color: var(--purple-church); border-bottom: 2px solid var(--vatican-gold); padding-bottom: 6px; display: flex; align-items: center; gap: 8px;}
+
+        /* RESPONSIVE DESKTOP */
+        @media (min-width: 992px) {
+            body { padding-bottom: 0; }
+            .bottom-nav { display: none !important; }
+            /* ELIMINADO: .menu-hamburger { display: none !important; } para que se quede visible */
+            .desktop-tabs { display: block; }
+            .desktop-hero { display: block; }
+            .section-img { display: block; }
+            .app-container { max-width: 800px; padding: 30px 20px; }
+            .quote-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-wrap">
+        <div class="brand">
+            <i class="bi bi-bank"></i> Universidad <span style="font-family: 'Inter'; font-weight:300; color: var(--text-dark);">Pontificia</span>
+        </div>
+        <div class="header-right">
+            <div class="badge-univ">Teología</div>
+            <button class="menu-hamburger" onclick="toggleSidebar()" aria-label="Abrir menú">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar-menu" id="sidebarMenu">
+    <div class="sidebar-header">
+        <span class="sidebar-title">Menú Institucional</span>
+        <button class="close-sidebar" onclick="toggleSidebar()">×</button>
+    </div>
+    <nav class="sidebar-links">
+        <button class="sidebar-item active" id="side-recursos" onclick="switchView('recursos'); toggleSidebar();">
+            <i class="bi bi-journal-text" style="color: var(--purple-church);"></i> Homilías Dominicales
+        </button>
+        <button class="sidebar-item" id="side-formacion" onclick="switchView('formacion'); toggleSidebar();">
+            <i class="bi bi-arrow-repeat" style="color: var(--purple-church);"></i> Formación Continua
+        </button>
+        <button class="sidebar-item" id="side-universidad" onclick="switchView('universidad'); toggleSidebar();">
+            <i class="bi bi-mortarboard" style="color: var(--purple-church);"></i> Posgrados y Grados
+        </button>
+        <button class="sidebar-item" id="side-perfil" onclick="switchView('perfil'); toggleSidebar();">
+            <i class="bi bi-person-badge" style="color: var(--purple-church);"></i> Secretaría Virtual
+        </button>
+    </nav>
+</aside>
+
+<nav class="desktop-tabs">
+    <div class="tabs-wrap">
+        <button class="tab-btn active" id="tab-recursos" onclick="switchView('recursos')">Homilías Dominicales</button>
+        <button class="tab-btn" id="tab-formacion" onclick="switchView('formacion')">Formación Continua</button>
+        <button class="tab-btn" id="tab-universidad" onclick="switchView('universidad')">Posgrados y Grados</button>
+        <button class="tab-btn" id="tab-perfil" onclick="switchView('perfil')">Secretaría Virtual</button>
+    </div>
+</nav>
+
+<section class="desktop-hero">
+    <h2>In Sanctitate et Doctrina</h2>
+    <p>«La exigencia de una sólida formación teológica responde hoy a los desafíos de la nueva evangelización de nuestra realidad mexicana»</p>
+    <div style="font-size: 0.85rem; letter-spacing: 1.5px; color: var(--vatican-gold); text-transform: uppercase; font-weight: bold;">Títulos con Validez Eclesial y Civil (RVOE)</div>
+</section>
+
+<div class="app-container">
+
+    <section id="view-recursos" class="app-view active-view">
+        <h3 class="section-title"><i class="bi bi-book"></i> Homilía y Predicación Dominical</h3>
+        <img class="section-img" src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop" alt="Libro Litúrgico">
+        
+        <div class="card" style="background: #fffdf5; border-color: var(--vatican-gold);">
+            <span class="tag" style="color: var(--purple-church)">Material Gratuito Descargable</span>
+            <h4 style="font-size: 1.15rem; font-style: italic; margin-bottom: 6px;">«Discípulos Misioneros en la Realidad de México»</h4>
+            <p style="font-size: 0.88rem; color:#4a4a4a; line-height: 1.45;">Pautas exegéticas y subsidios teológico-pastorales listos para enriquecer tu homilía del próximo domingo. Pensado para iluminar las problemáticas actuales de nuestras comunidades mexicanas.</p>
+            <button class="btn btn-gold" style="margin-top:12px;"><i class="bi bi-cloud-arrow-down-fill"></i> Descargar Material de Apoyo Homilético</button>
+        </div>
+
+        <h4 style="margin: 20px 0 12px 0; font-size: 1.1rem; color: var(--purple-church);"><i class="bi bi-stars"></i> Subsidios para Redes (Frases Compartibles)</h4>
+        
+        <div class="quote-grid">
+            <div class="quote-thumb-card" onclick="openQuoteModal('https://images.unsplash.com/photo-1507692049790-de58290a4334?q=80&w=500&auto=format&fit=crop', '«La oración es la mejor arma que tenemos; es una llave que abre el corazón de Dios»', 'San Pío de Pietrelcina')">
+                <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?q=80&w=500&auto=format&fit=crop" alt="Frase 1">
+                <div class="quote-thumb-body">
+                    <p>San Pío de Pietrelcina</p>
+                    <span style="font-size:0.7rem; color:var(--vatican-dark); font-weight:700;"><i class="bi bi-eye"></i> Ver y Compartir</span>
+                </div>
+            </div>
+            <div class="quote-thumb-card" onclick="openQuoteModal('https://images.unsplash.com/photo-1438211394456-73aae3e2632b?q=80&w=500&auto=format&fit=crop', '«La teología se hace de rodillas, porque el estudio debe alimentar la caridad pastoral»', 'Reflexión Teológica')">
+                <img src="https://images.unsplash.com/photo-1438211394456-73aae3e2632b?q=80&w=500&auto=format&fit=crop" alt="Frase 2">
+                <div class="quote-thumb-body">
+                    <p>Reflexión Teológica</p>
+                    <span style="font-size:0.7rem; color:var(--vatican-dark); font-weight:700;"><i class="bi bi-eye"></i> Ver y Compartir</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border-left: 4px solid var(--purple-church); background: #fdfbf7;">
+            <span class="tag" style="color: var(--purple-church);"><i class="bi bi-bookmark-star-fill"></i> Lectura Teológica Recomendada</span>
+            <h4 style="font-size: 1.15rem; margin-bottom: 6px; color: var(--purple-church);">¿Teología para qué? Teología para ser amigo de Dios</h4>
+            <p style="font-size: 0.78rem; color: var(--vatican-dark); font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Fray Martín Gelabert Ballester, OP</p>
+            <p style="font-size: 0.88rem; color: var(--text-dark); margin-bottom: 14px; line-height: 1.45; font-style: italic;">
+                "La teología no busca solo comprender con la razón, sino transformar el corazón. Estudiar teología es una vía profunda de oración y discernimiento cuyo fin último no es el saber académico, sino alcanzar la intimidad con el Creador y aprender a ser, verdaderamente, amigo de Dios."
+            </p>
+            <a href="https://nihilobstat.dominicos.org/articulos/teologia-para-ser-amigo-de-dios/" target="_blank" class="btn btn-gold" style="font-size: 0.85rem; text-decoration: none;"><i class="bi bi-file-earmark-text"></i> Leer Artículo Completo</a>
+        </div>
+
+        <div class="card" style="margin-top: 15px;">
+            <span class="tag">Biblioteca de Consulta</span>
+            <h4>Catálogo Teológico Digital</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.45;">Documentos vigentes del Magisterio de la Iglesia, encíclicas y las líneas pastorales de la Conferencia del Episcopado Mexicano (CEM).</p>
+            <a href="https://www.vatican.va/content/vatican/es.html" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; text-decoration: none;"><i class="bi bi-folder2-open"></i> Abrir Repositorio de Documentos</a>
+        </div>
+    </section>
+
+    <section id="view-formacion" class="app-view">
+        <h3 class="section-title"><i class="bi bi-tree"></i> Actualización Presbiteral</h3>
+        <img class="section-img" src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?q=80&w=800&auto=format&fit=crop" alt="Aula de Altos Estudios">
+        
+        <div class="card" style="border-top: 4px solid var(--purple-church);">
+            <span class="tag">Reflexión Pastoral</span>
+            <p style="font-size: 0.88rem; font-style: italic; color: var(--text-dark); line-height: 1.45;">"El estudio profundo de la Teología no es un lujo académico; es una exigencia caritativa para servir mejor al Pueblo de Dios en México ante los desafíos de la secularización."</p>
+            <div class="quote-author">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" alt="Excmo. Mons.">
+                <div>
+                    <h5 style="font-size: 0.88rem; font-weight:700;">S.E.R. Mons. Alejandro Silva</h5>
+                    <p style="font-size: 0.78rem; color: var(--text-muted);">Obispo Diocesano | Exalumno de Licenciatura Canónica</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="tag">Estudio y Criterio</span>
+            <div id="quiz-box">
+                <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; line-height: 1.4;">¿Qué documento rige actualmente los criterios universales para la formación y actualización de los sacerdotes?</p>
+                <div class="quiz-option" onclick="answerQuiz(this, false)">A) Lumen Gentium</div>
+                <div class="quiz-option" onclick="answerQuiz(this, true)">B) Ratio Fundamentalis Institutionis Sacerdotalis</div>
+                <div class="quiz-option" onclick="answerQuiz(this, false)">C) Pastores Dabo Vobis</div>
+            </div>
+            <div id="quiz-feedback" style="display:none; margin-top: 12px; padding: 10px; background: #e8f4fd; border-radius: 6px; font-size:0.85rem;">
+                <strong>¡Es correcto!</strong> Mantenerse actualizado teológicamente vigoriza el ministerio diario. Un posgrado te otorga herramientas científicas para afrontar la realidad pastoral con seguridad.
+            </div>
+        </div>
+    </section>
+
+    <section id="view-universidad" class="app-view">
+        <h3 class="section-title"><i class="bi bi-mortarboard"></i> Oferta Académica Superior</h3>
+        <img class="section-img" src="https://images.unsplash.com/photo-1590073844006-33379778ae09?q=80&w=800&auto=format&fit=crop" alt="Edificio Universitario">
+        
+        <div class="card program-card">
+            <span style="font-size: 0.7rem; color: var(--purple-church); font-weight: bold; text-transform: uppercase;">Grado Canónico y Civil</span>
+            <h4 style="margin: 2px 0 6px 0; font-size: 1.1rem;">Licenciatura Pontificia en Teología Dogmática</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.45;">Modalidad semipresencial / intensiva. Estructurada específicamente para balancear el estudio de alto nivel con las necesidades de la cura de almas parroquial.</p>
+            <button class="btn btn-outline" style="padding: 10px; font-size:0.8rem; margin-top: 10px;"><i class="bi bi-eye"></i> Ver Plan de Estudios</button>
+        </div>
+
+        <div class="card program-card">
+            <span style="font-size: 0.7rem; color: var(--purple-church); font-weight: bold; text-transform: uppercase;">Especialización</span>
+            <h4 style="margin: 2px 0 6px 0; font-size: 1.1rem;">Diplomado de Actualización en Teología Pastoral</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.45;">Herramientas para la dirección espiritual contemporánea, discernimiento comunitario y desafíos de las nuevas tecnologías en la parroquia.</p>
+            <button class="btn btn-outline" style="padding: 10px; font-size:0.8rem; margin-top: 10px;"><i class="bi bi-eye"></i> Ver Plan de Estudios</button>
+        </div>
+    </section>
+
+    <section id="view-perfil" class="app-view">
+        <h3 class="section-title"><i class="bi bi-church"></i> Admisiones e Incorporaciones</h3>
+        <img class="section-img" src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=800&auto=format&fit=crop" alt="Secretaría Universidad">
+        
+        <div class="card lead-form" style="border: 2px solid var(--purple-church);">
+            <h4 style="margin-bottom: 8px; color: var(--purple-church);">Contacto Directo</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">Consulte las facilidades, convenios con diócesis y aranceles especiales para el clero secular o religioso.</p>
+            <form onsubmit="event.preventDefault(); alert('Estimado Padre: Agradecemos su interés. La Secretaría Académica se pondrá en comunicación con usted a la brevedad. Unidos en la oración.');">
+                <input type="text" placeholder="Nombre completo y Diócesis (Ej: Pbro. Juan Pérez)" required>
+                <input type="email" placeholder="Correo Electrónico de contacto" required>
+                <select required>
+                    <option value="">Programa de su interés...</option>
+                    <option>Licenciatura Pontificia en Teología Dogmática</option>
+                    <option>Diplomado de Actualización en Teología Pastoral</option>
+                </select>
+                <input type="text" id="referral-field" placeholder="¿Código promocional / Frase compartida?" style="background: #f1f5f9; border-inline-start: 3px solid var(--vatican-gold);">
+                <button class="btn" type="submit"><i class="bi bi-envelope-paper"></i> Solicitar Cuadernillo de Información</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h4 style="font-size: 0.95rem; margin-bottom: 4px;">Tu Formación Continua</h4>
+            <p style="font-size:0.75rem; color: var(--text-muted);">Avance de lecturas recomendadas</p>
+            <div class="progress-container">
+                <div style="display:flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; margin-bottom: 4px;">
+                    <span>Lecturas Previas</span>
+                    <span>42%</span>
+                </div>
+                <div class="progress-bar"><span style="width: 42%;"></span></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal-overlay" id="quoteModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeQuoteModal()">×</button>
+        <div class="modal-image-container">
+            <img id="modalImg" src="" alt="Preview">
+            <div class="modal-quote-overlay" id="modalQuote"></div>
+            <div class="modal-author-overlay" id="modalAuthor"></div>
+            <div class="modal-watermark-overlay">Universidad Pontificia</div>
+        </div>
+        <div class="modal-actions">
+            <a id="shareWaBtn" href="#" target="_blank" class="btn-modal-wa"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            <button class="btn-modal-dl" onclick="alert('Descargando imagen en alta definición...')"><i class="bi bi-download"></i> Descargar</button>
+        </div>
+    </div>
+</div>
+
+<nav class="bottom-nav">
+    <button class="nav-item active" id="nav-recursos" onclick="switchView('recursos')">
+        <i class="bi bi-book"></i>Homilías
+    </button>
+    <button class="nav-item" id="nav-formacion" onclick="switchView('formacion')">
+        <i class="bi bi-journal-check"></i>Formación
+    </button>
+    <button class="nav-item" id="nav-universidad" onclick="switchView('universidad')">
+        <i class="bi bi-mortarboard"></i>Oferta
+    </button>
+    <button class="nav-item" id="nav-perfil" onclick="switchView('perfil')">
+        <i class="bi bi-person-circle"></i>Secretaría
+    </button>
+</nav>
+
+<script>
+    // FUNCIONES DEL MENÚ LATERAL (SIDEBAR)
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebarMenu');
+        const overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+
+    // CONTROLADOR UNIFICADO DE VISTAS
+    function switchView(viewName) {
+        // Ocultar todas las secciones
+        const views = document.querySelectorAll('.app-view');
+        views.forEach(v => v.classList.remove('active-view'));
+
+        // Mostrar la sección seleccionada
+        const targetView = document.getElementById('view-' + viewName);
+        if (targetView) {
+            targetView.classList.add('active-view');
+        }
+
+        // 1. Sincronizar Pestañas Superiores (Escritorio)
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        const activeTab = document.getElementById('tab-' + viewName);
+        if (activeTab) activeTab.classList.add('active');
+
+        // 2. Sincronizar Barra Inferior (Móvil)
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => item.classList.remove('active'));
+        const activeNavItem = document.getElementById('nav-' + viewName);
+        if (activeNavItem) activeNavItem.classList.add('active');
+
+        // 3. Sincronizar Menú Lateral (Sidebar)
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach(item => item.classList.remove('active'));
+        const activeSideItem = document.getElementById('side-' + viewName);
+        if (activeSideItem) activeSideItem.classList.add('active');
+
+        // Scroll suave hacia arriba al cambiar de sección
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // MODAL DE FRASES
+    function openQuoteModal(imgUrl, quoteText, authorText) {
+        document.getElementById('modalImg').src = imgUrl;
+        document.getElementById('modalQuote').innerText = quoteText;
+        document.getElementById('modalAuthor').innerText = authorText;
+        
+        const textToShare = encodeURIComponent(`${quoteText} - ${authorText}. Visto en Universidad Pontificia.`);
+        document.getElementById('shareWaBtn').href = `https://api.whatsapp.com/send?text=${textToShare}`;
+        
+        document.getElementById('quoteModal').classList.add('active');
+    }
+
+    function closeQuoteModal() {
+        document.getElementById('quoteModal').classList.remove('active');
+    }
+
+    // SISTEMA DE PREGUNTAS (QUIZ)
+    function answerQuiz(element, isCorrect) {
+        const options = document.querySelectorAll('.quiz-option');
+        options.forEach(opt => {
+            opt.style.pointerEvents = 'none'; 
+            opt.style.opacity = '0.6';
+        });
+        
+        if (isCorrect) {
+            element.classList.add('correct');
+            element.style.opacity = '1';
+            document.getElementById('quiz-feedback').style.display = 'block';
+        } else {
+            element.style.background = '#f8d7da';
+            element.style.color = '#721c24';
+            element.style.opacity = '1';
+            // Mostrar la correcta sutilmente
+            options[1].classList.add('correct');
+            options[1].style.opacity = '1';
+        }
+    }
+</script>
+</body>
+</html>
